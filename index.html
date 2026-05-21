@@ -6,228 +6,156 @@
 <title>Brand Hub — App Gastos de Casa</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink: #12221a;
-  --teal: #0d3d34;
-  --teal-mid: #1a5c4a;
-  --teal-light: #2e8b6e;
-  --coral: #e8735a;
-  --coral-light: #f4a48e;
-  --cream: #f7f2e8;
-  --cream-dark: #ede6d6;
-  --gold: #c9a84c;
-  --white: #fefcf8;
-  --gray: #8a9490;
-  --border: rgba(18,34,26,0.08);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); line-height:1.6; }
-
-/* ── NAV ── */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  background:rgba(13,61,52,0.97); backdrop-filter:blur(12px);
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 48px; height:56px; border-bottom:1px solid rgba(255,255,255,0.06);
-}
-nav .brand { font-family:'Fraunces',serif; font-weight:700; color:var(--cream); font-size:0.95rem; letter-spacing:0.12em; }
-nav .brand span { color:var(--coral); }
-nav ul { list-style:none; display:flex; gap:28px; }
-nav ul a { color:rgba(247,242,232,0.55); text-decoration:none; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; transition:color .2s; }
-nav ul a:hover { color:var(--cream); }
-
-/* ── HERO ── */
-.hero {
-  min-height:100vh; background:var(--teal);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:80px 40px; position:relative; overflow:hidden;
-}
-.hero::before {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse at 65% 35%, rgba(46,139,110,0.3) 0%, transparent 55%),
-              radial-gradient(ellipse at 25% 75%, rgba(232,115,90,0.12) 0%, transparent 45%);
-  pointer-events:none;
-}
-.hero-label { font-size:0.68rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--teal-light); font-weight:700; margin-bottom:28px; }
-.hero-name { font-family:'Fraunces',serif; font-size:clamp(4rem,14vw,11rem); font-weight:900; color:var(--cream); letter-spacing:-0.03em; line-height:0.88; margin-bottom:16px; }
-.hero-name span { color:var(--coral); }
-.hero-tagline { font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:clamp(1rem,2.2vw,1.4rem); color:rgba(247,242,232,0.5); margin-bottom:52px; }
-.hero-chips { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
-.chip { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:rgba(247,242,232,0.6); padding:7px 18px; border-radius:100px; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
-.chip.active { background:rgba(232,115,90,0.2); border-color:rgba(232,115,90,0.4); color:var(--coral-light); }
-.scroll-cue { position:absolute; bottom:32px; color:rgba(247,242,232,0.2); font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; animation:pulse 2.5s infinite; }
-@keyframes pulse { 0%,100%{opacity:.2}50%{opacity:.6} }
-
-/* ── SECTIONS ── */
-.section { padding:96px 60px 72px; max-width:1100px; margin:0 auto; }
-.sec-num { font-size:0.65rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--coral); font-weight:700; margin-bottom:10px; }
-.sec-title { font-family:'Fraunces',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:var(--teal); line-height:1.1; }
-.sec-sub { font-size:0.95rem; color:var(--gray); max-width:580px; margin-top:8px; }
-.divider { width:40px; height:3px; background:var(--coral); border-radius:2px; margin:20px 0 48px; }
-
-/* ── CARDS ── */
-.card { background:var(--white); border-radius:16px; padding:28px 32px; border:1px solid var(--border); box-shadow:0 2px 20px rgba(13,61,52,0.05); }
-.card-label { font-size:0.63rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray); font-weight:700; margin-bottom:10px; }
-
-/* ── NAMING ── */
-.naming-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:36px; }
-.name-card { background:var(--white); border-radius:16px; padding:28px; border:2px solid transparent; position:relative; transition:transform .15s; }
-.name-card:hover { transform:translateY(-2px); }
-.name-card.winner { border-color:var(--teal-light); background:linear-gradient(135deg,var(--white),rgba(13,61,52,0.03)); }
-.name-card.winner::before { content:'★ FINALISTA'; position:absolute; top:-11px; left:22px; background:var(--teal); color:var(--cream); font-size:0.58rem; letter-spacing:0.15em; padding:3px 12px; border-radius:100px; font-weight:700; }
-.name-card.top::before { content:'★ TAMBIÉN FINALISTA'; background:var(--coral); }
-.name-word { font-family:'Fraunces',serif; font-size:2.4rem; font-weight:900; color:var(--teal); letter-spacing:-0.02em; margin-bottom:6px; }
-.name-pills { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
-.pill { font-size:0.62rem; padding:3px 9px; border-radius:100px; font-weight:600; }
-.pill-g { background:rgba(46,139,110,0.1); color:var(--teal-light); }
-.pill-a { background:rgba(201,168,76,0.12); color:#7a5f0e; }
-.pill-r { background:rgba(232,115,90,0.1); color:#b84530; }
-.name-desc { font-size:0.85rem; color:var(--gray); line-height:1.65; }
-
-/* MATRIX TABLE */
-.matrix { width:100%; border-collapse:collapse; margin-top:32px; font-size:0.83rem; }
-.matrix th { text-align:left; padding:10px 14px; font-size:0.63rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); font-weight:700; border-bottom:2px solid var(--border); }
-.matrix td { padding:12px 14px; border-bottom:1px solid var(--border); }
-.matrix tr:last-child td { border-bottom:none; }
-.matrix tr.hl { background:rgba(13,61,52,0.03); }
-.matrix tr.hl td:first-child { font-weight:700; color:var(--teal); }
-.dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; vertical-align:middle; }
-.dg { background:var(--teal-light); }
-.da { background:var(--gold); }
-.dr { background:var(--coral); }
-
-/* PATTERN BLOCK */
-.pattern-block {
-  background:var(--teal); border-radius:16px; padding:36px 40px; margin-top:32px; color:var(--cream);
-}
-.pattern-word { font-family:'Fraunces',serif; font-size:1.8rem; font-weight:900; margin-bottom:6px; }
-.pattern-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(247,242,232,0.35); margin-bottom:20px; }
-.pattern-examples { display:flex; gap:10px; flex-wrap:wrap; }
-.p-ex { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:100px; padding:6px 16px; font-family:'DM Mono',monospace; font-size:0.82rem; color:rgba(247,242,232,0.7); }
-
-/* ── STRATEGY ── */
-.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:36px 0; }
-.insight-card { background:var(--teal); border-radius:16px; padding:26px 22px; color:var(--cream); }
-.insight-icon { font-size:1.6rem; margin-bottom:10px; }
-.insight-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; margin-bottom:7px; }
-.insight-text { font-size:0.8rem; color:rgba(247,242,232,0.6); line-height:1.6; }
-
-.big-q { font-family:'Fraunces',serif; font-size:clamp(1.3rem,2.5vw,1.9rem); font-weight:700; color:var(--teal); line-height:1.3; border-left:4px solid var(--coral); padding-left:24px; margin:36px 0; }
-
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:28px 0; }
-.strategy-box { background:var(--white); border-radius:16px; padding:28px; border:1px solid var(--border); }
-.strategy-box h4 { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--teal); margin-bottom:14px; }
-.strategy-box ul { list-style:none; }
-.strategy-box ul li { font-size:0.83rem; color:var(--gray); padding:6px 0; border-bottom:1px solid var(--border); line-height:1.5; }
-.strategy-box ul li:last-child { border-bottom:none; }
-.strategy-box ul li strong { color:var(--ink); }
-
-/* ── TAGLINES ── */
-.tagline-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:28px 0; }
-.tl-item { background:var(--white); border-radius:12px; padding:22px 26px; border:1px solid var(--border); }
-.tl-item.winner-tl { border-color:var(--coral); background:rgba(232,115,90,0.03); }
-.tl-badge { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:700; color:var(--coral); margin-bottom:7px; }
-.tl-text { font-family:'Fraunces',serif; font-size:1.2rem; font-weight:700; color:var(--teal); margin-bottom:7px; }
-.tl-note { font-size:0.78rem; color:var(--gray); line-height:1.5; }
-
-/* ── VISUAL IDENTITY ── */
-.color-row { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:28px 0; }
-.swatch { border-radius:14px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,0.08); }
-.swatch-fill { height:88px; }
-.swatch-info { padding:12px; background:var(--white); }
-.swatch-name { font-weight:600; font-size:0.78rem; }
-.swatch-hex { font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--gray); margin-top:2px; }
-.swatch-role { font-size:0.62rem; color:var(--gray); margin-top:3px; text-transform:uppercase; letter-spacing:0.05em; }
-
-.type-specimen { background:var(--white); border-radius:16px; padding:36px; border:1px solid var(--border); margin:20px 0; }
-.type-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray); font-weight:700; margin-bottom:6px; }
-.type-disp { font-family:'Fraunces',serif; font-size:2.8rem; font-weight:900; color:var(--teal); line-height:1; }
-.type-disp em { color:var(--coral); font-style:italic; }
-.type-head { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; color:var(--teal); margin:20px 0 4px; }
-.type-body { font-size:0.9rem; color:var(--gray); max-width:480px; line-height:1.7; }
-.type-ui { font-size:0.63rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--coral); font-weight:600; margin-top:18px; }
-
-/* LOGO */
-.logo-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0; }
-.logo-box { border-radius:16px; padding:48px 32px; display:flex; flex-direction:column; align-items:center; gap:14px; }
-.logo-box.dark { background:var(--teal); }
-.logo-box.light { background:var(--cream-dark); }
-.logo-box .logo-variant-label { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); }
-.logo-box.dark .logo-variant-label { color:rgba(247,242,232,0.3); }
-.logo-wordmark { font-family:'Fraunces',serif; font-weight:900; letter-spacing:0.06em; }
-
-/* PERSONALITY */
-.p-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0; }
-.p-card { background:var(--white); border-radius:14px; padding:24px; border:1px solid var(--border); }
-.p-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--teal); margin-bottom:12px; }
-.p-row { display:flex; justify-content:space-between; margin-bottom:5px; }
-.p-yes { font-size:0.82rem; color:var(--teal-light); font-weight:500; }
-.p-yes::before { content:'✓ '; }
-.p-no { font-size:0.82rem; color:var(--coral); }
-.p-no::before { content:'✗ '; }
-
-/* VOICE */
-.voice-ex { background:var(--white); border-radius:12px; padding:20px 24px; margin:10px 0; border:1px solid var(--border); }
-.voice-ex.good { border-left:3px solid var(--teal-light); }
-.voice-ex.bad { border-left:3px solid var(--coral); opacity:0.65; }
-.voice-lbl { font-size:0.63rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin-bottom:7px; }
-.voice-lbl.g { color:var(--teal-light); }
-.voice-lbl.b { color:var(--coral); }
-.voice-txt { font-size:0.87rem; color:var(--ink); line-height:1.6; }
-
-/* WORD RESEARCH */
-.concept-block { background:var(--white); border-radius:16px; overflow:hidden; border:1px solid var(--border); margin-bottom:16px; }
-.concept-header { display:flex; align-items:center; gap:12px; padding:16px 24px; background:rgba(13,61,52,0.03); border-bottom:1px solid var(--border); }
-.concept-emoji { font-size:1.2rem; }
-.concept-title { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700; color:var(--teal); }
-.words-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
-.word-entry { padding:12px 18px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); }
-.word-entry:hover { background:rgba(13,61,52,0.03); }
-.word-lang { font-size:0.58rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:3px; display:flex; align-items:center; gap:4px; }
-.wdot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-.word-main { font-family:'DM Mono',monospace; font-size:0.92rem; font-weight:500; margin-bottom:2px; }
-.word-main.hl { color:var(--teal); font-weight:700; }
-.word-meaning { font-size:0.68rem; color:var(--gray); line-height:1.4; }
-.word-badge { display:inline-block; margin-top:4px; font-size:0.6rem; background:rgba(232,115,90,0.1); color:var(--coral); padding:2px 7px; border-radius:100px; font-weight:600; }
-.word-badge.gold { background:rgba(201,168,76,0.12); color:#7a5f0e; }
-
-/* ARCHITECTURE */
-.arch { background:var(--teal); border-radius:20px; padding:44px; margin:28px 0; position:relative; overflow:hidden; }
-.arch::before { content:''; position:absolute; top:-30%; right:-10%; width:60%; height:160%; background:radial-gradient(ellipse,rgba(46,139,110,0.25) 0%,transparent 70%); }
-.arch-title { font-family:'Fraunces',serif; font-size:2.2rem; font-weight:900; color:var(--cream); margin-bottom:4px; }
-.arch-title span { color:var(--coral); }
-.arch-sub { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(247,242,232,0.35); margin-bottom:32px; }
-.arch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.arch-item { background:rgba(255,255,255,0.07); border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.1); }
-.arch-item-title { font-weight:700; font-size:0.85rem; color:var(--teal-light); margin-bottom:5px; }
-.arch-item-desc { font-size:0.75rem; color:rgba(247,242,232,0.5); line-height:1.5; }
-.arch-future { margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.1); }
-.arch-future-label { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(247,242,232,0.25); margin-bottom:10px; }
-.arch-future-pills { display:flex; gap:8px; flex-wrap:wrap; }
-.arch-fp { background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.12); border-radius:100px; padding:5px 14px; font-size:0.72rem; color:rgba(247,242,232,0.35); }
-
-/* FOOTER */
-footer { background:var(--teal); text-align:center; padding:72px 40px; margin-top:40px; }
-footer .fw { font-family:'Fraunces',serif; font-size:3.5rem; font-weight:900; color:var(--cream); letter-spacing:-0.02em; }
-footer .fw span { color:var(--coral); }
-footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; letter-spacing:0.1em; text-transform:uppercase; }
-
-/* STATUS BADGE */
-.status-bar { background:rgba(232,115,90,0.12); border:1px solid rgba(232,115,90,0.25); border-radius:100px; display:inline-flex; align-items:center; gap:8px; padding:6px 16px; margin-bottom:32px; }
-.status-dot { width:7px; height:7px; border-radius:50%; background:var(--coral); animation:blink 1.5s infinite; }
-@keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
-.status-text { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--coral); font-weight:700; }
-
-@media(max-width:768px){
-  nav ul { display:none; }
-  .section { padding:72px 24px 56px; }
-  .naming-grid,.insight-grid,.two-col,.tagline-grid,.color-row,.logo-row,.p-grid,.arch-grid { grid-template-columns:1fr; }
-}
+:root{--ink:#12221a;--teal:#0d3d34;--teal-mid:#1a5c4a;--teal-light:#2e8b6e;--coral:#e8735a;--coral-light:#f4a48e;--cream:#f7f2e8;--cream-dark:#ede6d6;--gold:#c9a84c;--white:#fefcf8;--gray:#8a9490;--border:rgba(18,34,26,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,61,52,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;border-bottom:1px solid rgba(255,255,255,0.06);}
+nav .brand{font-family:'Fraunces',serif;font-weight:700;color:var(--cream);font-size:0.95rem;letter-spacing:0.12em;}
+nav .brand span{color:var(--coral);}
+nav ul{list-style:none;display:flex;gap:24px;}
+nav ul a{color:rgba(247,242,232,0.55);text-decoration:none;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;transition:color .2s;}
+nav ul a:hover{color:var(--cream);}
+.hero{min-height:100vh;background:var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 35%,rgba(46,139,110,0.3) 0%,transparent 55%),radial-gradient(ellipse at 25% 75%,rgba(232,115,90,0.12) 0%,transparent 45%);pointer-events:none;}
+.hero-label{font-size:0.68rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--teal-light);font-weight:700;margin-bottom:28px;}
+.hero-name{font-family:'Fraunces',serif;font-size:clamp(4rem,14vw,11rem);font-weight:900;color:var(--cream);letter-spacing:-0.03em;line-height:0.88;margin-bottom:16px;}
+.hero-name span{color:var(--coral);}
+.hero-tagline{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,2.2vw,1.4rem);color:rgba(247,242,232,0.5);margin-bottom:52px;}
+.hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.chip{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(247,242,232,0.6);padding:7px 18px;border-radius:100px;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
+.chip.active{background:rgba(232,115,90,0.2);border-color:rgba(232,115,90,0.4);color:var(--coral-light);}
+.scroll-cue{position:absolute;bottom:32px;color:rgba(247,242,232,0.2);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;animation:pulse 2.5s infinite;}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.6}}
+.section{padding:96px 60px 72px;max-width:1100px;margin:0 auto;}
+.sec-num{font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:10px;}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--teal);line-height:1.1;}
+.sec-sub{font-size:0.95rem;color:var(--gray);max-width:580px;margin-top:8px;}
+.divider{width:40px;height:3px;background:var(--coral);border-radius:2px;margin:20px 0 48px;}
+.card{background:var(--white);border-radius:16px;padding:28px 32px;border:1px solid var(--border);box-shadow:0 2px 20px rgba(13,61,52,0.05);}
+.card-label{font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);font-weight:700;margin-bottom:10px;}
+.phase-header{background:var(--teal);border-radius:12px;padding:16px 24px;margin:32px 0 16px;display:flex;align-items:center;gap:12px;}
+.phase-num{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--coral);font-weight:500;}
+.phase-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--cream);}
+.phase-desc{font-size:0.78rem;color:rgba(247,242,232,0.5);margin-left:auto;}
+.names-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:8px;}
+.name-card{background:var(--white);border-radius:14px;padding:24px;border:2px solid transparent;position:relative;transition:transform .15s;}
+.name-card:hover{transform:translateY(-2px);}
+.name-card.finalist{border-color:var(--teal-light);}
+.name-card.finalist::before{content:'★ FINALISTA';position:absolute;top:-10px;left:20px;background:var(--teal);color:var(--cream);font-size:0.58rem;letter-spacing:0.15em;padding:3px 12px;border-radius:100px;font-weight:700;}
+.name-card.discarded{opacity:0.65;}
+.name-card.reserve{border-color:var(--gold);}
+.name-card.reserve::before{content:'RESERVA';position:absolute;top:-10px;left:20px;background:var(--gold);color:white;font-size:0.58rem;letter-spacing:0.15em;padding:3px 12px;border-radius:100px;font-weight:700;}
+.name-word{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;color:var(--teal);letter-spacing:-0.02em;margin-bottom:6px;}
+.name-pills{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.pill{font-size:0.6rem;padding:2px 8px;border-radius:100px;font-weight:600;}
+.pill-g{background:rgba(46,139,110,0.1);color:var(--teal-light);}
+.pill-a{background:rgba(201,168,76,0.12);color:#7a5f0e;}
+.pill-r{background:rgba(232,115,90,0.1);color:#b84530;}
+.name-desc{font-size:0.82rem;color:var(--gray);line-height:1.6;}
+.name-verdict{font-size:0.75rem;color:var(--ink);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-style:italic;}
+.matrix{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.82rem;}
+.matrix th{text-align:left;padding:10px 14px;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);font-weight:700;border-bottom:2px solid var(--border);}
+.matrix td{padding:11px 14px;border-bottom:1px solid var(--border);}
+.matrix tr:last-child td{border-bottom:none;}
+.matrix tr.hl{background:rgba(13,61,52,0.03);}
+.matrix tr.hl td:first-child{font-weight:700;color:var(--teal);}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:middle;}
+.dg{background:var(--teal-light)}.da{background:var(--gold)}.dr{background:var(--coral)}
+.pattern-block{background:var(--teal);border-radius:16px;padding:32px 36px;margin:28px 0;color:var(--cream);}
+.pattern-word{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;margin-bottom:4px;}
+.pattern-sub{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(247,242,232,0.35);margin-bottom:16px;}
+.pattern-examples{display:flex;gap:8px;flex-wrap:wrap;}
+.p-ex{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:0.8rem;color:rgba(247,242,232,0.7);}
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;}
+.insight-card{background:var(--teal);border-radius:14px;padding:22px;color:var(--cream);}
+.insight-icon{font-size:1.4rem;margin-bottom:8px;}
+.insight-title{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;margin-bottom:6px;}
+.insight-text{font-size:0.78rem;color:rgba(247,242,232,0.6);line-height:1.6;}
+.big-q{font-family:'Fraunces',serif;font-size:clamp(1.2rem,2.3vw,1.8rem);font-weight:700;color:var(--teal);line-height:1.3;border-left:4px solid var(--coral);padding-left:22px;margin:32px 0;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.strategy-box{background:var(--white);border-radius:14px;padding:24px;border:1px solid var(--border);}
+.strategy-box h4{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;color:var(--teal);margin-bottom:12px;}
+.strategy-box ul{list-style:none;}
+.strategy-box ul li{font-size:0.82rem;color:var(--gray);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.5;}
+.strategy-box ul li:last-child{border-bottom:none;}
+.strategy-box ul li strong{color:var(--ink);}
+.tagline-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.tl-item{background:var(--white);border-radius:12px;padding:20px 24px;border:1px solid var(--border);}
+.tl-item.w{border-color:var(--coral);background:rgba(232,115,90,0.03);}
+.tl-badge{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;color:var(--coral);margin-bottom:6px;}
+.tl-text{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;color:var(--teal);margin-bottom:6px;}
+.tl-note{font-size:0.77rem;color:var(--gray);line-height:1.5;}
+.color-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0;}
+.swatch{border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.08);}
+.swatch-fill{height:80px;}
+.swatch-info{padding:10px 12px;background:var(--white);}
+.swatch-name{font-weight:600;font-size:0.76rem;}
+.swatch-hex{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gray);margin-top:2px;}
+.swatch-role{font-size:0.6rem;color:var(--gray);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;}
+.type-specimen{background:var(--white);border-radius:14px;padding:32px;border:1px solid var(--border);margin:18px 0;}
+.type-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);font-weight:700;margin-bottom:5px;}
+.type-disp{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;color:var(--teal);line-height:1;}
+.type-disp em{color:var(--coral);font-style:italic;}
+.type-head{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--teal);margin:18px 0 4px;}
+.type-body{font-size:0.88rem;color:var(--gray);max-width:480px;line-height:1.7;}
+.type-ui{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);font-weight:600;margin-top:16px;}
+.logo-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.logo-box{border-radius:14px;padding:44px 28px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.logo-box.dark{background:var(--teal);}
+.logo-box.light{background:var(--cream-dark);}
+.logo-variant-label{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);}
+.logo-box.dark .logo-variant-label{color:rgba(247,242,232,0.3);}
+.p-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.p-card{background:var(--white);border-radius:12px;padding:22px;border:1px solid var(--border);}
+.p-title{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;color:var(--teal);margin-bottom:10px;}
+.p-row{display:flex;justify-content:space-between;margin-bottom:4px;}
+.p-yes{font-size:0.8rem;color:var(--teal-light);font-weight:500;}
+.p-yes::before{content:'✓ ';}
+.p-no{font-size:0.8rem;color:var(--coral);}
+.p-no::before{content:'✗ ';}
+.voice-ex{background:var(--white);border-radius:12px;padding:18px 22px;margin:8px 0;border:1px solid var(--border);}
+.voice-ex.good{border-left:3px solid var(--teal-light);}
+.voice-ex.bad{border-left:3px solid var(--coral);opacity:0.65;}
+.voice-lbl{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.voice-lbl.g{color:var(--teal-light);}
+.voice-lbl.b{color:var(--coral);}
+.voice-txt{font-size:0.85rem;color:var(--ink);line-height:1.6;}
+.concept-block{background:var(--white);border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-bottom:14px;}
+.concept-header{display:flex;align-items:center;gap:10px;padding:14px 22px;background:rgba(13,61,52,0.03);border-bottom:1px solid var(--border);}
+.concept-emoji{font-size:1.1rem;}
+.concept-title{font-family:'Fraunces',serif;font-size:0.9rem;font-weight:700;color:var(--teal);}
+.words-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));}
+.word-entry{padding:11px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
+.word-entry:hover{background:rgba(13,61,52,0.03);}
+.word-lang{font-size:0.57rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:3px;display:flex;align-items:center;gap:4px;}
+.wdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.word-main{font-family:'DM Mono',monospace;font-size:0.88rem;font-weight:500;margin-bottom:2px;}
+.word-main.hl{color:var(--teal);font-weight:700;}
+.word-meaning{font-size:0.66rem;color:var(--gray);line-height:1.4;}
+.word-badge{display:inline-block;margin-top:3px;font-size:0.58rem;background:rgba(232,115,90,0.1);color:var(--coral);padding:2px 7px;border-radius:100px;font-weight:600;}
+.word-badge.gold{background:rgba(201,168,76,0.12);color:#7a5f0e;}
+.arch{background:var(--teal);border-radius:18px;padding:40px;margin:24px 0;position:relative;overflow:hidden;}
+.arch::before{content:'';position:absolute;top:-30%;right:-10%;width:60%;height:160%;background:radial-gradient(ellipse,rgba(46,139,110,0.25) 0%,transparent 70%);}
+.arch-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--cream);margin-bottom:4px;}
+.arch-title span{color:var(--coral);}
+.arch-sub{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(247,242,232,0.35);margin-bottom:28px;}
+.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.arch-item{background:rgba(255,255,255,0.07);border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.1);}
+.arch-item-title{font-weight:700;font-size:0.82rem;color:var(--teal-light);margin-bottom:4px;}
+.arch-item-desc{font-size:0.72rem;color:rgba(247,242,232,0.5);line-height:1.5;}
+.arch-future{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);}
+.arch-future-label{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(247,242,232,0.25);margin-bottom:8px;}
+.arch-future-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.arch-fp{background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.12);border-radius:100px;padding:4px 12px;font-size:0.7rem;color:rgba(247,242,232,0.35);}
+.alt-bg{background:var(--white);}
+footer{background:var(--teal);text-align:center;padding:64px 40px;margin-top:40px;}
+footer .fw{font-family:'Fraunces',serif;font-size:3rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;}
+footer .fw span{color:var(--coral);}
+footer p{color:rgba(247,242,232,0.3);font-size:0.7rem;margin-top:12px;letter-spacing:0.1em;text-transform:uppercase;}
+@media(max-width:768px){nav ul{display:none;}.section{padding:72px 20px 52px;}.names-grid,.insight-grid,.two-col,.tagline-grid,.color-row,.logo-row,.p-grid,.arch-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="brand">APP GASTOS DE CASA <span>·</span> BRAND HUB</div>
   <ul>
@@ -240,7 +168,6 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-label">Brand Hub · App Gastos de Casa · 2026</div>
   <div class="hero-name">SPAR<span>Ö</span></div>
@@ -258,125 +185,232 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
 <div id="naming">
 <div class="section">
   <div class="sec-num">01 — Naming</div>
-  <h2 class="sec-title">El nombre lo cambia todo</h2>
-  <p class="sec-sub">Evaluamos opciones contra 7 criterios de marca. Los dos finalistas actuales comparten la misma musicalidad que funciona en inglés y español.</p>
+  <h2 class="sec-title">Evolución completa del naming</h2>
+  <p class="sec-sub">Registro íntegro de todas las opciones exploradas, organizadas por fase y criterio. Los finalistas actuales son SPARÖ y HÄLO.</p>
   <div class="divider"></div>
 
-  <div class="naming-grid">
-    <div class="name-card winner">
-      <div class="name-word">SPARÖ</div>
-      <div class="name-pills">
-        <span class="pill pill-g">✓ spar = ahorrar</span>
-        <span class="pill pill-g">✓ isla sueca real</span>
-        <span class="pill pill-g">✓ musicalidad perfecta</span>
-        <span class="pill pill-a">~ SPAR supermercados</span>
-      </div>
-      <div class="name-desc">Del nórdico <em>spar</em> — ahorrar. La terminación <em>-ö</em> es el sufijo de las islas del archipiélago sueco. Fonéticamente limpio en inglés y español. La ö opera como sello nórdico visual sin necesitar explicación.</div>
+  <!-- FASE 1 -->
+  <div class="phase-header">
+    <div class="phase-num">FASE 01</div>
+    <div class="phase-title">Nombres en español — primera exploración</div>
+    <div class="phase-desc">Descartados · Sin proyección internacional</div>
+  </div>
+  <div class="names-grid">
+    <div class="name-card discarded">
+      <div class="name-word">Cuadre</div>
+      <div class="name-pills"><span class="pill pill-g">✓ semántica LATAM</span><span class="pill pill-g">✓ "cuadrar las cuentas"</span><span class="pill pill-r">✗ sin personalidad global</span><span class="pill pill-r">✗ poco memorable</span></div>
+      <div class="name-desc">Primera opción explorada. "Cuadrar los gastos" está sembrado en el ADN financiero latinoamericano. Doble semántica: balance financiero + hacer sentido cognitivo. Descartado por falta de personalidad visual y baja memorabilidad en mercado anglosajón.</div>
+      <div class="name-verdict">Veredicto: descartado. Demasiado local para un producto con ambición internacional.</div>
     </div>
-    <div class="name-card top winner">
-      <div class="name-word">HÄLO</div>
-      <div class="name-pills">
-        <span class="pill pill-g">✓ halo universal</span>
-        <span class="pill pill-g">✓ logo implícito</span>
-        <span class="pill pill-g">✓ doble mercado</span>
-        <span class="pill pill-a">~ Halo (videojuego Xbox)</span>
-      </div>
-      <div class="name-desc"><em>Halo</em> — aureola, protección, claridad. La <em>ä</em> lo nordifica. "Heart" está en "hearth" y el círculo del halo es el logo que se escribe solo. Funciona idéntico en inglés y español sin traducción.</div>
+    <div class="name-card discarded">
+      <div class="name-word">Nido</div>
+      <div class="name-pills"><span class="pill pill-g">✓ 4 letras</span><span class="pill pill-g">✓ metáfora cálida del hogar</span><span class="pill pill-a">~ sin referencia financiera</span><span class="pill pill-r">✗ confusión con baby/nursery</span></div>
+      <div class="name-desc">El nido como lugar donde la familia construye y protege sus recursos. Emocionalmente poderoso, visualmente rico. Sin anclaje explícito al mundo financiero — requiere más trabajo de educación de marca.</div>
+      <div class="name-verdict">Veredicto: descartado. Sin referencia financiera implícita.</div>
     </div>
-
-    <div class="name-card">
-      <div class="name-word" style="font-size:1.8rem">FONDÖ</div>
-      <div class="name-pills">
-        <span class="pill pill-g">✓ triple palanca</span>
-        <span class="pill pill-g">✓ fond (EN) = afecto</span>
-        <span class="pill pill-g">✓ fondo (ES) = fondo</span>
-      </div>
-      <div class="name-desc">Fondo financiero en español + fond=afecto en inglés + ö nórdica. La combinación más rica semánticamente. Pendiente de evaluación como alternativa.</div>
+    <div class="name-card discarded">
+      <div class="name-word">Canasta</div>
+      <div class="name-pills"><span class="pill pill-g">✓ "canasta básica" LATAM</span><span class="pill pill-a">~ 7 letras</span><span class="pill pill-r">✗ connota escasez</span><span class="pill pill-r">✗ difícil construir aspiración</span></div>
+      <div class="name-desc">La "canasta básica" es el indicador económico más conocido en Perú y LATAM. Resonancia cultural máxima, pero el concepto arrastra connotaciones de subsistencia y ajuste.</div>
+      <div class="name-verdict">Veredicto: descartado. La semántica de escasez limita el posicionamiento aspiracional.</div>
     </div>
-    <div class="name-card">
-      <div class="name-word" style="font-size:1.8rem">CUADRE</div>
-      <div class="name-pills">
-        <span class="pill pill-g">✓ semántica LATAM</span>
-        <span class="pill pill-r">✗ sin personalidad global</span>
-        <span class="pill pill-r">✗ poco memorable</span>
-      </div>
-      <div class="name-desc">Primera opción explorada. "Cuadrar las cuentas" es profundamente LATAM pero no escala bien al mercado anglosajón y carece de la personalidad visual buscada.</div>
+    <div class="name-card discarded">
+      <div class="name-word">Vesta</div>
+      <div class="name-pills"><span class="pill pill-g">✓ diosa romana del hogar</span><span class="pill pill-g">✓ premium, global</span><span class="pill pill-r">✗ bajo reconocimiento LATAM</span><span class="pill pill-r">✗ requiere explicación</span></div>
+      <div class="name-desc">Deidad romana del fuego doméstico — conexión conceptual perfecta. Pero la distancia cultural con LATAM es real. Funciona mejor en segmentos premium urbanos anglosajones.</div>
+      <div class="name-verdict">Veredicto: descartado. Demasiado hermético para el mercado masivo LATAM.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">Nomia</div>
+      <div class="name-pills"><span class="pill pill-g">✓ raíz oikonomia</span><span class="pill pill-r">✗ sin reconocimiento intuitivo</span><span class="pill pill-r">✗ puede sonar médico</span></div>
+      <div class="name-desc">Del griego oikonomia — "gestión del hogar", origen etimológico de "economía". Intelectualmente brillante pero hermético. La profundidad conceptual no compensa la falta de reconocimiento inmediato.</div>
+      <div class="name-verdict">Veredicto: descartado. Demasiado opaco para construir marca masiva.</div>
     </div>
   </div>
 
-  <!-- Matrix -->
+  <!-- FASE 2 -->
+  <div class="phase-header">
+    <div class="phase-num">FASE 02</div>
+    <div class="phase-title">Pivote a inglés — personalidad y memorabilidad</div>
+    <div class="phase-desc">Descartados · Paso hacia el doble mercado</div>
+  </div>
+  <div class="names-grid">
+    <div class="name-card discarded">
+      <div class="name-word">Hearth</div>
+      <div class="name-pills"><span class="pill pill-g">✓ "heart" dentro de "hearth"</span><span class="pill pill-g">✓ centro del hogar</span><span class="pill pill-a">~ solo en inglés</span></div>
+      <div class="name-desc">La palabra inglesa para el hogar de fuego. "Heart" está literalmente dentro de "hearth" — doble capa semántica. Logo implícito (chimenea). Descartado porque no funciona en español con la misma fuerza.</div>
+      <div class="name-verdict">Veredicto: descartado. No resiste el mercado dual inglés/español.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">Luma</div>
+      <div class="name-pills"><span class="pill pill-g">✓ latín lumen</span><span class="pill pill-g">✓ 4 letras, cross-cultural</span><span class="pill pill-a">~ competencia (luma.ai)</span></div>
+      <div class="name-desc">Del latín lumen — luz, claridad. Funciona en inglés, español y portugués. Iluminar tus gastos. Descartado por competencia de marca existente (luma.ai) en categoría tech adyacente.</div>
+      <div class="name-verdict">Veredicto: descartado. Conflicto con marca existente.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">Brio</div>
+      <div class="name-pills"><span class="pill pill-g">✓ italiano/español: vivacidad</span><span class="pill pill-g">✓ 4 letras, energético</span><span class="pill pill-a">~ lifestyle, no finanzas</span></div>
+      <div class="name-desc">Vivacidad, energía, carácter en italiano y español. Las finanzas no tienen que ser aburridas. Descartado porque suena más a app de lifestyle que de finanzas domésticas.</div>
+      <div class="name-verdict">Veredicto: descartado. Categoría equivocada en el imaginario del usuario.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">Fami</div>
+      <div class="name-pills"><span class="pill pill-g">✓ contracción de familia</span><span class="pill pill-g">✓ 4 letras, universal</span><span class="pill pill-r">✗ cierra el target (no parejas sin hijos)</span></div>
+      <div class="name-desc">Contracción de familia — reconocible en todo el mundo latino. Muy memorable y corto. Descartado porque puede cerrar el producto a solo familias con hijos, excluyendo parejas jóvenes.</div>
+      <div class="name-verdict">Veredicto: descartado. Target demasiado estrecho.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">Grove</div>
+      <div class="name-pills"><span class="pill pill-g">✓ crecimiento orgánico</span><span class="pill pill-g">✓ sostenibilidad, comunidad</span><span class="pill pill-r">✗ abstracto en español</span></div>
+      <div class="name-desc">Una arboleda — algo que crece junto, orgánicamente, en comunidad. Inusual para fintech, lo que lo hace distintivo. Descartado porque es demasiado abstracto en el contexto latinoamericano.</div>
+      <div class="name-verdict">Veredicto: descartado. Requiere demasiado trabajo de construcción de marca.</div>
+    </div>
+  </div>
+
+  <!-- FASE 3 -->
+  <div class="phase-header">
+    <div class="phase-num">FASE 03</div>
+    <div class="phase-title">Estrategia nórdica — cultural equity borrowing</div>
+    <div class="phase-desc">Exploración activa · Patrón con diacríticos</div>
+  </div>
+  <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;line-height:1.7;">A partir de aquí se aplica la estrategia Häagen-Dazs/IKEA: nombres que suenan nórdicos o germánicos para evocar control, estabilidad y transparencia — los valores culturales de Escandinavia y Alemania. El diacrítico (ö/ä) opera como sello visual.</p>
+  <div class="names-grid">
+    <div class="name-card finalist">
+      <div class="name-word">SPARÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ spar=ahorrar (nórdico)</span><span class="pill pill-g">✓ patrón isla sueca</span><span class="pill pill-g">✓ musicalidad perfecta EN/ES</span><span class="pill pill-a">~ SPAR supermercados (48 países)</span></div>
+      <div class="name-desc">Del nórdico spar — ahorrar. La terminación -ö es el sufijo de islas del archipiélago sueco (Fårö, Värö, Härö). La ö como sello nórdico visual. Fonéticamente impecable en inglés y español: "spa-rö".</div>
+      <div class="name-verdict">★ FINALISTA. Pendiente verificación trademark vs SPAR International.</div>
+    </div>
+    <div class="name-card finalist">
+      <div class="name-word">HÄLO</div>
+      <div class="name-pills"><span class="pill pill-g">✓ halo universal EN/ES</span><span class="pill pill-g">✓ ä nórdica</span><span class="pill pill-g">✓ logo implícito (círculo)</span><span class="pill pill-a">~ Halo videojuego Xbox</span></div>
+      <div class="name-desc">Halo — aureola, protección, claridad — es universal en inglés y español. La ä nordifica sin desfigurar. El círculo del halo es el logo que se escribe solo. Categoría diferente a Xbox (fintech vs gaming).</div>
+      <div class="name-verdict">★ FINALISTA. Pendiente verificación trademark — categoría diferente a Halo/Xbox.</div>
+    </div>
+    <div class="name-card reserve">
+      <div class="name-word">FONDÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ fondo (ES) = fondo/fondo</span><span class="pill pill-g">✓ fond (EN) = afecto</span><span class="pill pill-g">✓ triple palanca</span></div>
+      <div class="name-desc">Fondo financiero en español + fond=afecto en inglés + ö nórdica. La opción semánticamente más rica. Candidata de reserva si los finalistas tienen problemas de trademark.</div>
+      <div class="name-verdict">Reserva activa. Triple palanca semántica ES/EN/nórdico.</div>
+    </div>
+    <div class="name-card reserve">
+      <div class="name-word">KLÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ klar=claro DE+SV</span><span class="pill pill-g">✓ ä+ö doble sello</span><span class="pill pill-g">✓ neutro EN/ES</span></div>
+      <div class="name-desc">Klar significa claro, listo, resuelto en alemán y sueco simultáneamente. "Alles klar" = todo en orden. Doble diacrítico (ä+ö) máximo sello germánico-nórdico.</div>
+      <div class="name-verdict">Reserva activa. Fuerte posicionamiento germánico.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">TRYGÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ trygg=seguro (NO/SV)</span><span class="pill pill-g">✓ mismo patrón SPARÖ</span></div>
+      <div class="name-desc">Trygg significa seguro, confiable, protegido en noruego y sueco. Sigue el patrón fonético de SPARÖ con exactitud. Descartado frente a los finalistas por menor recordación.</div>
+      <div class="name-verdict">Explorado. Descartado frente a SPARÖ por menor diferenciación.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">VÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ värde=valor (SV)</span><span class="pill pill-g">✓ isla real sueca</span></div>
+      <div class="name-desc">De värde — valor en sueco. Proteger el valor del hogar. Existe como topónimo real en Suecia, lo que refuerza la autenticidad nórdica.</div>
+      <div class="name-verdict">Explorado. Musicalidad correcta pero semántica más débil que SPARÖ.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">LÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ lär=aprender (SV)</span><span class="pill pill-g">✓ mismo patrón fonético</span></div>
+      <div class="name-desc">Lär en sueco significa aprender. Una app que te enseña sobre tus finanzas mientras las registras. L líquida al inicio la hace muy suave.</div>
+      <div class="name-verdict">Explorado. Concepto interesante pero SPARÖ tiene mayor fuerza financiera directa.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">MÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ mare=mar (latín)</span><span class="pill pill-g">✓ calma, profundidad</span></div>
+      <div class="name-desc">Del latín mare — el mar. Metáfora de calma, profundidad, claridad. Usado igual en español, italiano y portugués. Quizás la más suave fonéticamente.</div>
+      <div class="name-verdict">Explorado. Hermosa pero sin conexión financiera directa.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">HÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ isla real finlandesa</span><span class="pill pill-g">✓ fonética muy limpia</span></div>
+      <div class="name-desc">Isla real en el archipiélago finlandés. Sin significado literal útil — tabla en blanco semántica. Fonéticamente la más suave: la H aspirada casi desaparece en español.</div>
+      <div class="name-verdict">Explorado. Demasiado abstracto sin carga semántica financiera.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">NORÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ norte + ö</span><span class="pill pill-g">✓ 4 caracteres + diacrítico</span></div>
+      <div class="name-desc">La más directa: Norte + ö. Evoca inmediatamente Escandinavia. Funciona idéntico en inglés y español. Simple al punto de ser audaz.</div>
+      <div class="name-verdict">Explorado. Demasiado genérico como marca.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">VÄRNA</div>
+      <div class="name-pills"><span class="pill pill-g">✓ proteger (SV real)</span><span class="pill pill-g">✓ ä nórdica</span></div>
+      <div class="name-desc">Palabra sueca real: proteger, salvaguardar, cuidar. Perfecta para una app que protege el bienestar financiero del hogar. Termina en -a en lugar de -ö, más suave.</div>
+      <div class="name-verdict">Explorado. Buena semántica, pero HÄLO supera en memorabilidad.</div>
+    </div>
+    <div class="name-card discarded">
+      <div class="name-word">SPÄRÖ</div>
+      <div class="name-pills"><span class="pill pill-g">✓ variante de SPARÖ</span><span class="pill pill-g">✓ ä aleja de SPAR supermercado</span></div>
+      <div class="name-desc">Variante de SPARÖ con ä en lugar de a. Pequeño cambio que crea distancia visual del riesgo SPAR International. Mantiene toda la musicalidad del original.</div>
+      <div class="name-verdict">Variante táctica de SPARÖ. Evaluar si el riesgo trademark lo requiere.</div>
+    </div>
+  </div>
+
+  <!-- MATRIZ COMPARATIVA FINALISTAS -->
   <div class="card" style="margin-top:32px;">
-    <div class="card-label">Matriz de evaluación</div>
+    <div class="card-label">Matriz comparativa — Finalistas vs Reservas</div>
     <table class="matrix">
-      <thead><tr>
-        <th>Criterio</th><th>SPARÖ</th><th>HÄLO</th><th>FONDÖ</th><th>CUADRE</th>
-      </tr></thead>
+      <thead><tr><th>Criterio</th><th>SPARÖ</th><th>HÄLO</th><th>FONDÖ</th><th>KLÄRÖ</th></tr></thead>
       <tbody>
-        <tr class="hl"><td>Reconocimiento LATAM</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td></tr>
-        <tr><td>Mercado anglosajón</td><td><span class="dot dg"></span>Funciona</td><td><span class="dot dg"></span>Muy alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dr"></span>Bajo</td></tr>
-        <tr class="hl"><td>Sello nórdico visual</td><td><span class="dot dg"></span>Máximo</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dr"></span>Ninguno</td></tr>
-        <tr><td>Memorabilidad</td><td><span class="dot dg"></span>Alta</td><td><span class="dot dg"></span>Alta</td><td><span class="dot dg"></span>Alta</td><td><span class="dot da"></span>Media</td></tr>
-        <tr class="hl"><td>Referencia financiera</td><td><span class="dot dg"></span>Directa</td><td><span class="dot da"></span>Indirecta</td><td><span class="dot dg"></span>Directa</td><td><span class="dot dg"></span>Directa</td></tr>
-        <tr><td>Logo implícito</td><td><span class="dot da"></span>Parcial</td><td><span class="dot dg"></span>Círculo/halo</td><td><span class="dot da"></span>Parcial</td><td><span class="dot dr"></span>Ninguno</td></tr>
-        <tr class="hl"><td>Riesgo trademark</td><td><span class="dot da"></span>Medio</td><td><span class="dot da"></span>Medio</td><td><span class="dot dg"></span>Bajo</td><td><span class="dot dg"></span>Bajo</td></tr>
+        <tr class="hl"><td>Reconocimiento LATAM</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot da"></span>Medio</td></tr>
+        <tr><td>Mercado anglosajón</td><td><span class="dot dg"></span>Funciona</td><td><span class="dot dg"></span>Muy alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td></tr>
+        <tr class="hl"><td>Sello nórdico visual</td><td><span class="dot dg"></span>Máximo</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Alto</td><td><span class="dot dg"></span>Máximo</td></tr>
+        <tr><td>Referencia financiera directa</td><td><span class="dot dg"></span>Directa (spar=ahorrar)</td><td><span class="dot da"></span>Indirecta</td><td><span class="dot dg"></span>Directa (fondo)</td><td><span class="dot da"></span>Parcial (klar=claro)</td></tr>
+        <tr class="hl"><td>Musicalidad EN+ES</td><td><span class="dot dg"></span>Perfecta</td><td><span class="dot dg"></span>Perfecta</td><td><span class="dot dg"></span>Buena</td><td><span class="dot dg"></span>Buena</td></tr>
+        <tr><td>Logo implícito</td><td><span class="dot da"></span>Parcial</td><td><span class="dot dg"></span>Círculo/halo</td><td><span class="dot da"></span>Parcial</td><td><span class="dot da"></span>Parcial</td></tr>
+        <tr class="hl"><td>Riesgo trademark</td><td><span class="dot da"></span>Medio (SPAR)</td><td><span class="dot da"></span>Medio (Xbox)</td><td><span class="dot dg"></span>Bajo</td><td><span class="dot dg"></span>Bajo</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Pattern -->
+  <!-- PATRÓN FONÉTICO -->
   <div class="pattern-block">
-    <div class="card-label" style="color:rgba(247,242,232,0.35)">Patrón fonético ganador</div>
+    <div class="card-label" style="color:rgba(247,242,232,0.35)">Patrón fonético ganador — criterio de selección</div>
     <div class="pattern-word">Consonante + Vocal abierta + RÖ</div>
-    <div class="pattern-label">Estructura de los topónimos del archipiélago sueco — 2 sílabas, estrés en primera, terminación redonda</div>
+    <div class="pattern-sub">Estructura de topónimos del archipiélago sueco — 2 sílabas, estrés en primera, terminación redonda</div>
     <div class="pattern-examples">
-      <span class="p-ex">SPARÖ ★</span>
-      <span class="p-ex">Fårö (real)</span>
-      <span class="p-ex">Härö (real)</span>
-      <span class="p-ex">Värö (real)</span>
-      <span class="p-ex">Märö</span>
-      <span class="p-ex">Lärö</span>
-      <span class="p-ex">Norö</span>
+      <span class="p-ex">SPARÖ ★</span><span class="p-ex">Fårö (isla real)</span><span class="p-ex">Härö (isla real)</span><span class="p-ex">Värö (isla real)</span><span class="p-ex">Märö</span><span class="p-ex">Lärö</span><span class="p-ex">Norö</span>
     </div>
   </div>
 </div>
 </div>
 
 <!-- ESTRATEGIA -->
-<div id="estrategia" style="background:var(--white);">
+<div id="estrategia" class="alt-bg">
 <div class="section">
   <div class="sec-num">02 — Estrategia de marca</div>
   <h2 class="sec-title">Por qué nórdico</h2>
-  <p class="sec-sub">Cultural Equity Borrowing — tomar prestada la credibilidad de una cultura sin pertenecer a ella.</p>
+  <p class="sec-sub">Cultural Equity Borrowing — tomar prestada la credibilidad cultural de países nórdicos y germánicos sin pertenecer a ellos.</p>
   <div class="divider"></div>
-
-  <div class="big-q">"Häagen-Dazs fue inventado por un neoyorquino en el Bronx para sonar danés.<br>Décadas después, sigue funcionando."</div>
-
+  <div class="big-q">"Häagen-Dazs fue inventado por un neoyorquino en el Bronx para sonar danés. Décadas después, sigue funcionando."</div>
   <div class="insight-grid">
     <div class="insight-card">
       <div class="insight-icon">🧊</div>
-      <div class="insight-title">Los países nórdicos lideran</div>
-      <div class="insight-text">Dinamarca, Noruega, Finlandia y Suecia dominan los rankings de transparencia fiscal, confianza institucional y bienestar financiero (Transparency International, OCDE).</div>
+      <div class="insight-title">Los nórdicos lideran en confianza</div>
+      <div class="insight-text">Dinamarca, Noruega, Finlandia y Suecia dominan rankings de transparencia fiscal, confianza institucional y bienestar financiero (Transparency International, OCDE). El cerebro del consumidor ya tiene ese archivo cargado.</div>
     </div>
     <div class="insight-card">
       <div class="insight-icon">ä</div>
       <div class="insight-title">El diacrítico como sello</div>
-      <div class="insight-text">La ö y la ä operan como marca visual instantánea de nórdico, igual que la diéresis en Häagen-Dazs. Sin necesidad de explicación — el cerebro lo lee y asocia.</div>
+      <div class="insight-text">La ö y la ä operan como marca visual instantánea de nórdico — igual que la diéresis en Häagen-Dazs. Se registra con diacrítico como marca y sin él como dominio. Ej: SPARÖ → sparo.app</div>
     </div>
     <div class="insight-card">
       <div class="insight-icon">🌍</div>
-      <div class="insight-title">Doble mercado</div>
-      <div class="insight-text">El nombre funciona en LATAM (español) y mercado anglosajón (inglés) simultáneamente. Sin connotaciones negativas en ninguno. Fonética limpia en ambos.</div>
+      <div class="insight-title">Mercado dual desde el día 1</div>
+      <div class="insight-text">El nombre funciona en LATAM (español) y mercado anglosajón (inglés) simultáneamente. Sin connotaciones negativas en ninguno. Fonética limpia en los dos — criterio eliminatorio.</div>
     </div>
   </div>
-
   <div class="two-col">
     <div class="strategy-box">
       <h4>Referencias de la estrategia</h4>
       <ul>
-        <li><strong>Häagen-Dazs:</strong> nombre inventado para sonar danés. No existe en ningún idioma.</li>
+        <li><strong>Häagen-Dazs:</strong> nombre completamente inventado para sonar danés. No existe en ningún idioma.</li>
         <li><strong>IKEA:</strong> usa palabras y topónimos suecos reales. El consumidor global aprende a reconocerlos.</li>
-        <li><strong>Nubank:</strong> rompió el azul bancario con morado. Cuadre rompe el azul con verde.</li>
-        <li><strong>Notion:</strong> producto tech que se siente como compañero inteligente, no software.</li>
+        <li><strong>Nubank:</strong> rompió el azul bancario con morado. Cuadre/Sparö rompe con verde.</li>
+        <li><strong>Notion:</strong> producto tech que se siente como compañero, no software.</li>
       </ul>
     </div>
     <div class="strategy-box">
@@ -384,169 +418,99 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
       <ul>
         <li><strong>vs Fintechs bancarias:</strong> no toca cuentas. Cero fricción de integración.</li>
         <li><strong>vs Excel:</strong> IA elimina la entrada manual. Una foto de recibo basta.</li>
-        <li><strong>vs Mint/YNAB:</strong> diseñado para economía LATAM con expansión global.</li>
-        <li><strong>vs Splitwise:</strong> no divide deudas — entiende patrones del hogar.</li>
+        <li><strong>vs Mint/YNAB:</strong> diseñado para economía LATAM con visión global.</li>
+        <li><strong>vs Splitwise:</strong> no divide deudas — entiende patrones del hogar completo.</li>
       </ul>
     </div>
   </div>
-
-  <div class="card" style="background:var(--teal); border:none; margin-top:4px;">
-    <div class="card-label" style="color:rgba(247,242,232,0.35)">La frase interna de marca</div>
-    <div style="font-family:'Fraunces',serif; font-size:1.2rem; font-weight:700; color:var(--cream); line-height:1.4; margin-top:10px;">"El primer amigo que tiene cada familia latinoamericana que entiende de finanzas — y que no te juzga por lo que gastas."</div>
-    <div style="font-size:0.75rem; color:rgba(247,242,232,0.35); margin-top:10px;">Usá esta frase para filtrar decisiones de producto, UX y comunicación.</div>
+  <div class="card" style="background:var(--teal);border:none;margin-top:4px;">
+    <div class="card-label" style="color:rgba(247,242,232,0.35)">Frase interna de marca — filtro de decisiones</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;color:var(--cream);line-height:1.4;margin-top:8px;">"El primer amigo que tiene cada familia latinoamericana que entiende de finanzas — y que no te juzga por lo que gastas."</div>
+    <div style="font-size:0.73rem;color:rgba(247,242,232,0.35);margin-top:8px;">Usá esta frase para filtrar decisiones de producto, UX y comunicación. Si una decisión aleja la marca de este perfil, reconsiderá.</div>
   </div>
 </div>
 </div>
 
-<!-- IDENTIDAD VISUAL -->
+<!-- IDENTIDAD -->
 <div id="identidad">
 <div class="section">
   <div class="sec-num">03 — Identidad Visual</div>
   <h2 class="sec-title">El lenguaje visual</h2>
   <p class="sec-sub">Inteligente y cálido. Confiable y accesible. Cada decisión visual comunica lo mismo.</p>
   <div class="divider"></div>
-
-  <!-- LOGO -->
   <div class="card-label">Logotipo — concepto</div>
   <div class="logo-row">
     <div class="logo-box dark">
-      <svg width="48" height="48" viewBox="0 0 52 52" fill="none">
-        <path d="M26 8L6 22V44H46V22L26 8Z" stroke="#2e8b6e" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-        <path d="M18 34L23 39L34 28" stroke="#e8735a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M20 44V32H32V44" stroke="#2e8b6e" stroke-width="2" fill="none"/>
-      </svg>
-      <div class="logo-wordmark" style="font-size:1.5rem; color:var(--cream); letter-spacing:0.06em;">SPARÖ</div>
+      <svg width="44" height="44" viewBox="0 0 52 52" fill="none"><path d="M26 8L6 22V44H46V22L26 8Z" stroke="#2e8b6e" stroke-width="2.5" stroke-linejoin="round" fill="none"/><path d="M18 34L23 39L34 28" stroke="#e8735a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 44V32H32V44" stroke="#2e8b6e" stroke-width="2" fill="none"/></svg>
+      <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--cream);letter-spacing:0.06em;">SPARÖ</div>
       <div class="logo-variant-label">Sobre oscuro</div>
     </div>
     <div class="logo-box light">
-      <svg width="48" height="48" viewBox="0 0 52 52" fill="none">
-        <path d="M26 8L6 22V44H46V22L26 8Z" stroke="#0d3d34" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-        <path d="M18 34L23 39L34 28" stroke="#e8735a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M20 44V32H32V44" stroke="#0d3d34" stroke-width="2" fill="none"/>
-      </svg>
-      <div class="logo-wordmark" style="font-size:1.5rem; color:var(--teal); letter-spacing:0.06em;">SPARÖ</div>
+      <svg width="44" height="44" viewBox="0 0 52 52" fill="none"><path d="M26 8L6 22V44H46V22L26 8Z" stroke="#0d3d34" stroke-width="2.5" stroke-linejoin="round" fill="none"/><path d="M18 34L23 39L34 28" stroke="#e8735a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 44V32H32V44" stroke="#0d3d34" stroke-width="2" fill="none"/></svg>
+      <div style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--teal);letter-spacing:0.06em;">SPARÖ</div>
       <div class="logo-variant-label">Sobre claro</div>
     </div>
   </div>
-  <p style="font-size:0.8rem; color:var(--gray); margin-top:8px; line-height:1.6;">
-    <strong style="color:var(--ink);">Concepto del ícono:</strong> casa + checkmark interno. La casa = territorio de marca. El checkmark en coral = las cuentas cuadran. Intencionalmente no toca los bordes — hay espacio para crecer.
-  </p>
-
-  <!-- COLORS -->
-  <div style="margin-top:44px;">
-    <div class="card-label" style="margin-bottom:14px;">Paleta de colores</div>
-    <div class="color-row">
-      <div class="swatch"><div class="swatch-fill" style="background:#0d3d34;"></div><div class="swatch-info"><div class="swatch-name">Verde Selva</div><div class="swatch-hex">#0d3d34</div><div class="swatch-role">Primario · Confianza</div></div></div>
-      <div class="swatch"><div class="swatch-fill" style="background:#2e8b6e;"></div><div class="swatch-info"><div class="swatch-name">Verde Lima</div><div class="swatch-hex">#2e8b6e</div><div class="swatch-role">Secundario · Acción</div></div></div>
-      <div class="swatch"><div class="swatch-fill" style="background:#e8735a;"></div><div class="swatch-info"><div class="swatch-name">Terracota</div><div class="swatch-hex">#e8735a</div><div class="swatch-role">Acento · Énfasis</div></div></div>
-      <div class="swatch"><div class="swatch-fill" style="background:#f7f2e8;"></div><div class="swatch-info"><div class="swatch-name">Crema</div><div class="swatch-hex">#f7f2e8</div><div class="swatch-role">Fondo · Calidez</div></div></div>
-      <div class="swatch"><div class="swatch-fill" style="background:#c9a84c;"></div><div class="swatch-info"><div class="swatch-name">Oro Lima</div><div class="swatch-hex">#c9a84c</div><div class="swatch-role">Premium · Logros</div></div></div>
-    </div>
-    <div class="card" style="margin-top:12px;">
-      <div class="card-label">Racional cromático</div>
-      <p style="font-size:0.84rem; color:var(--gray); line-height:1.7; margin-top:6px;">Verde en lugar de azul bancario — misma jugada de Nubank con el morado. Comunica crecimiento y frescura fuera del paradigma bancario tradicional. La <strong style="color:var(--ink);">Terracota</strong> añade calidez latinoamericana. El <strong style="color:var(--ink);">Crema</strong> como fondo (no blanco puro) hace todo más orgánico, menos tecnológico-aséptico.</p>
-    </div>
+  <p style="font-size:0.8rem;color:var(--gray);margin:8px 0 32px;line-height:1.6;"><strong style="color:var(--ink);">Concepto:</strong> casa + checkmark interno. La casa = territorio de marca. El checkmark en coral = las cuentas cuadran. Intencionalmente no toca los bordes — hay espacio para crecer.</p>
+  <div class="card-label" style="margin-bottom:14px;">Paleta de colores</div>
+  <div class="color-row">
+    <div class="swatch"><div class="swatch-fill" style="background:#0d3d34;"></div><div class="swatch-info"><div class="swatch-name">Verde Selva</div><div class="swatch-hex">#0d3d34</div><div class="swatch-role">Primario · Confianza</div></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#2e8b6e;"></div><div class="swatch-info"><div class="swatch-name">Verde Lima</div><div class="swatch-hex">#2e8b6e</div><div class="swatch-role">Secundario · Acción</div></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#e8735a;"></div><div class="swatch-info"><div class="swatch-name">Terracota</div><div class="swatch-hex">#e8735a</div><div class="swatch-role">Acento · Énfasis</div></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#f7f2e8;"></div><div class="swatch-info"><div class="swatch-name">Crema</div><div class="swatch-hex">#f7f2e8</div><div class="swatch-role">Fondo · Calidez</div></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#c9a84c;"></div><div class="swatch-info"><div class="swatch-name">Oro Lima</div><div class="swatch-hex">#c9a84c</div><div class="swatch-role">Premium · Logros</div></div></div>
   </div>
-
-  <!-- TYPOGRAPHY -->
-  <div style="margin-top:44px;">
-    <div class="card-label" style="margin-bottom:14px;">Tipografía</div>
-    <div class="type-specimen">
-      <div class="type-label">Display · Fraunces · 900</div>
-      <div class="type-disp">El hogar <em>inteligente</em></div>
-      <div class="type-label" style="margin-top:22px;">Heading · Fraunces · 700</div>
-      <div class="type-head">Todo cuadra cuando tienes claridad</div>
-      <div class="type-label" style="margin-top:16px;">Body · DM Sans · 400</div>
-      <div class="type-body">Este mes gastaste S/ 3,240 en alimentación — un 12% menos que el mes pasado. Tienes S/ 680 disponibles antes de fin de mes.</div>
-      <div class="type-ui">Label · DM Sans · 600 · Uppercase · Spacing 0.2em</div>
-      <div style="font-size:0.63rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray); font-weight:600; margin-top:4px;">Categoría · Restaurantes · Este mes</div>
-    </div>
-    <div class="card" style="margin-top:12px;">
-      <div class="card-label">Por qué Fraunces</div>
-      <p style="font-size:0.84rem; color:var(--gray); line-height:1.7; margin-top:6px;">Fraunces es una "wobbly serif" — tiene movimiento suave en sus trazos que la hace sentir viva. No es la serif clásica (fría, editorial) ni la sans-serif tech dominante (Inter, SF Pro). Es el punto entre inteligente y cálido. DM Sans para body da contraste de personalidad sin sacrificar legibilidad.</p>
-    </div>
+  <div class="card" style="margin-bottom:32px;">
+    <div class="card-label">Racional cromático</div>
+    <p style="font-size:0.84rem;color:var(--gray);line-height:1.7;margin-top:6px;">Verde en lugar de azul bancario — misma jugada de Nubank con el morado. Comunica crecimiento y frescura fuera del paradigma bancario tradicional. La <strong style="color:var(--ink);">Terracota</strong> añade calidez latinoamericana que el verde frío no puede dar solo. El <strong style="color:var(--ink);">Crema</strong> como fondo (no blanco puro) hace todo más orgánico, menos tecnológico-aséptico.</p>
   </div>
-
-  <!-- TAGLINES -->
-  <div style="margin-top:44px;">
+  <div class="card-label" style="margin-bottom:14px;">Tipografía</div>
+  <div class="type-specimen">
+    <div class="type-label">Display · Fraunces · 900</div>
+    <div class="type-disp">El hogar <em>inteligente</em></div>
+    <div class="type-label" style="margin-top:20px;">Heading · Fraunces · 700</div>
+    <div class="type-head">Todo cuadra cuando tienes claridad</div>
+    <div class="type-label" style="margin-top:14px;">Body · DM Sans · 400</div>
+    <div class="type-body">Este mes gastaste S/ 3,240 en alimentación — un 12% menos que el mes pasado. Tienes S/ 680 disponibles antes de fin de mes.</div>
+    <div class="type-ui">Label · DM Sans · 600 · Uppercase · spacing 0.2em</div>
+    <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);font-weight:600;margin-top:4px;">Categoría · Restaurantes · Este mes</div>
+  </div>
+  <div class="card" style="margin-top:12px;">
+    <div class="card-label">Por qué Fraunces</div>
+    <p style="font-size:0.84rem;color:var(--gray);line-height:1.7;margin-top:6px;">Fraunces es una "wobbly serif" — tiene movimiento suave en sus trazos que la hace sentir viva, no estática. No es la serif clásica (fría, editorial) ni la sans-serif tech dominante (Inter, SF Pro). Es el punto exacto entre inteligente y cálido. DM Sans para body da contraste sin sacrificar legibilidad.</p>
+  </div>
+  <div style="margin-top:32px;">
     <div class="card-label" style="margin-bottom:14px;">Taglines</div>
     <div class="tagline-grid">
-      <div class="tl-item winner-tl">
-        <div class="tl-badge">★ Principal</div>
-        <div class="tl-text">Todo cuadra en casa</div>
-        <div class="tl-note">Activa el significado del concepto, promete armonía doméstica y cierre financiero. "En casa" ancla el universo sin decir "app" ni "gastos".</div>
-      </div>
-      <div class="tl-item winner-tl">
-        <div class="tl-badge">★ Digital / Performance</div>
-        <div class="tl-text">Los gastos, por fin claros</div>
-        <div class="tl-note">"Por fin" valida la frustración del usuario. Directo y aliviador. Ideal para onboarding y publicidad.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-text">Tu casa, sus números, una sola vista</div>
-        <div class="tl-note">Para comunicar la funcionalidad de hogar compartido. Más explicativo, menos poético.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-text">Inteligencia para lo que más importa</div>
-        <div class="tl-note">Positioning premium. Segmento familiar adulto. Menos específico, más aspiracional.</div>
-      </div>
+      <div class="tl-item w"><div class="tl-badge">★ Principal</div><div class="tl-text">Todo cuadra en casa</div><div class="tl-note">Activa el concepto, promete armonía doméstica y cierre financiero. "En casa" ancla el universo sin decir "app".</div></div>
+      <div class="tl-item w"><div class="tl-badge">★ Digital / Performance</div><div class="tl-text">Los gastos, por fin claros</div><div class="tl-note">"Por fin" valida la frustración. Directo y aliviador. Ideal para onboarding y publicidad.</div></div>
+      <div class="tl-item"><div class="tl-text">Tu casa, sus números, una sola vista</div><div class="tl-note">Para comunicar funcionalidad de hogar compartido. Más explicativo.</div></div>
+      <div class="tl-item"><div class="tl-text">Inteligencia para lo que más importa</div><div class="tl-note">Positioning premium. Segmento familiar adulto.</div></div>
     </div>
   </div>
 </div>
 </div>
 
 <!-- VOZ -->
-<div id="voz" style="background:var(--white);">
+<div id="voz" class="alt-bg">
 <div class="section">
   <div class="sec-num">04 — Voz y Tono</div>
   <h2 class="sec-title">Cómo habla la marca</h2>
-  <p class="sec-sub">La consistencia de voz es tan importante como la identidad visual.</p>
+  <p class="sec-sub">Arquetipo: El Sabio + El Cuidador. Inteligente pero cálido. Preciso pero empático.</p>
   <div class="divider"></div>
-
   <div class="p-grid">
-    <div class="p-card">
-      <div class="p-title">🧠 Inteligente, no pedante</div>
-      <div class="p-row"><span class="p-yes">Usa datos concretos</span><span class="p-no">Sin jerga financiera</span></div>
-      <div class="p-row"><span class="p-yes">Analiza y sintetiza</span><span class="p-no">Sin tecnicismos</span></div>
-      <div class="p-row"><span class="p-yes">Adelanta lo que viene</span><span class="p-no">Sin condescendencia</span></div>
-    </div>
-    <div class="p-card">
-      <div class="p-title">🏠 Doméstico, no corporativo</div>
-      <div class="p-row"><span class="p-yes">Habla de "tu casa"</span><span class="p-no">Sin lenguaje bancario</span></div>
-      <div class="p-row"><span class="p-yes">Reconoce la vida real</span><span class="p-no">Sin frases de marketing</span></div>
-      <div class="p-row"><span class="p-yes">Cálido y cercano</span><span class="p-no">Sin sonar a call center</span></div>
-    </div>
-    <div class="p-card">
-      <div class="p-title">✅ Directo, no cortante</div>
-      <div class="p-row"><span class="p-yes">Va al grano</span><span class="p-no">Sin ser brusco</span></div>
-      <div class="p-row"><span class="p-yes">Claridad ante todo</span><span class="p-no">Sin ambigüedad</span></div>
-      <div class="p-row"><span class="p-yes">Siempre accionable</span><span class="p-no">Sin juicios morales</span></div>
-    </div>
-    <div class="p-card">
-      <div class="p-title">🌱 Optimista, no naif</div>
-      <div class="p-row"><span class="p-yes">Reconoce los logros</span><span class="p-no">Sin exagerar</span></div>
-      <div class="p-row"><span class="p-yes">Motiva con datos</span><span class="p-no">Sin toxic positivity</span></div>
-      <div class="p-row"><span class="p-yes">Mira hacia adelante</span><span class="p-no">Sin ignorar realidad</span></div>
-    </div>
+    <div class="p-card"><div class="p-title">🧠 Inteligente, no pedante</div><div class="p-row"><span class="p-yes">Usa datos concretos</span><span class="p-no">Sin jerga financiera</span></div><div class="p-row"><span class="p-yes">Analiza y sintetiza</span><span class="p-no">Sin tecnicismos</span></div><div class="p-row"><span class="p-yes">Adelanta lo que viene</span><span class="p-no">Sin condescendencia</span></div></div>
+    <div class="p-card"><div class="p-title">🏠 Doméstico, no corporativo</div><div class="p-row"><span class="p-yes">Habla de "tu casa"</span><span class="p-no">Sin lenguaje bancario</span></div><div class="p-row"><span class="p-yes">Reconoce la vida real</span><span class="p-no">Sin frases de marketing</span></div><div class="p-row"><span class="p-yes">Cálido y cercano</span><span class="p-no">Sin sonar a call center</span></div></div>
+    <div class="p-card"><div class="p-title">✅ Directo, no cortante</div><div class="p-row"><span class="p-yes">Va al grano</span><span class="p-no">Sin ser brusco</span></div><div class="p-row"><span class="p-yes">Claridad ante todo</span><span class="p-no">Sin ambigüedad</span></div><div class="p-row"><span class="p-yes">Siempre accionable</span><span class="p-no">Sin juicios morales</span></div></div>
+    <div class="p-card"><div class="p-title">🌱 Optimista, no naif</div><div class="p-row"><span class="p-yes">Reconoce los logros</span><span class="p-no">Sin exagerar</span></div><div class="p-row"><span class="p-yes">Motiva con datos</span><span class="p-no">Sin toxic positivity</span></div><div class="p-row"><span class="p-yes">Mira hacia adelante</span><span class="p-no">Sin ignorar realidad</span></div></div>
   </div>
-
-  <div style="margin-top:28px;">
-    <div class="card-label" style="margin-bottom:10px;">Ejemplos aplicados</div>
-    <div class="voice-ex good">
-      <div class="voice-lbl g">✓ Así habla — Notificación de presupuesto</div>
-      <div class="voice-txt">Ya llevas el 80% del presupuesto de restaurantes este mes. Quedan S/ 120 para 11 días. ¿Seguimos o ajustamos?</div>
-    </div>
-    <div class="voice-ex bad">
-      <div class="voice-lbl b">✗ Lo que NO es la marca</div>
-      <div class="voice-txt">⚠️ ALERTA: Has superado el 80% de tu límite en "Restaurantes". Por favor revise su presupuesto para evitar excederse.</div>
-    </div>
-    <div class="voice-ex good" style="margin-top:14px;">
-      <div class="voice-lbl g">✓ Así habla — Resumen mensual</div>
-      <div class="voice-txt">Junio fue tu mejor mes: gastaron S/ 420 menos que en mayo y completaron los 4 presupuestos. Karina lideró los ahorros en alimentación.</div>
-    </div>
-    <div class="voice-ex good" style="margin-top:14px;">
-      <div class="voice-lbl g">✓ Así habla — Insight de IA</div>
-      <div class="voice-txt">En los últimos 3 meses gastan más los viernes. Farmacia y restaurantes representan el 60% de esos picos. Dato para tenerlo en cuenta.</div>
-    </div>
+  <div style="margin-top:24px;">
+    <div class="card-label" style="margin-bottom:10px;">Ejemplos aplicados al producto</div>
+    <div class="voice-ex good"><div class="voice-lbl g">✓ Notificación de presupuesto</div><div class="voice-txt">Ya llevas el 80% del presupuesto de restaurantes este mes. Quedan S/ 120 para 11 días. ¿Seguimos o ajustamos?</div></div>
+    <div class="voice-ex bad"><div class="voice-lbl b">✗ Lo que NO es la marca</div><div class="voice-txt">⚠️ ALERTA: Has superado el 80% de tu límite en "Restaurantes". Por favor revise su presupuesto para evitar excederse.</div></div>
+    <div class="voice-ex good" style="margin-top:12px;"><div class="voice-lbl g">✓ Resumen mensual</div><div class="voice-txt">Junio fue tu mejor mes: gastaron S/ 420 menos que en mayo y completaron los 4 presupuestos. Karina lideró los ahorros en alimentación.</div></div>
+    <div class="voice-ex bad"><div class="voice-lbl b">✗ Lo que NO es la marca</div><div class="voice-txt">¡Felicitaciones! 🎉🎉 ¡Han tenido un mes INCREÍBLE! ¡Sus gastos han disminuido significativamente! ¡Sigan así, campeones!</div></div>
+    <div class="voice-ex good" style="margin-top:12px;"><div class="voice-lbl g">✓ Insight de IA</div><div class="voice-txt">En los últimos 3 meses gastan más los viernes. Farmacia y restaurantes representan el 60% de esos picos. Dato para tenerlo en cuenta.</div></div>
   </div>
 </div>
 </div>
@@ -555,102 +519,158 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
 <div id="palabras">
 <div class="section">
   <div class="sec-num">05 — Banco de Palabras</div>
-  <h2 class="sec-title">Investigación lingüística</h2>
-  <p class="sec-sub">Raíces en 6 idiomas analizadas para naming. Las marcadas en verde son candidatas activas.</p>
+  <h2 class="sec-title">Investigación lingüística completa</h2>
+  <p class="sec-sub">80+ palabras en 6 idiomas analizadas para naming. Inglés · Alemán · Sueco · Noruego · Danés · Finlandés.</p>
   <div class="divider"></div>
 
   <div class="concept-block">
-    <div class="concept-header"><div class="concept-emoji">💰</div><div class="concept-title">Ahorro · Savings</div></div>
+    <div class="concept-header"><div class="concept-emoji">💰</div><div class="concept-title">Ahorro · Savings · Sparen</div></div>
     <div class="words-grid">
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">savings</div><div class="word-meaning">Lo guardado para el futuro</div></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">thrift</div><div class="word-meaning">Economía, uso cuidadoso</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">sparen</div><div class="word-meaning">Ahorrar</div><span class="word-badge">raíz SPARÖ</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">spare</div><div class="word-meaning">Guardar de sobra, reservar</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">nest egg</div><div class="word-meaning">Reserva para el futuro</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">sparen</div><div class="word-meaning">Ahorrar, economizar</div><span class="word-badge">raíz SPARÖ</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Ersparnis</div><div class="word-meaning">El ahorro acumulado</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">Rücklage</div><div class="word-meaning">Reserva, fondo de emergencia</div></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">spara</div><div class="word-meaning">Ahorrar (infinitivo)</div><span class="word-badge gold">nombre potencial</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main">besparingar</div><div class="word-meaning">Los ahorros acumulados</div></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">spare</div><div class="word-meaning">Ahorrar</div></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">opsparing</div><div class="word-meaning">Ahorro acumulado</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main">sparing</div><div class="word-meaning">El ahorro como práctica</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">opsparing</div><div class="word-meaning">Ahorro acumulado (op=encima)</div><span class="word-badge gold">potential</span></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">säästö</div><div class="word-meaning">Ahorro — ä+ö máximo sello</div><span class="word-badge">★ fonética única</span></div>
     </div>
   </div>
 
   <div class="concept-block">
-    <div class="concept-header"><div class="concept-emoji">🏠</div><div class="concept-title">Hogar · Household</div></div>
+    <div class="concept-header"><div class="concept-emoji">🏠</div><div class="concept-title">Hogar · Household · Haushalt</div></div>
     <div class="words-grid">
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Haushalt</div><div class="word-meaning">Hogar Y presupuesto</div><span class="word-badge">★ doble significado</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">household</div><div class="word-meaning">El hogar como unidad</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">hearth</div><div class="word-meaning">Hogar/chimenea — "heart" dentro</div><span class="word-badge gold">explorado</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">outflow</div><div class="word-meaning">Flujo de salida del dinero</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Haushalt</div><div class="word-meaning">Hogar Y presupuesto (mismo término)</div><span class="word-badge">★ doble significado</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">Ausgaben</div><div class="word-meaning">Gastos, egresos</div></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Heim</div><div class="word-meaning">Hogar, raíz de "home"</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">hem</div><div class="word-meaning">Hogar — 3 letras</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">hjem</div><div class="word-meaning">Hogar</div></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">koti</div><div class="word-meaning">Hogar — 4 letras inusual</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">hem</div><div class="word-meaning">Hogar — 3 letras, raíz de hämö</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main">hushåll</div><div class="word-meaning">Hogar/economía doméstica</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">hjem</div><div class="word-meaning">Hogar — pronunciado "yem"</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">hjem</div><div class="word-meaning">Hogar</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">koti</div><div class="word-meaning">Hogar — 4 letras, muy inusual</div><span class="word-badge gold">potential</span></div>
     </div>
   </div>
 
   <div class="concept-block">
-    <div class="concept-header"><div class="concept-emoji">📐</div><div class="concept-title">Orden · Order</div></div>
+    <div class="concept-header"><div class="concept-emoji">📐</div><div class="concept-title">Orden · Order · Ordnung</div></div>
     <div class="words-grid">
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Ordnung</div><div class="word-meaning">Orden — concepto cultural alemán</div><span class="word-badge">★ concepto clave</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">lagom</div><div class="word-meaning">Exactamente lo necesario</div><span class="word-badge">★★★ perfecto</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">rydde</div><div class="word-meaning">Ordenar, despejar</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">tidy</div><div class="word-meaning">Ordenado, limpio, en su sitio</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">steady</div><div class="word-meaning">Estable, firme, sin fluctuación</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">settled</div><div class="word-meaning">Resuelto, en orden, saldado</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Ordnung</div><div class="word-meaning">Orden — "Ordnung muss sein"</div><span class="word-badge">★ concepto cultural</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">aufräumen</div><div class="word-meaning">Poner en orden, organizar</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main">ordning</div><div class="word-meaning">Orden, estructura</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">lagom</div><div class="word-meaning">Exactamente lo necesario</div><span class="word-badge">★★★ perfecto para presupuesto</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">rydde</div><div class="word-meaning">Ordenar, despejar — "rydde opp"</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main">orden</div><div class="word-meaning">Orden (igual que en español)</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">selkeä</div><div class="word-meaning">Claro, ordenado, transparente</div><span class="word-badge gold">fonética interesante</span></div>
     </div>
   </div>
 
   <div class="concept-block">
-    <div class="concept-header"><div class="concept-emoji">🔍</div><div class="concept-title">Claridad · Transparency</div></div>
+    <div class="concept-header"><div class="concept-emoji">🔍</div><div class="concept-title">Transparencia · Clarity · Klarheit</div></div>
     <div class="words-grid">
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">klar</div><div class="word-meaning">Claro, listo, resuelto</div><span class="word-badge">★ potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">ljus</div><div class="word-meaning">Luz, luminoso</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">clarity</div><div class="word-meaning">Claridad total</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">lucid</div><div class="word-meaning">Lúcido, transparente, racional</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">clear</div><div class="word-meaning">Claro, despejado, sin deuda</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">klar</div><div class="word-meaning">Claro, listo — "alles klar"</div><span class="word-badge">★ potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Klarheit</div><div class="word-meaning">La claridad como sustantivo</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">hell</div><div class="word-meaning">Brillante, claro, luminoso</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">klar</div><div class="word-meaning">Claro, listo (igual que alemán)</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">ljus</div><div class="word-meaning">Luz, luminoso, claro</div><span class="word-badge gold">potential</span></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">lys</div><div class="word-meaning">Luz, luminosidad</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">kirkas</div><div class="word-meaning">Brillante, nítido</div><span class="word-badge gold">fonética única</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">klarhed</div><div class="word-meaning">La claridad como sustantivo</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">kirkas</div><div class="word-meaning">Brillante, claro, nítido</div><span class="word-badge gold">fonética única</span></div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-header"><div class="concept-emoji">🧭</div><div class="concept-title">Norte · North · Nord</div></div>
+    <div class="words-grid">
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">north</div><div class="word-meaning">Norte — dirección, polo, referencia</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">polar</div><div class="word-meaning">Del polo, extremo, puro</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Nord</div><div class="word-meaning">Norte — prefijo potente</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">Norden</div><div class="word-meaning">El Norte como región/concepto</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">norr</div><div class="word-meaning">Norte — doble R, textura visual</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main">nord</div><div class="word-meaning">Norte</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">pohja</div><div class="word-meaning">Norte/base/fondo — polisemia</div><span class="word-badge">★ concepto profundo</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">pohjola</div><div class="word-meaning">El Norte mítico en folclore finlandés</div><span class="word-badge gold">potential</span></div>
     </div>
   </div>
 
   <div class="concept-block">
     <div class="concept-header"><div class="concept-emoji">📦</div><div class="concept-title">Caja · Kasse · Fund</div></div>
     <div class="words-grid">
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Kasse</div><div class="word-meaning">Caja, fondo — base de Sparkasse</div><span class="word-badge">★★ potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Sparkasse</div><div class="word-meaning">Caja de ahorros alemana icónica</div><span class="word-badge">★★ referente</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">vault</div><div class="word-meaning">Bóveda, caja fuerte</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">till</div><div class="word-meaning">Caja registradora, gaveta</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">fund</div><div class="word-meaning">Fondo, reserva acumulada</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Kasse</div><div class="word-meaning">Caja, tesorería — base de Sparkasse</div><span class="word-badge">★★ potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Sparkasse</div><div class="word-meaning">Caja de ahorros — institución icónica</div><span class="word-badge">★★ referente</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main">Tresor</div><div class="word-meaning">Caja fuerte, bóveda</div></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">kassa</div><div class="word-meaning">Caja, tesorería</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">varanto</div><div class="word-meaning">Reserva, depósito</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">kasse</div><div class="word-meaning">Caja, cajero, fondo</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">pengekasse</div><div class="word-meaning">Caja de dinero (penge=dinero)</div><span class="word-badge">compuesto</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">varanto</div><div class="word-meaning">Reserva, fondo, depósito</div><span class="word-badge gold">potential</span></div>
     </div>
   </div>
 
   <div class="concept-block">
-    <div class="concept-header"><div class="concept-emoji">❄️</div><div class="concept-title">Conceptos nórdicos únicos</div></div>
+    <div class="concept-header"><div class="concept-emoji">🧮</div><div class="concept-title">Cálculo · Planificación · Rechnen</div></div>
     <div class="words-grid">
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">lagom</div><div class="word-meaning">Exactamente lo necesario</div><span class="word-badge">★★★ presupuesto perfecto</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">ro</div><div class="word-meaning">Calma, paz interior</div><span class="word-badge">★★ muy potente</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">trygg</div><div class="word-meaning">Seguro, confiable</div><span class="word-badge">★★ potente</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">oversikt</div><div class="word-meaning">Vista panorámica total</div><span class="word-badge gold">potential</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main hl">lykke</div><div class="word-meaning">Felicidad, buena fortuna</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main hl">tally</div><div class="word-meaning">Conteo, registro, hacer cuadrar</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">reckon</div><div class="word-meaning">Calcular, estimar (informal)</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#2563eb"></div>EN</div><div class="word-main">forecast</div><div class="word-meaning">Proyección, pronóstico</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">rechnen</div><div class="word-meaning">Calcular — raíz de "reckoning"</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#dc2626"></div>DE</div><div class="word-main hl">Rechnung</div><div class="word-meaning">Factura Y cálculo — mismo término</div><span class="word-badge">★ doble significado</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">räkna</div><div class="word-meaning">Calcular, contar</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">regne</div><div class="word-meaning">Calcular. También: llover.</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA</div><div class="word-main">beregning</div><div class="word-meaning">Cálculo, planificación</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">laskea</div><div class="word-meaning">Calcular, contar</div></div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-header"><div class="concept-emoji">❄️</div><div class="concept-title">Conceptos nórdicos únicos — sin traducción exacta</div></div>
+    <div class="words-grid">
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">lagom</div><div class="word-meaning">Exactamente lo necesario. Ni más ni menos.</div><span class="word-badge">★★★ concepto perfecto</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO/DA</div><div class="word-main hl">ro</div><div class="word-meaning">Calma, paz interior profunda</div><span class="word-badge">★★ muy potente</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO/SV</div><div class="word-main hl">trygg</div><div class="word-meaning">Seguro, confiable, protegido</div><span class="word-badge">★★ potente</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">oversikt</div><div class="word-meaning">Vista panorámica total de tus finanzas</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">överblick</div><div class="word-meaning">Vista de pájaro, panorama general</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#8b1a1a"></div>DA/NO</div><div class="word-main hl">lykke</div><div class="word-meaning">Felicidad, buena fortuna</div><span class="word-badge gold">potential</span></div>
       <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO</div><div class="word-main hl">nok</div><div class="word-meaning">Suficiente — suficiencia financiera</div><span class="word-badge">★ concepto</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">sisu</div><div class="word-meaning">Determinación silenciosa</div><span class="word-badge gold">4 letras</span></div>
-      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">frihet</div><div class="word-meaning">Libertad financiera</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#6d28d9"></div>FI</div><div class="word-main hl">sisu</div><div class="word-meaning">Determinación silenciosa, resiliencia</div><span class="word-badge gold">4 letras</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">frihet</div><div class="word-meaning">Libertad financiera como meta</div><span class="word-badge gold">potential</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">välmående</div><div class="word-meaning">Bienestar, prosperidad general</div><span class="word-badge gold">concepto clave</span></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1d6fa4"></div>SV</div><div class="word-main hl">stillhet</div><div class="word-meaning">Quietud, silencio, calma profunda</div></div>
+      <div class="word-entry"><div class="word-lang"><div class="wdot" style="background:#1a5c4a"></div>NO/DA</div><div class="word-main hl">venn</div><div class="word-meaning">Amigo + diagrama Venn (intersección)</div><span class="word-badge gold">explorado</span></div>
     </div>
   </div>
 </div>
 </div>
 
 <!-- ARQUITECTURA -->
-<div id="arquitectura" style="background:var(--white);">
+<div id="arquitectura" class="alt-bg">
 <div class="section">
   <div class="sec-num">06 — Arquitectura de marca</div>
   <h2 class="sec-title">La marca a escala</h2>
-  <p class="sec-sub">El sistema está diseñado para crecer. Estas son las extensiones naturales.</p>
+  <p class="sec-sub">El sistema está diseñado para crecer desde LATAM hacia el mercado global.</p>
   <div class="divider"></div>
-
   <div class="arch">
     <div class="arch-title">SPAR<span>Ö</span></div>
     <div class="arch-sub">Marca madre · Plataforma de inteligencia doméstica</div>
     <div class="arch-grid">
-      <div class="arch-item">
-        <div class="arch-item-title">Sparö Hogar</div>
-        <div class="arch-item-desc">El producto actual. App para hogares — parejas, familias. Registro, análisis, presupuestos compartidos.</div>
-      </div>
-      <div class="arch-item">
-        <div class="arch-item-title">Sparö Insights</div>
-        <div class="arch-item-desc">Dashboard de datos para el usuario. Reportes, tendencias, proyecciones basadas en historial.</div>
-      </div>
-      <div class="arch-item">
-        <div class="arch-item-title">Sparö Pro</div>
-        <div class="arch-item-desc">Tier premium. IA ilimitada, exportaciones, integración con contadores o asesores financieros.</div>
-      </div>
+      <div class="arch-item"><div class="arch-item-title">Sparö Hogar</div><div class="arch-item-desc">El producto actual. App para hogares — parejas, familias. Registro IA, análisis, presupuestos compartidos.</div></div>
+      <div class="arch-item"><div class="arch-item-title">Sparö Insights</div><div class="arch-item-desc">Dashboard de datos para el usuario. Reportes, tendencias, proyecciones basadas en historial.</div></div>
+      <div class="arch-item"><div class="arch-item-title">Sparö Pro</div><div class="arch-item-desc">Tier premium. IA ilimitada, exportaciones, integración con contadores o asesores financieros.</div></div>
     </div>
     <div class="arch-future">
       <div class="arch-future-label">Extensiones futuras — horizonte 2–4 años</div>
@@ -663,15 +683,14 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
       </div>
     </div>
   </div>
-
-  <div class="two-col" style="margin-top:16px;">
+  <div class="two-col">
     <div class="strategy-box">
       <h4>Estrategia de dominio</h4>
       <ul>
-        <li><strong>sparo.app</strong> — principal. TLD .app: HTTPS forzado, señal de producto digital.</li>
+        <li><strong>sparo.app</strong> — principal. TLD .app señal de producto digital, HTTPS forzado.</li>
         <li><strong>getsparo.com</strong> — alternativa .com clásica.</li>
-        <li><strong>@sparoapp</strong> — handle uniforme en todas las redes.</li>
-        <li>Marca registrada con ö: <strong>SPARÖ</strong> — dominio sin diacrítico para teclados.</li>
+        <li><strong>@sparoapp</strong> — handle uniforme en todas las redes sociales.</li>
+        <li>Marca registrada con ö: SPARÖ — dominio sin diacrítico para teclados.</li>
       </ul>
     </div>
     <div class="strategy-box">
@@ -690,8 +709,7 @@ footer p { color:rgba(247,242,232,0.3); font-size:0.72rem; margin-top:14px; lett
 <footer>
   <div class="fw">SPAR<span>Ö</span></div>
   <p>Brand Hub · App Gastos de Casa · Lima, Perú · 2026</p>
-  <p style="margin-top:6px; font-size:0.62rem;">Todo cuadra en casa</p>
+  <p style="margin-top:4px;font-size:0.6rem;">Todo cuadra en casa</p>
 </footer>
-
 </body>
 </html>
