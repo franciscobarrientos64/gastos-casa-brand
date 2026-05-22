@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Stitch Prompts — SPARÖ</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12221a;--teal:#0d3d34;--teal-light:#2e8b6e;--coral:#e8735a;--cream:#f7f2e8;--cream-dark:#ede6d6;--gold:#c9a84c;--white:#fefcf8;--gray:#8a9490;--border:rgba(18,34,26,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+header{background:var(--teal);padding:48px 60px 52px;position:relative;overflow:hidden;}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:36px;background:var(--cream);clip-path:ellipse(52% 100% at 50% 100%);}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(46,139,110,0.3) 0%,transparent 60%);pointer-events:none;}
+header h1{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--cream);margin-bottom:6px;}
+header h1 span{color:var(--coral);}
+header p{color:rgba(247,242,232,0.5);font-size:0.85rem;max-width:600px;line-height:1.6;}
+main{max-width:900px;margin:0 auto;padding:48px 60px 80px;}
+
+.intro-card{background:rgba(232,115,90,0.08);border:1px solid rgba(232,115,90,0.2);border-radius:16px;padding:24px 28px;margin-bottom:40px;}
+.intro-card p{font-size:0.88rem;color:var(--ink);line-height:1.7;}
+.intro-card strong{color:var(--coral);}
+
+.prompt-block{margin-bottom:40px;}
+.prompt-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;}
+.prompt-num{background:var(--teal);color:var(--cream);font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:500;padding:4px 12px;border-radius:100px;white-space:nowrap;margin-top:3px;}
+.prompt-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--teal);line-height:1.2;}
+.prompt-desc{font-size:0.82rem;color:var(--gray);margin-top:4px;line-height:1.5;}
+
+.prompt-box{background:var(--teal);border-radius:16px;padding:28px 32px;position:relative;}
+.prompt-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,242,232,0.3);font-weight:700;margin-bottom:12px;}
+.prompt-text{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--cream);line-height:1.8;white-space:pre-wrap;word-break:break-word;}
+.copy-btn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(247,242,232,0.7);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s;}
+.copy-btn:hover{background:rgba(255,255,255,0.18);color:var(--cream);}
+.copy-btn.copied{background:rgba(46,139,110,0.3);border-color:var(--teal-light);color:var(--teal-light);}
+
+.annotation{background:var(--white);border-radius:12px;padding:18px 22px;margin-top:12px;border:1px solid var(--border);}
+.annotation-label{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:8px;}
+.annotation p{font-size:0.82rem;color:var(--gray);line-height:1.6;}
+.annotation ul{font-size:0.82rem;color:var(--gray);padding-left:18px;line-height:1.8;}
+.annotation strong{color:var(--ink);}
+
+.divider{width:40px;height:2px;background:var(--coral);border-radius:2px;margin:40px 0;}
+
+.tips{background:var(--white);border-radius:16px;padding:28px 32px;border:1px solid var(--border);margin-top:40px;}
+.tips h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--teal);margin-bottom:16px;}
+.tip-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.tip-item:last-child{border-bottom:none;}
+.tip-icon{font-size:1rem;flex-shrink:0;margin-top:2px;}
+.tip-text{font-size:0.83rem;color:var(--gray);line-height:1.5;}
+.tip-text strong{color:var(--ink);}
+
+@media(max-width:768px){header,main{padding-left:24px;padding-right:24px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Google Stitch Prompts <span>·</span> SPARÖ</h1>
+  <p>Set completo de prompts para obtener un diseño de nivel Apple Design Award. Cada prompt está calibrado para evitar los outputs genéricos que devuelve Stitch por defecto.</p>
+</header>
+
+<main>
+
+<div class="intro-card">
+  <p><strong>Por qué Stitch devuelve diseños genéricos:</strong> Los prompts vagos activan sus templates por defecto — los mismos que usa para cualquier app financiera. La solución es sobrecargarlo con referencias específicas, valores de color exactos, y lenguaje de diseño preciso que lo fuerce a salir del template. Estos prompts están escritos para eso.</p>
+</div>
+
+<!-- PROMPT 0: SYSTEM -->
+<div class="prompt-block">
+  <div class="prompt-header">
+    <div class="prompt-num">PROMPT MAESTRO</div>
+    <div>
+      <div class="prompt-title">Design System — usar en todas las pantallas</div>
+      <div class="prompt-desc">Pegá esto PRIMERO antes de cualquier pantalla específica. Establece el lenguaje visual completo.</div>
+    </div>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Copiar y pegar en Stitch</div>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+    <div class="prompt-text">Design a mobile app screen for a household expense tracking app. The visual language must feel like it was designed in Scandinavia — specifically referencing the aesthetic of Danish and Swedish fintech apps like Lunar Bank and Klarna, combined with the interface precision of Linear.app and the editorial warmth of the Craft app.
+
+VISUAL IDENTITY:
+- Primary color: deep forest green #0d3d34 (not bright, not lime — deep, sophisticated)
+- Action color: #2e8b6e (medium green for interactive elements)
+- Accent: terracotta #e8735a (used sparingly, maximum 1 element per screen)
+- Background: warm cream #f7f2e8 (never pure white — always warm off-white)
+- Premium moments: muted gold #c9a84c (for achievements, positive milestones only)
+- Text: #12221a (near-black with green undertone, never pure black)
+
+TYPOGRAPHY:
+- Display/headings: Fraunces (optical serif, editorial, characterful)
+- Body/UI labels: DM Sans (geometric, clean, warm)
+- Data/numbers: DM Mono (monospaced for financial figures)
+- Type scale is generous — headlines are large and confident
+- Financial numbers use tabular figures, always right-aligned
+
+LAYOUT PHILOSOPHY:
+- Generous negative space — Nordic breathing room, not cramped
+- Asymmetric card layouts with intentional visual hierarchy
+- No borders unless essential — use space and color to separate
+- Cards have subtle warmth: cream backgrounds, barely-there shadows
+- Bottom navigation is minimal: 4 items maximum, icon + label
+
+COMPONENT LANGUAGE:
+- Cards: rounded corners 20px, cream (#f7f2e8) background on white base, shadow: 0 2px 16px rgba(13,61,52,0.06)
+- Buttons: primary = deep green #0d3d34 with cream text, pill-shaped (48px height), full-width for CTAs
+- Input fields: cream background, no visible border until focus, 16px border-radius
+- Icons: 1.5px stroke, rounded caps, never filled — always outlined
+- Progress bars: thin (6px), green fill on cream track, smooth rounded ends
+
+WHAT TO AVOID ABSOLUTELY:
+- No purple gradients or blue color schemes
+- No generic dashboard widgets or chart widgets that look like business analytics
+- No dark mode unless specifically requested
+- No glassmorphism or heavy blur effects
+- No emoji in the UI
+- No bright saturated colors
+- No generic fintech "money" iconography (dollar signs, coins, piggy banks)
+- No Inter or Roboto typefaces
+- No shadow-heavy skeuomorphic cards
+
+The result should feel like a premium Scandinavian product: calm, confident, intelligent — the kind of app that wins an Apple Design Award or an Awwwards Site of the Day.</div>
+  </div>
+  <div class="annotation">
+    <div class="annotation-label">Por qué funciona</div>
+    <p>Nombrar apps reales (Lunar, Klarna, Linear, Craft) le da a Stitch referencias visuales concretas. Las hex exactas evitan que interprete "verde" como cualquier cosa. La lista de "avoid" es tan importante como lo que se pide — elimina sus defaults más comunes.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROMPT 1: DASHBOARD -->
+<div class="prompt-block">
+  <div class="prompt-header">
+    <div class="prompt-num">PANTALLA 01</div>
+    <div>
+      <div class="prompt-title">Dashboard — Vista principal del hogar</div>
+      <div class="prompt-desc">La pantalla que el usuario ve al abrir la app. El momento de mayor impacto de diseño.</div>
+    </div>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Copiar y pegar en Stitch (después del Prompt Maestro)</div>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+    <div class="prompt-text">Design the HOME DASHBOARD screen of a household expense tracking app for couples and families.
+
+SCREEN ANATOMY (top to bottom):
+1. TOP BAR: Left side shows small avatar pair (two overlapping circles, initials "F" and "K" in #0d3d34 and #2e8b6e) + greeting "Buenos días, Francisco" in DM Sans 400. Right side: minimal bell icon (no badge). Background continues the cream.
+
+2. HERO CARD (full-width, prominent): Deep forest green #0d3d34 background. Shows:
+   - Small label "Gasto total del mes" in DM Sans 11px, cream 50% opacity, uppercase, letter-spacing
+   - Large amount "S/ 3,240" in Fraunces 48px, cream, bold — dominant visual element
+   - Below: two subtle metrics side by side: "vs mes anterior ↓ 12%" in small DM Mono, terracotta #e8735a for the percentage | "Presupuesto restante S/ 680" in cream 60%
+   - Bottom of card: a thin, elegant spending progress bar — cream track, slightly lighter green fill, 6px height, showing 83% used
+   - Card has 24px padding, 20px border-radius, no shadow needed
+
+3. QUICK ACTIONS ROW: 3 pill-shaped buttons below the hero card. Cream background, #0d3d34 text, 14px DM Sans medium. Labels: "+ Gasto" | "Escanear" | "Ver todo". Subtle shadow on each.
+
+4. SECTION HEADER: "Esta semana" in Fraunces 20px #0d3d34, left-aligned. Right: "ver todo" in DM Sans 13px #2e8b6e.
+
+5. EXPENSE LIST (3-4 items): Each item is a clean row:
+   - Left: category icon circle (32px, cream background, #0d3d34 stroke icon inside)
+   - Center: merchant name in DM Sans 15px medium #12221a + category label 12px #8a9490 below
+   - Right: amount in DM Mono 15px #12221a bold + date 11px #8a9490 below, right-aligned
+   - Very subtle separator line between items (1px, #ede6d6)
+   - Sample data: "Vivanda" S/186 · "Restaurante Central" S/340 · "Farmacia" S/48 · "Netflix" S/39
+
+6. BOTTOM NAVIGATION: 4 items — Home (active, #0d3d34 icon + label) | Gastos | Presupuestos | Perfil. Inactive items in #8a9490. No background, just a very subtle top border on the nav bar.
+
+OVERALL FEEL: Like opening a beautifully designed Scandinavian banking app. Confident numbers. Calm layout. Not a single unnecessary element. The green hero card anchors the visual hierarchy immediately.</div>
+  </div>
+  <div class="annotation">
+    <div class="annotation-label">Decisiones de diseño clave</div>
+    <ul>
+      <li><strong>La hero card verde oscuro</strong> crea jerarquía inmediata — el usuario sabe dónde mirar primero</li>
+      <li><strong>DM Mono para números</strong> — los dígitos no bailan, siempre alineados</li>
+      <li><strong>Los avatares circulares superpuestos</strong> comunican "app de pareja" sin explicarlo</li>
+      <li><strong>3 acciones rápidas como pills</strong> — no FAB flotante genérico</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PROMPT 2: ADD EXPENSE -->
+<div class="prompt-block">
+  <div class="prompt-header">
+    <div class="prompt-num">PANTALLA 02</div>
+    <div>
+      <div class="prompt-title">Agregar gasto — El momento de la IA</div>
+      <div class="prompt-desc">La pantalla más usada. Debe sentirse rápida, simple, casi mágica.</div>
+    </div>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Copiar y pegar en Stitch</div>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+    <div class="prompt-text">Design the ADD EXPENSE screen for a household expense tracking app. This is the most-used screen — it must feel instant, frictionless, and almost magical.
+
+This screen has TWO states. Design the SECOND state (after AI has scanned a receipt):
+
+TOP: Back arrow left + "Nuevo gasto" title centered in Fraunces 18px #0d3d34. 
+
+RECEIPT PREVIEW AREA: A slightly tilted (2-3 degrees) receipt thumbnail card, cream background, showing a simplified receipt graphic. Above it, a small pill badge: green background #0d3d34, white text "✓ Escaneado por IA" in DM Sans 11px. This area has soft cream background, no hard borders.
+
+MAIN FORM CARD (white #fefcf8, 20px radius, subtle shadow):
+- AMOUNT FIELD: Centered, huge. Label "S/" in DM Sans 24px #8a9490 + amount "186.50" in Fraunces 52px #0d3d34 bold. Below: thin underline only (no box). This is the hero of the form.
+- Divider line 1px #ede6d6
+- MERCHANT ROW: Small icon (shop outline, 20px, #2e8b6e) + "Vivanda" in DM Sans 16px #12221a. Right: pencil edit icon #8a9490.
+- Divider
+- CATEGORY ROW: Category icon circle (Alimentación, use a minimal fork+knife icon) + "Alimentación" DM Sans 16px. Right: chevron #8a9490.
+- Divider  
+- DATE ROW: Calendar icon + "Hoy, 21 mayo" DM Sans 16px. Right: chevron.
+- Divider
+- ASSIGNEE ROW: Two small overlapping avatar circles + "Francisco y Karina" DM Sans 16px. Right: chevron.
+
+NOTE FIELD: Below the card. Placeholder "Añadir nota..." in DM Sans 14px #8a9490 italic. No border, cream background.
+
+BOTTOM CTA: Full-width pill button, #0d3d34 background, "Guardar gasto" in DM Sans 16px cream bold. 54px height. 16px horizontal margin. Floating above the bottom safe area.
+
+OVERALL FEEL: The scanned receipt tilted subtly in the background gives a tactile, physical quality. The enormous amount field tells the user exactly what matters. The form rows are clean table rows, not a wall of input boxes.</div>
+  </div>
+  <div class="annotation">
+    <div class="annotation-label">Por qué esta pantalla gana premios</div>
+    <ul>
+      <li><strong>El monto en 52px Fraunces</strong> — lo más importante ocupa el mayor espacio</li>
+      <li><strong>El recibo levemente inclinado</strong> — detalle táctil que ninguna app genérica hace</li>
+      <li><strong>Badge "Escaneado por IA"</strong> — el diferenciador del producto, visible siempre</li>
+      <li><strong>Rows sin bordes</strong> — separadores sutiles en lugar de input boxes pesados</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PROMPT 3: BUDGETS -->
+<div class="prompt-block">
+  <div class="prompt-header">
+    <div class="prompt-num">PANTALLA 03</div>
+    <div>
+      <div class="prompt-title">Presupuestos — La vista de control</div>
+      <div class="prompt-desc">Donde el usuario siente que tiene el control. La visualización de datos como arte.</div>
+    </div>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Copiar y pegar en Stitch</div>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+    <div class="prompt-text">Design the BUDGETS screen for a household expense tracking app. This screen shows spending progress against monthly budgets per category. Make data feel beautiful, not clinical.
+
+TOP: "Presupuestos" in Fraunces 28px #0d3d34 bold, left-aligned. Below: "Mayo 2026 · 11 días restantes" in DM Sans 13px #8a9490. Right side: a small circular progress ring showing the month completion (67% of month gone), 32px diameter, thin stroke, #2e8b6e color.
+
+MONTH OVERVIEW CARD: Cream background, full-width, 20px radius, 20px padding.
+- "Disponible este mes" label DM Sans 11px uppercase #8a9490
+- "S/ 680" in Fraunces 36px #0d3d34 bold
+- "de S/ 4,000 presupuestado" in DM Sans 13px #8a9490
+- One elegant horizontal bar: 6px height, full width, cream (#ede6d6) track, #2e8b6e fill at 83%, perfectly rounded ends.
+
+BUDGET LIST (4 categories, each as its own card):
+Each card: white #fefcf8, 16px radius, 16px padding, subtle shadow, 12px gap between cards.
+
+Card anatomy:
+- TOP ROW: Category icon (outlined, 24px, in category accent color) + category name DM Sans 15px bold #12221a + remaining amount right-aligned in DM Mono 14px (green if healthy, terracotta #e8735a if over 85%)
+- PROGRESS BAR: 8px height, full width, #ede6d6 track, fill color changes by health: under 70% = #2e8b6e, 70-90% = #c9a84c, over 90% = #e8735a. Smooth transition, perfectly rounded.
+- BOTTOM ROW: "S/ 820 gastado" in DM Mono 12px #8a9490 left | "de S/ 1,200" right
+
+Sample categories:
+1. Alimentación — S/820 of S/1,200 — 68% — green bar
+2. Restaurantes — S/340 of S/400 — 85% — gold bar  
+3. Transporte — S/180 of S/300 — 60% — green bar
+4. Salud — S/290 of S/200 — 145% — terracotta bar + small "Excedido" pill badge
+
+FAB: No traditional FAB. Instead: a minimal pill button bottom-right "＋ Presupuesto" #0d3d34 background, cream text, small shadow.
+
+OVERALL FEEL: Data visualization that feels like a Scandinavian infographic — restrained, purposeful, beautiful. The color-coded bars tell the story instantly without explanatory text. The "Excedido" card in terracotta creates natural visual hierarchy to what needs attention.</div>
+  </div>
+  <div class="annotation">
+    <div class="annotation-label">El detalle que define la pantalla</div>
+    <ul>
+      <li><strong>Las barras cambian de color según salud financiera</strong> — verde/dorado/terracota. El usuario entiende el estado sin leer ningún número</li>
+      <li><strong>El anillo circular de días del mes</strong> — pequeño pero comunica mucho en 32px</li>
+      <li><strong>DM Mono solo para números</strong> — los textos descriptivos en DM Sans, los datos en mono</li>
+      <li><strong>"Excedido" como pill badge terracota</strong> — señal de alerta sin alarmismo</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PROMPT 4: INSIGHTS -->
+<div class="prompt-block">
+  <div class="prompt-header">
+    <div class="prompt-num">PANTALLA 04</div>
+    <div>
+      <div class="prompt-title">Insights de IA — La pantalla diferenciadora</div>
+      <div class="prompt-desc">Lo que ninguna app de la competencia tiene. La inteligencia que convierte datos en narrativa.</div>
+    </div>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Copiar y pegar en Stitch</div>
+    <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+    <div class="prompt-text">Design an AI INSIGHTS screen for a household expense tracking app. This screen shows personalized financial insights generated by AI — not charts and graphs, but written observations and patterns presented beautifully, like a personal financial advisor speaking directly to the user.
+
+TOP: "Tu resumen" in Fraunces 28px #0d3d34. Below: "Análisis al 21 mayo" DM Sans 13px #8a9490.
+
+FEATURED INSIGHT CARD (hero, full-width):
+Deep green #0d3d34 background, 24px padding, 20px radius.
+- Small pill at top: cream background, #0d3d34 text "✦ Insight destacado" DM Sans 11px
+- Main text in Fraunces 22px cream italic: "Gastan 40% más los viernes. Restaurantes y farmacia representan el 60% de ese patrón."
+- Below: subtle divider line cream 10% opacity
+- Two stat pills side by side: cream 10% background, cream text, DM Mono 13px: "↑ 40% viernes" | "Últimos 3 meses"
+- Bottom: small "Ver detalle →" in DM Sans 12px cream 50%, right-aligned
+
+INSIGHTS LIST (3 cards below, standard white cards):
+Each card: white #fefcf8, 16px radius, 20px padding, light shadow.
+
+Card 1 — Positive pattern:
+- Small icon: ↓ arrow in #2e8b6e circle
+- "Alimentación en casa" DM Sans 13px bold #0d3d34
+- Body text DM Sans 14px #8a9490 line-height 1.6: "Compraron en Vivanda 3 veces esta semana. Gastaron S/186 menos que el mismo período de abril."
+- Tag: small pill "#2e8b6e bg" cream text "Ahorro"
+
+Card 2 — Pattern alert:
+- Small icon: clock in #c9a84c circle
+- "Picos de gasto nocturnos" DM Sans 13px bold #0d3d34  
+- Body: "El 70% de los gastos de restaurantes ocurre después de las 8pm. Promedio: S/85 por salida."
+- Tag: gold pill "Patrón"
+
+Card 3 — Projection:
+- Small icon: → arrow in #0d3d34 circle
+- "Proyección de cierre" DM Sans 13px bold #0d3d34
+- Body: "A este ritmo, cerrarán mayo con S/3,920 de gasto total. S/80 bajo presupuesto."
+- Tag: #2e8b6e pill "Proyección"
+
+OVERALL FEEL: This screen feels like reading a beautifully designed personal letter from a financial advisor, not like looking at a dashboard. The insights are written in plain, direct Spanish. The hero card in dark green anchors the hierarchy. White cards below feel like organized note cards.</div>
+  </div>
+  <div class="annotation">
+    <div class="annotation-label">Por qué esta pantalla no existe en la competencia</div>
+    <ul>
+      <li><strong>Insights en prosa, no en gráficos</strong> — la IA habla como persona, no como spreadsheet</li>
+      <li><strong>La hero card en verde oscuro</strong> jerarquiza el insight más importante del mes</li>
+      <li><strong>Tags de categoría (Ahorro/Patrón/Proyección)</strong> — clasifican el tipo de insight sin explicación adicional</li>
+      <li><strong>Fraunces en cursiva para el insight destacado</strong> — tipografía editorial que da peso a las palabras</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TIPS -->
+<div class="tips">
+  <h3>⚡ Cómo sacar el máximo de Stitch</h3>
+  <div class="tip-item">
+    <div class="tip-icon">📋</div>
+    <div class="tip-text"><strong>Siempre el Prompt Maestro primero.</strong> Abre una nueva sesión en Stitch, pega el maestro, confirma, y luego pega el de pantalla específica. Si las mezclas en un solo prompt pierde foco.</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🎨</div>
+    <div class="tip-text"><strong>Si el resultado no respeta los colores</strong>, añade al final del prompt: "Use EXACTLY these hex values: primary #0d3d34, accent #e8735a, background #f7f2e8. Do not substitute or approximate."</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🔄</div>
+    <div class="tip-text"><strong>Iteración específica, no vaga.</strong> En lugar de "hazlo más limpio", decí "reduce el padding interno de los cards a 16px y elimina los bordes visibles de los inputs".</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">📱</div>
+    <div class="tip-text"><strong>Pedí siempre iOS frame.</strong> Añadir "Show in iPhone 15 Pro frame, portrait mode" al final de cada prompt mejora la presentación y le da escala correcta al diseño.</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">✦</div>
+    <div class="tip-text"><strong>La frase cierre siempre ayuda.</strong> Terminar con "The result should be worthy of an Apple Design Award nomination" activa un nivel de refinamiento diferente en los outputs generativos.</div>
+  </div>
+  <div class="tip-item">
+    <div class="tip-icon">🏆</div>
+    <div class="tip-text"><strong>Referencias explícitas de apps ganadoras.</strong> "Inspired by the interface quality of Linear.app, Things 3 by Cultured Code, and Mela recipe app" — estas tres apps tienen el nivel exacto de detalle al que apuntar.</div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function copyPrompt(btn) {
+  const box = btn.closest('.prompt-box');
+  const text = box.querySelector('.prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
