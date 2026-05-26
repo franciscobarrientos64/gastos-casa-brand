@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Research v2 — Naming App Gastos de Casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12221a;
+  --teal: #0d3d34;
+  --teal-light: #2e8b6e;
+  --coral: #e8735a;
+  --cream: #f7f2e8;
+  --cream-dark: #ede6d6;
+  --gold: #c9a84c;
+  --white: #fefcf8;
+  --gray: #8a9490;
+  --border: rgba(18,34,26,0.08);
+  --jp: #c0392b;
+  --kr: #1a5276;
+  --de: #dc2626;
+  --sv: #1d6fa4;
+  --no: #1a5c4a;
+  --da: #8b1a1a;
+  --fi: #6d28d9;
+  --en: #2563eb;
+  --la: #7d6608;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); line-height:1.6; }
+
+header {
+  background:var(--teal);
+  padding:60px 60px 64px;
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 70% 40%, rgba(46,139,110,0.3) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(232,115,90,0.1) 0%, transparent 50%);
+  pointer-events:none;
+}
+header::after {
+  content:''; position:absolute; bottom:-1px; left:0; right:0; height:40px;
+  background:var(--cream);
+  clip-path:ellipse(52% 100% at 50% 100%);
+}
+header h1 { font-family:'Fraunces',serif; font-size:2.4rem; font-weight:900; color:var(--cream); margin-bottom:8px; position:relative; }
+header h1 span { color:var(--coral); }
+header p { color:rgba(247,242,232,0.5); font-size:0.9rem; max-width:600px; line-height:1.7; position:relative; }
+
+main { max-width:1100px; margin:0 auto; padding:48px 60px 100px; }
+
+/* FEEDBACK SECTION */
+.feedback-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:32px 0; }
+.fb-card { background:var(--white); border-radius:14px; padding:20px 22px; border:1px solid var(--border); }
+.fb-name { font-family:'Fraunces',serif; font-size:1.3rem; font-weight:700; color:var(--teal); margin-bottom:6px; }
+.fb-verdict { display:inline-block; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; padding:3px 10px; border-radius:100px; margin-bottom:10px; }
+.fb-pass { background:rgba(186,26,26,0.08); color:#ba1a1a; }
+.fb-interesting { background:rgba(201,168,76,0.12); color:#7a5f0e; }
+.fb-reason { font-size:0.84rem; color:var(--gray); line-height:1.6; }
+.fb-reason strong { color:var(--ink); }
+
+/* LEGEND */
+.legend { display:flex; gap:14px; flex-wrap:wrap; margin:32px 0 8px; }
+.lang-pill { display:flex; align-items:center; gap:6px; font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+.ldot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+
+/* CONCEPT BLOCKS */
+.concept-block { background:var(--white); border-radius:16px; overflow:hidden; border:1px solid var(--border); margin-bottom:16px; box-shadow:0 2px 12px rgba(13,61,52,0.04); }
+.concept-header { display:flex; align-items:center; gap:12px; padding:16px 24px; background:rgba(13,61,52,0.03); border-bottom:1px solid var(--border); }
+.concept-emoji { font-size:1.2rem; }
+.concept-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--teal); }
+.concept-sub { font-size:0.75rem; color:var(--gray); margin-top:1px; }
+.words-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
+.word-entry { padding:12px 18px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); transition:background .15s; }
+.word-entry:hover { background:rgba(13,61,52,0.03); }
+.word-lang { font-size:0.58rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:3px; display:flex; align-items:center; gap:4px; }
+.wdot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.word-main { font-family:'DM Mono',monospace; font-size:0.92rem; font-weight:500; margin-bottom:2px; }
+.word-main.hl { color:var(--teal); font-weight:700; }
+.word-reading { font-size:0.68rem; color:var(--teal-light); font-style:italic; margin-bottom:2px; }
+.word-meaning { font-size:0.68rem; color:var(--gray); line-height:1.4; }
+.word-badge { display:inline-block; margin-top:3px; font-size:0.6rem; background:rgba(232,115,90,0.1); color:var(--coral); padding:2px 7px; border-radius:100px; font-weight:600; }
+.word-badge.gold { background:rgba(201,168,76,0.12); color:#7a5f0e; }
+.word-badge.star { background:var(--teal); color:var(--cream); }
+
+/* SECTION HEADERS */
+.sec-num { font-size:0.65rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--coral); font-weight:700; margin-bottom:8px; margin-top:52px; }
+.sec-title { font-family:'Fraunces',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700; color:var(--teal); line-height:1.1; margin-bottom:8px; }
+.sec-sub { font-size:0.9rem; color:var(--gray); max-width:580px; margin-bottom:8px; }
+.divider { width:40px; height:3px; background:var(--coral); border-radius:2px; margin:16px 0 36px; }
+
+/* CANDIDATES */
+.candidates { background:var(--teal); border-radius:20px; padding:40px; margin-top:40px; position:relative; overflow:hidden; }
+.candidates::before { content:''; position:absolute; top:-30%; right:-10%; width:60%; height:160%; background:radial-gradient(ellipse,rgba(46,139,110,0.25) 0%,transparent 70%); pointer-events:none; }
+.candidates h2 { font-family:'Fraunces',serif; font-size:1.6rem; font-weight:900; color:var(--cream); margin-bottom:6px; position:relative; }
+.candidates p { font-size:0.82rem; color:rgba(247,242,232,0.45); margin-bottom:28px; position:relative; }
+.cand-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; position:relative; }
+.cand-item { background:rgba(255,255,255,0.07); border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,0.1); }
+.cand-item.star { background:rgba(255,255,255,0.12); border-color:rgba(232,115,90,0.4); }
+.cand-word { font-family:'DM Mono',monospace; font-size:1.3rem; font-weight:500; color:var(--cream); margin-bottom:3px; }
+.cand-reading { font-size:0.68rem; color:rgba(247,242,232,0.4); margin-bottom:6px; font-style:italic; }
+.cand-origin { font-size:0.62rem; color:rgba(247,242,232,0.35); margin-bottom:8px; letter-spacing:0.08em; }
+.cand-why { font-size:0.78rem; color:rgba(247,242,232,0.65); line-height:1.5; }
+.cand-star { font-size:0.6rem; background:var(--coral); color:white; padding:2px 8px; border-radius:100px; font-weight:700; letter-spacing:0.1em; display:inline-block; margin-bottom:8px; }
+
+/* INSIGHTS */
+.insight-box { background:var(--white); border-radius:16px; padding:28px 32px; border:1px solid var(--border); margin-bottom:16px; }
+.insight-box h4 { font-family:'Fraunces',serif; font-size:1.05rem; font-weight:700; color:var(--teal); margin-bottom:12px; }
+.insight-box p { font-size:0.86rem; color:var(--gray); line-height:1.7; }
+.insight-box strong { color:var(--ink); }
+
+@media(max-width:768px){
+  header, main { padding-left:20px; padding-right:20px; }
+  .words-grid { grid-template-columns:1fr 1fr; }
+  .feedback-grid, .cand-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Word Research <span>v2</span></h1>
+  <p>Segunda ronda de investigación lingüística. Incorpora feedback del proceso de naming, nuevas raíces germánicas y nórdicas, y expansión a japonés y coreano.</p>
+</header>
+
+<main>
+
+<!-- FEEDBACK ANALYSIS -->
+<div class="sec-num">01 — Feedback</div>
+<h2 class="sec-title">Qué aprendimos de la primera ronda</h2>
+<p class="sec-sub">Cada descarte revela qué valoran y qué evitan. Eso es dirección de marca, no fracaso.</p>
+<div class="divider"></div>
+
+<div class="feedback-grid">
+  <div class="fb-card">
+    <div class="fb-name">Spara</div>
+    <div class="fb-verdict fb-pass">Descartado</div>
+    <div class="fb-reason"><strong>Problema:</strong> En castellano se lee "es para..." — activación involuntaria de una frase incompleta. El cerebro hispanohablante lo cierra automáticamente con algo. Imposible de desactivar una vez que se ve.</div>
+  </div>
+  <div class="fb-card">
+    <div class="fb-name">Koti</div>
+    <div class="fb-verdict fb-interesting">En exploración</div>
+    <div class="fb-reason"><strong>Observación:</strong> "Suena a corazón" — eso puede ser una ventaja (calidez, hogar, afecto) o un riesgo (confusión semántica). Merece variantes: Kotö, Kota, Kotig.</div>
+  </div>
+  <div class="fb-card">
+    <div class="fb-name">Haushalt</div>
+    <div class="fb-verdict fb-interesting">Concepto perfecto · forma incorrecta</div>
+    <div class="fb-reason"><strong>Insight clave:</strong> En alemán Haushalt es la misma palabra para hogar y presupuesto — exactamente la propuesta de valor del producto. El concepto es el ganador. La forma de 8 sílabas no. Solución: derivar raíces cortas de Haushalt.</div>
+  </div>
+  <div class="fb-card">
+    <div class="fb-name">Sisu</div>
+    <div class="fb-verdict fb-pass">Descartado</div>
+    <div class="fb-reason"><strong>Problema:</strong> Memorabilidad baja a pesar de ser corto. El sonido no activa ninguna asociación en español ni inglés. Requiere demasiado trabajo de construcción de marca desde cero.</div>
+  </div>
+</div>
+
+<div class="insight-box" style="margin-top:8px;">
+  <h4>El patrón que emerge</h4>
+  <p>Buscan un nombre que tenga <strong>el concepto de Haushalt</strong> (hogar + finanzas = una sola idea), <strong>la calidez de Koti</strong>, y la <strong>pronunciabilidad de SPARÖ</strong>. La intersección de esas tres cosas es el nombre correcto. Esta investigación va a buscarlo en japonés, coreano y raíces latinas además de los idiomas nórdicos.</p>
+</div>
+
+<!-- LEGEND -->
+<div class="sec-num" style="margin-top:52px;">02 — Investigación</div>
+<h2 class="sec-title">Banco de palabras ampliado</h2>
+<p class="sec-sub">8 idiomas · 10 conceptos · Foco en japonés y coreano por primera vez.</p>
+<div class="divider"></div>
+
+<div class="legend">
+  <div class="lang-pill"><div class="ldot" style="background:var(--en)"></div>EN</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--de)"></div>DE</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--sv)"></div>SV</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--no)"></div>NO</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--fi)"></div>FI</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--jp)"></div>JP</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--kr)"></div>KR</div>
+  <div class="lang-pill"><div class="ldot" style="background:var(--la)"></div>LA</div>
+</div>
+
+<!-- HOGAR + PRESUPUESTO COMBINADO (el concepto Haushalt) -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🏠💰</div>
+    <div>
+      <div class="concept-title">Hogar + Finanzas — mismo concepto</div>
+      <div class="concept-sub">La misma palabra para casa y presupuesto. El concepto exacto de Haushalt en otros idiomas.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">Haushalt</div>
+      <div class="word-meaning">Hogar Y presupuesto. La misma palabra.</div>
+      <span class="word-badge star">★ concepto original</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">Haus</div>
+      <div class="word-meaning">Casa. Raíz de Haushalt. 4 letras.</div>
+      <span class="word-badge gold">★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">家計 (kakei)</div>
+      <div class="word-reading">ka-kei</div>
+      <div class="word-meaning">Economía doméstica, finanzas del hogar. Igual que Haushalt.</div>
+      <span class="word-badge star">★★★ concepto idéntico</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">가계 (gagye)</div>
+      <div class="word-reading">ga-gye</div>
+      <div class="word-meaning">Economía del hogar, finanzas familiares.</div>
+      <span class="word-badge star">★★ concepto idéntico</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">살림 (sallim)</div>
+      <div class="word-reading">sa-llim</div>
+      <div class="word-meaning">Gestión del hogar, economía doméstica. Muy rico culturalmente.</div>
+      <span class="word-badge star">★★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">domus</div>
+      <div class="word-meaning">Casa, hogar. Raíz de doméstico, domicilio.</div>
+      <span class="word-badge gold">raíz de DOMI</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">oikos</div>
+      <div class="word-meaning">Hogar griego. Raíz de economía (oikonomia).</div>
+      <span class="word-badge gold">raíz de OIK</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">hushåll</div>
+      <div class="word-meaning">Economía doméstica / hogar. Igual que Haushalt.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOGAR -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🏠</div>
+    <div>
+      <div class="concept-title">Hogar · Home · 家</div>
+      <div class="concept-sub">La casa como concepto emocional, no solo físico.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">Heim</div>
+      <div class="word-meaning">Hogar íntimo, el lugar al que perteneces.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV/IS</div>
+      <div class="word-main hl">heima</div>
+      <div class="word-meaning">En casa, en el hogar. Islandés/Nórdico antiguo.</div>
+      <span class="word-badge gold">★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--fi)"></div>FI</div>
+      <div class="word-main hl">koti</div>
+      <div class="word-meaning">Hogar en finlandés. 4 letras, suave.</div>
+      <span class="word-badge gold">en exploración</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">家 (ie/uchi)</div>
+      <div class="word-reading">ie / u-chi</div>
+      <div class="word-meaning">Casa, hogar, familia. Uchi = hogar íntimo.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">おうち (ouchi)</div>
+      <div class="word-reading">o-u-chi</div>
+      <div class="word-meaning">Hogar (forma cálida/informal). Muy afectuoso.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">暮らし (kurashi)</div>
+      <div class="word-reading">ku-ra-shi</div>
+      <div class="word-meaning">Estilo de vida, el vivir diario. Concepto muy rico.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">집 (jip)</div>
+      <div class="word-reading">jip</div>
+      <div class="word-meaning">Casa, hogar. 3 letras en romanización.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">가정 (gajung)</div>
+      <div class="word-reading">ga-jung</div>
+      <div class="word-meaning">Hogar, familia. Concepto de núcleo familiar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDEN / ORGANIZACIÓN -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">📐</div>
+    <div>
+      <div class="concept-title">Orden · Organización · 整理</div>
+      <div class="concept-sub">Poner las finanzas en su lugar.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">すっきり (sukkiri)</div>
+      <div class="word-reading">su-kki-ri</div>
+      <div class="word-meaning">Limpio, despejado, ordenado, resuelto. Lo que sientes cuando todo cuadra.</div>
+      <span class="word-badge star">★★★ concepto perfecto</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">整理 (seiri)</div>
+      <div class="word-reading">sei-ri</div>
+      <div class="word-meaning">Organizar, poner en orden. Uno de los 5S japoneses.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">きちんと (kichinto)</div>
+      <div class="word-reading">ki-chin-to</div>
+      <div class="word-meaning">Propiamente, con orden, de forma cuidadosa.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">깔끔 (kkalkeum)</div>
+      <div class="word-reading">kkal-keum</div>
+      <div class="word-meaning">Ordenado, limpio, impecable. Muy usado para lo que "queda bien".</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">정리 (jungri)</div>
+      <div class="word-reading">jung-ri</div>
+      <div class="word-meaning">Organizar, poner en orden, resolver.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">정돈 (jungdon)</div>
+      <div class="word-reading">jung-don</div>
+      <div class="word-meaning">Tidiness, orden perfecto.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">lagom</div>
+      <div class="word-meaning">Exactamente lo necesario. El ideal nórdico.</div>
+      <span class="word-badge star">★★★ concepto perfecto</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--no)"></div>NO</div>
+      <div class="word-main hl">rydde</div>
+      <div class="word-meaning">Ordenar, despejar. "Rydde opp" = poner en orden.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+  </div>
+</div>
+
+<!-- CALMA / PAZ FINANCIERA -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🌿</div>
+    <div>
+      <div class="concept-title">Calma · Paz financiera · やすらぎ</div>
+      <div class="concept-sub">El estado emocional que produce tener las finanzas en orden.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">やすらぎ (yasuragi)</div>
+      <div class="word-reading">ya-su-ra-gi</div>
+      <div class="word-meaning">Paz, confort, tranquilidad interior. Lo que sientes cuando no te preocupa el dinero.</div>
+      <span class="word-badge star">★★ concepto poderoso</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">なごみ (nagomi)</div>
+      <div class="word-reading">na-go-mi</div>
+      <div class="word-meaning">Armonía, calma cálida, bienestar sereno.</div>
+      <span class="word-badge gold">★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">安心 (anshin)</div>
+      <div class="word-reading">an-shin</div>
+      <div class="word-meaning">Paz mental, seguridad, alivio. "Estar tranquilo".</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">여유 (yeoyu)</div>
+      <div class="word-reading">yeo-yu</div>
+      <div class="word-meaning">Margen financiero, holgura, tranquilidad. Tener yeoyu = no estar ahogado.</div>
+      <span class="word-badge star">★★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">차분 (chabun)</div>
+      <div class="word-reading">cha-bun</div>
+      <div class="word-meaning">Calma, compostura, serenidad.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--no)"></div>NO/DA</div>
+      <div class="word-main hl">ro</div>
+      <div class="word-reading">roh</div>
+      <div class="word-meaning">Calma, paz interior profunda.</div>
+      <span class="word-badge gold">★★ muy potente</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">stillhet</div>
+      <div class="word-meaning">Quietud, silencio interior.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">välmående</div>
+      <div class="word-meaning">Bienestar, prosperidad general.</div>
+    </div>
+  </div>
+</div>
+
+<!-- AHORRO / FRUGALIDAD -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">💰</div>
+    <div>
+      <div class="concept-title">Ahorro · Frugalidad · 節約</div>
+      <div class="concept-sub">Guardar con intención, no con escasez.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">節約 (setsuyaku)</div>
+      <div class="word-reading">se-tsu-ya-ku</div>
+      <div class="word-meaning">Ahorro, economía, frugalidad con intención.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">貯蓄 (chochiku)</div>
+      <div class="word-reading">cho-chi-ku</div>
+      <div class="word-meaning">Ahorro acumulado, reserva.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">ゆとり (yutori)</div>
+      <div class="word-reading">yu-to-ri</div>
+      <div class="word-meaning">Holgura financiera, margen, espacio para respirar.</div>
+      <span class="word-badge gold">★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">알뜰 (altteul)</div>
+      <div class="word-reading">al-tteul</div>
+      <div class="word-meaning">Frugal, cuidadoso con el dinero, eficiente.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">절약 (jeolyak)</div>
+      <div class="word-reading">jeo-lyak</div>
+      <div class="word-meaning">Ahorro, economía (mismo concepto que setsuyaku).</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">sparen</div>
+      <div class="word-meaning">Ahorrar. Raíz de SPARÖ.</div>
+      <span class="word-badge">raíz conocida</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--fi)"></div>FI</div>
+      <div class="word-main hl">säästö</div>
+      <div class="word-meaning">Ahorro. Máxima carga de diacríticos ä+ö.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--no)"></div>NO</div>
+      <div class="word-main hl">nok</div>
+      <div class="word-meaning">Suficiente. El concepto de suficiencia financiera.</div>
+      <span class="word-badge gold">concepto poderoso</span>
+    </div>
+  </div>
+</div>
+
+<!-- CALOR / CALIDEZ DEL HOGAR -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🔥</div>
+    <div>
+      <div class="concept-title">Calor · Calidez · 온기</div>
+      <div class="concept-sub">La sensación emocional de un hogar que funciona bien.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">온기 (ongi)</div>
+      <div class="word-reading">on-gi</div>
+      <div class="word-meaning">Calor, calidez, la temperatura emocional del hogar.</div>
+      <span class="word-badge star">★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">포근 (pogeun)</div>
+      <div class="word-reading">po-geun</div>
+      <div class="word-meaning">Acogedor, cálido, confortable. El equivalent coreano de hygge.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">ぬくもり (nukumori)</div>
+      <div class="word-reading">nu-ku-mo-ri</div>
+      <div class="word-meaning">Calidez, calor humano, el calor que da el hogar.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--no)"></div>NO</div>
+      <div class="word-main hl">koselig</div>
+      <div class="word-meaning">Acogedor, cálido (noruego equivalente a hygge).</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--da)"></div>DA</div>
+      <div class="word-main hl">hygge</div>
+      <div class="word-meaning">Bienestar y acogimiento danés. Muy conocido internacionalmente.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">mys</div>
+      <div class="word-meaning">Comodidad sueca, momento de calidez íntima.</div>
+      <span class="word-badge gold">3 letras — potente</span>
+    </div>
+  </div>
+</div>
+
+<!-- EQUILIBRIO / BALANCE -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">⚖️</div>
+    <div>
+      <div class="concept-title">Equilibrio · Balance · 균형</div>
+      <div class="concept-sub">Las cuentas que cuadran.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">収支 (shushi)</div>
+      <div class="word-reading">shu-shi</div>
+      <div class="word-meaning">Ingresos y egresos balanceados. El equilibrio financiero.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">まとめ (matome)</div>
+      <div class="word-reading">ma-to-me</div>
+      <div class="word-meaning">Resumen, consolidación, poner todo junto.</div>
+      <span class="word-badge gold">★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">균형 (gyunhyung)</div>
+      <div class="word-reading">gyun-hyung</div>
+      <div class="word-meaning">Equilibrio, balance.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">모음 (moeum)</div>
+      <div class="word-reading">mo-eum</div>
+      <div class="word-meaning">Colección, reunión de cosas. Consolidar los gastos.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">balans</div>
+      <div class="word-meaning">Balance, equilibrio.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">Ausgleich</div>
+      <div class="word-meaning">Equilibrio, compensación, balance.</div>
+    </div>
+  </div>
+</div>
+
+<!-- JUNTOS / COMPARTIDO -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">👫</div>
+    <div>
+      <div class="concept-title">Juntos · Compartido · 함께</div>
+      <div class="concept-sub">El app es para parejas y familias — la dimensión colectiva.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">함께 (hamkke)</div>
+      <div class="word-reading">ham-kke</div>
+      <div class="word-meaning">Juntos, en conjunto. Muy usado para acciones compartidas.</div>
+      <span class="word-badge gold">★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">우리 (uri)</div>
+      <div class="word-reading">u-ri</div>
+      <div class="word-meaning">Nosotros. En coreano se dice "nuestro hogar" no "mi hogar".</div>
+      <span class="word-badge star">★★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">一緒 (issho)</div>
+      <div class="word-reading">i-ssho</div>
+      <div class="word-meaning">Juntos, al mismo tiempo, en compañía.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">家族 (kazoku)</div>
+      <div class="word-reading">ka-zo-ku</div>
+      <div class="word-meaning">Familia. El núcleo del producto.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--no)"></div>NO</div>
+      <div class="word-main hl">venn</div>
+      <div class="word-meaning">Amigo. También evoca diagrama de Venn (intersección).</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--sv)"></div>SV</div>
+      <div class="word-main hl">vi</div>
+      <div class="word-meaning">Nosotros en sueco. 2 letras. Extremadamente audaz.</div>
+      <span class="word-badge gold">2 letras</span>
+    </div>
+  </div>
+</div>
+
+<!-- CLARIDAD -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🔍</div>
+    <div>
+      <div class="concept-title">Claridad · Transparencia · 明確</div>
+      <div class="concept-sub">Ver con nitidez lo que entra y lo que sale.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">明確 (meikaku)</div>
+      <div class="word-reading">mei-ka-ku</div>
+      <div class="word-meaning">Claridad, certeza, definición. Lo opuesto a la confusión financiera.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--jp)"></div>JP</div>
+      <div class="word-main hl">丁寧 (teinei)</div>
+      <div class="word-reading">tei-nei</div>
+      <div class="word-meaning">Cuidadoso, preciso, meticuloso. El carácter de la app.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">명확 (myunghwak)</div>
+      <div class="word-reading">myung-hwak</div>
+      <div class="word-meaning">Claridad, precisión.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--kr)"></div>KR</div>
+      <div class="word-main hl">소박 (sobak)</div>
+      <div class="word-reading">so-bak</div>
+      <div class="word-meaning">Simple, modesto, sin pretensiones. La honestidad financiera.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--de)"></div>DE</div>
+      <div class="word-main hl">klar</div>
+      <div class="word-meaning">Claro, listo, resuelto. Alemán y sueco.</div>
+      <span class="word-badge gold">★ potente</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--fi)"></div>FI</div>
+      <div class="word-main hl">kirkas</div>
+      <div class="word-meaning">Brillante, nítido, claro en finlandés.</div>
+    </div>
+  </div>
+</div>
+
+<!-- RAÍCES LATINAS / ROMÁNICAS -->
+<div class="concept-block">
+  <div class="concept-header">
+    <div class="concept-emoji">🏛️</div>
+    <div>
+      <div class="concept-title">Raíces Latinas — Universales</div>
+      <div class="concept-sub">Palabras que funcionan en todas las lenguas romances simultáneamente.</div>
+    </div>
+  </div>
+  <div class="words-grid">
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">domus</div>
+      <div class="word-meaning">Casa. Raíz de doméstico, domicilio, domo.</div>
+      <span class="word-badge gold">raíz de DOMI</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">domi</div>
+      <div class="word-meaning">En casa (locativo latino). Corto, internacional.</div>
+      <span class="word-badge star">★★ nombre potencial</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">oikos</div>
+      <div class="word-meaning">Hogar griego. Raíz de economía.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">lares</div>
+      <div class="word-meaning">Dioses del hogar romano. Los guardianes de la casa.</div>
+      <span class="word-badge gold">concepto rico</span>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">focus</div>
+      <div class="word-meaning">Hogar, chimenea en latín. Raíz de "focus" inglés.</div>
+    </div>
+    <div class="word-entry">
+      <div class="word-lang"><div class="wdot" style="background:var(--la)"></div>LA</div>
+      <div class="word-main hl">cura</div>
+      <div class="word-meaning">Cuidado, atención, gestión. "Cura domus" = cuidar el hogar.</div>
+      <span class="word-badge gold">nombre potencial</span>
+    </div>
+  </div>
+</div>
+
+<!-- CANDIDATOS ESTRELLA -->
+<div class="candidates">
+  <h2>★ Candidatos para construcción — v2</h2>
+  <p>Las raíces más prometedoras para desarrollar en nombre de marca. Incorporan el feedback recibido.</p>
+  <div class="cand-grid">
+    <div class="cand-item star">
+      <div class="cand-star">★ FAVORITO</div>
+      <div class="cand-word">KAKEI</div>
+      <div class="cand-reading">家計 · ka-kei</div>
+      <div class="cand-origin">Japonés · Economía doméstica</div>
+      <div class="cand-why">El Haushalt japonés — exactamente la misma palabra para finanzas del hogar. Pronunciación limpia en inglés y español. 5 letras. kä-kei con diacrítico = sello internacional.</div>
+    </div>
+    <div class="cand-item star">
+      <div class="cand-star">★ FAVORITO</div>
+      <div class="cand-word">URI</div>
+      <div class="cand-reading">우리 · u-ri</div>
+      <div class="cand-origin">Coreano · Nosotros</div>
+      <div class="cand-why">En coreano "nuestro hogar" se dice "uri jip" — no existe el concepto de "mi hogar", siempre es nuestro. 3 letras. App de gastos compartidos. uri.app podría estar disponible.</div>
+    </div>
+    <div class="cand-item star">
+      <div class="cand-star">★ FAVORITO</div>
+      <div class="cand-word">HEIMA</div>
+      <div class="cand-reading">heim-a</div>
+      <div class="cand-origin">Islandés · En casa</div>
+      <div class="cand-why">Nórdico antiguo para "en casa, en el hogar". Reconocida internacionalmente por el film de Sigur Rós. Fácil EN+ES. Muy musical. 5 letras. heima.app.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">HÄUS</div>
+      <div class="cand-reading">haus</div>
+      <div class="cand-origin">Alemán · Casa (raíz de Haushalt)</div>
+      <div class="cand-why">Captura el concepto de Haushalt en 4 letras. "Haus" suena como "house" en inglés. La ä lo nordifica. El nombre más directo del concepto que buscan.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">YEOYU</div>
+      <div class="cand-reading">여유 · yeo-yu</div>
+      <div class="cand-origin">Coreano · Margen financiero</div>
+      <div class="cand-why">Tener "yeoyu" significa tener holgura económica, no estar ahogado. Es la promesa del producto. Inusual, memorable, sin competencia.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">NAGOMI</div>
+      <div class="cand-reading">なごみ · na-go-mi</div>
+      <div class="cand-origin">Japonés · Armonía cálida</div>
+      <div class="cand-why">Armonía y calma doméstica. La sensación que produce el orden financiero. 6 letras, fonética muy accesible en español e inglés.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">SALLIM</div>
+      <div class="cand-reading">살림 · sa-llim</div>
+      <div class="cand-origin">Coreano · Gestión del hogar</div>
+      <div class="cand-why">La palabra coreana para "llevar la casa". Rico culturalmente — implica cuidado, organización y recursos. Sal + llim = fácil de pronunciar en español.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">DOMI</div>
+      <div class="cand-reading">do-mi</div>
+      <div class="cand-origin">Latín · En casa (domus)</div>
+      <div class="cand-why">Del latín "domus" — raíz de doméstico, domicilio en todas las lenguas romances. El usuario LATAM ya tiene una relación implícita. 4 letras, cross-cultural.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">ONGI</div>
+      <div class="cand-reading">온기 · on-gi</div>
+      <div class="cand-origin">Coreano · Calidez del hogar</div>
+      <div class="cand-why">Calidez emocional, la temperatura del hogar. Una app de finanzas que se siente cálida. 4 letras. Inusual pero pronunciable. ongi.app.</div>
+    </div>
+    <div class="cand-item">
+      <div class="cand-word">MATOME</div>
+      <div class="cand-reading">まとめ · ma-to-me</div>
+      <div class="cand-origin">Japonés · Resumen/Consolidar</div>
+      <div class="cand-why">Consolidar, reunir, resumir — lo que hace el app con los gastos. Muy usado en japonés digital. 6 letras, rítmico, fácil en español.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>
