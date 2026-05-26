@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Design Awards — Análisis para SPARÖ</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12221a;
+  --teal: #0d3d34;
+  --teal-light: #2e8b6e;
+  --coral: #e8735a;
+  --cream: #f7f2e8;
+  --cream-dark: #ede6d6;
+  --gold: #c9a84c;
+  --white: #fefcf8;
+  --gray: #8a9490;
+  --border: rgba(18,34,26,0.08);
+  --apple: #0071e3;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); line-height:1.6; }
+
+header {
+  background:var(--teal);
+  padding:60px 60px 64px;
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 70% 40%, rgba(46,139,110,0.25) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(232,115,90,0.1) 0%, transparent 50%);
+  pointer-events:none;
+}
+header::after {
+  content:''; position:absolute; bottom:-1px; left:0; right:0; height:40px;
+  background:var(--cream);
+  clip-path:ellipse(52% 100% at 50% 100%);
+}
+header h1 { font-family:'Fraunces',serif; font-size:2.2rem; font-weight:900; color:var(--cream); margin-bottom:8px; position:relative; }
+header h1 span { color:var(--coral); }
+header p { color:rgba(247,242,232,0.5); font-size:0.88rem; max-width:640px; line-height:1.7; position:relative; }
+
+main { max-width:1100px; margin:0 auto; padding:48px 60px 100px; }
+
+.sec-num { font-size:0.65rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--coral); font-weight:700; margin-bottom:8px; margin-top:56px; }
+.sec-title { font-family:'Fraunces',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700; color:var(--teal); line-height:1.1; margin-bottom:8px; }
+.sec-sub { font-size:0.9rem; color:var(--gray); max-width:600px; }
+.divider { width:40px; height:3px; background:var(--coral); border-radius:2px; margin:16px 0 36px; }
+
+/* CATEGORY PILLS */
+.categories { display:flex; gap:10px; flex-wrap:wrap; margin:24px 0; }
+.cat-pill { padding:8px 18px; border-radius:100px; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
+.cat-blue { background:rgba(0,113,227,0.08); color:var(--apple); border:1px solid rgba(0,113,227,0.2); }
+.cat-green { background:rgba(46,139,110,0.1); color:var(--teal-light); border:1px solid rgba(46,139,110,0.2); }
+.cat-coral { background:rgba(232,115,90,0.1); color:var(--coral); border:1px solid rgba(232,115,90,0.2); }
+.cat-gold { background:rgba(201,168,76,0.1); color:#7a5f0e; border:1px solid rgba(201,168,76,0.2); }
+
+/* WINNER CARDS */
+.winners-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin:32px 0; }
+.winner-card { background:var(--white); border-radius:16px; padding:24px; border:1px solid var(--border); box-shadow:0 2px 16px rgba(13,61,52,0.05); }
+.winner-card.highlight { border-color:var(--coral); background:linear-gradient(135deg,var(--white),rgba(232,115,90,0.03)); }
+.winner-badge { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:700; padding:3px 10px; border-radius:100px; display:inline-block; margin-bottom:10px; }
+.badge-winner { background:var(--apple); color:white; }
+.badge-finalist { background:rgba(0,113,227,0.1); color:var(--apple); }
+.badge-relevant { background:var(--coral); color:white; }
+.winner-name { font-family:'Fraunces',serif; font-size:1.2rem; font-weight:700; color:var(--teal); margin-bottom:4px; }
+.winner-cat { font-size:0.72rem; color:var(--gray); margin-bottom:12px; letter-spacing:0.05em; }
+.winner-desc { font-size:0.84rem; color:var(--gray); line-height:1.65; }
+.winner-lesson { font-size:0.8rem; color:var(--teal); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); line-height:1.55; }
+.winner-lesson::before { content:'→ '; color:var(--coral); font-weight:700; }
+
+/* PRINCIPLES */
+.principles-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; margin:32px 0; }
+.principle-card { background:var(--white); border-radius:14px; padding:22px; border:1px solid var(--border); }
+.principle-num { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--coral); font-weight:500; margin-bottom:8px; letter-spacing:0.1em; }
+.principle-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--teal); margin-bottom:8px; }
+.principle-desc { font-size:0.82rem; color:var(--gray); line-height:1.6; }
+.principle-example { font-size:0.77rem; color:var(--teal-light); margin-top:8px; font-style:italic; }
+
+/* GAP ANALYSIS */
+.gap-table { width:100%; border-collapse:collapse; margin:24px 0; }
+.gap-table th { text-align:left; padding:10px 16px; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); font-weight:700; border-bottom:2px solid var(--border); }
+.gap-table td { padding:13px 16px; font-size:0.85rem; border-bottom:1px solid var(--border); vertical-align:top; }
+.gap-table tr:last-child td { border-bottom:none; }
+.gap-table tr:nth-child(even) { background:rgba(13,61,52,0.02); }
+.status-done { color:var(--teal-light); font-weight:700; }
+.status-partial { color:var(--gold); font-weight:700; }
+.status-missing { color:var(--coral); font-weight:700; }
+.priority-high { background:rgba(232,115,90,0.1); color:var(--coral); font-size:0.65rem; padding:2px 8px; border-radius:100px; font-weight:700; letter-spacing:0.08em; white-space:nowrap; }
+.priority-med { background:rgba(201,168,76,0.1); color:#7a5f0e; font-size:0.65rem; padding:2px 8px; border-radius:100px; font-weight:700; letter-spacing:0.08em; white-space:nowrap; }
+.priority-low { background:rgba(46,139,110,0.1); color:var(--teal-light); font-size:0.65rem; padding:2px 8px; border-radius:100px; font-weight:700; letter-spacing:0.08em; white-space:nowrap; }
+
+/* ROADMAP */
+.roadmap { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:32px 0; }
+.roadmap-col { background:var(--white); border-radius:16px; padding:24px; border:1px solid var(--border); }
+.roadmap-phase { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:700; color:var(--coral); margin-bottom:8px; }
+.roadmap-title { font-family:'Fraunces',serif; font-size:1rem; font-weight:700; color:var(--teal); margin-bottom:16px; }
+.roadmap-item { font-size:0.82rem; color:var(--gray); padding:8px 0; border-bottom:1px solid var(--border); line-height:1.5; display:flex; gap:8px; align-items:flex-start; }
+.roadmap-item:last-child { border-bottom:none; }
+.roadmap-dot { width:6px; height:6px; border-radius:50%; background:var(--teal-light); flex-shrink:0; margin-top:6px; }
+
+/* COPILOT FOCUS */
+.focus-box { background:var(--teal); border-radius:20px; padding:40px; margin:32px 0; position:relative; overflow:hidden; }
+.focus-box::before { content:''; position:absolute; top:-30%; right:-10%; width:60%; height:160%; background:radial-gradient(ellipse,rgba(46,139,110,0.25) 0%,transparent 70%); pointer-events:none; }
+.focus-box h3 { font-family:'Fraunces',serif; font-size:1.4rem; font-weight:900; color:var(--cream); margin-bottom:6px; position:relative; }
+.focus-box p { font-size:0.84rem; color:rgba(247,242,232,0.5); margin-bottom:24px; position:relative; }
+.focus-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; position:relative; }
+.focus-item { background:rgba(255,255,255,0.07); border-radius:12px; padding:16px; border:1px solid rgba(255,255,255,0.1); }
+.focus-label { font-size:0.62rem; color:rgba(247,242,232,0.35); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+.focus-value { font-size:0.85rem; color:var(--cream); line-height:1.5; font-weight:500; }
+
+/* BIG QUOTE */
+.big-quote { font-family:'Fraunces',serif; font-size:clamp(1.2rem,2.2vw,1.7rem); font-weight:700; color:var(--teal); line-height:1.3; border-left:4px solid var(--coral); padding-left:22px; margin:36px 0; }
+
+@media(max-width:768px){
+  header, main { padding-left:20px; padding-right:20px; }
+  .winners-grid, .principles-grid, .roadmap, .focus-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Apple Design Awards <span>·</span> Análisis</h1>
+  <p>Investigación de las apps ganadoras 2023–2025 con foco en diseño, usabilidad e innovación. Todo traducido en acciones concretas para nuestro app de gastos del hogar.</p>
+</header>
+
+<main>
+
+<!-- CONTEXT -->
+<div class="sec-num">01 — Contexto</div>
+<h2 class="sec-title">El benchmark más exigente</h2>
+<p class="sec-sub">Los Apple Design Awards son el Oscar del software móvil. Los ganadores no se eligen por descargas ni revenue — se eligen por excelencia en diseño, innovación técnica e impacto en la vida de las personas.</p>
+<div class="divider"></div>
+
+<div class="categories">
+  <div class="cat-pill cat-blue">Delight &amp; Fun</div>
+  <div class="cat-pill cat-green">Interaction</div>
+  <div class="cat-pill cat-coral">Innovation</div>
+  <div class="cat-pill cat-gold">Visuals &amp; Graphics</div>
+  <div class="cat-pill cat-blue">Social Impact</div>
+  <div class="cat-pill cat-green">Inclusivity</div>
+</div>
+
+<div class="big-quote">"Los ganadores no son los más descargados. Son los más <em>bien diseñados</em>. Apple los elige por impacto real en la vida de las personas."</div>
+
+<!-- WINNERS RELEVANTES -->
+<div class="sec-num">02 — Winners relevantes para nuestro app</div>
+<h2 class="sec-title">Casos de estudio directos</h2>
+<p class="sec-sub">Filtrado a los ganadores y finalistas que aplican directamente a un app de finanzas domésticas.</p>
+<div class="divider"></div>
+
+<div class="winners-grid">
+
+  <div class="winner-card highlight">
+    <div class="winner-badge badge-relevant">★ MÁS RELEVANTE</div>
+    <div class="winner-name">Copilot Money</div>
+    <div class="winner-cat">Finalista Interaction · Apple Design Awards 2024 · Finance</div>
+    <div class="winner-desc">App de finanzas personales. Apple lo describió como "The future of personal finance". Finalista en la categoría de Interaction — interfaces intuitivas y controles perfectamente adaptados a la plataforma. Tagline oficial de Apple: "Clear, beautiful, trusted."</div>
+    <div class="winner-lesson">Es el único app de finanzas que Apple ha reconocido en los últimos años. Es nuestro benchmark directo. Lo que lo diferencia: claridad visual extrema + IA de categorización + privacidad explícita.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2025</div>
+    <div class="winner-name">CapWords</div>
+    <div class="winner-cat">Delight &amp; Fun · China · iPhone/iPad</div>
+    <div class="winner-desc">App de aprendizaje de idiomas: tomas una foto de cualquier objeto y aparece su nombre como sticker animado. Cada transición va acompañada de un sonido del mundo real. Apple dijo: "an idea as simple as it is revolutionary."</div>
+    <div class="winner-lesson">La cámara como punto de entrada natural convierte algo complejo (aprender vocabulario) en algo delicioso. Nuestro escaneo de recibos con IA tiene exactamente el mismo potencial — foto → datos → magia.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2025</div>
+    <div class="winner-name">Lumy</div>
+    <div class="winner-cat">Delight &amp; Fun · India · iPhone/iPad/Apple Watch</div>
+    <div class="winner-desc">Tracker de sol y luna. Reconocido por: paleta de colores meticulosamente curada, widgets y Live Activities elegantes, sincronización impecable con Apple Watch. Información compleja (datos celestes) presentada de forma intuitiva.</div>
+    <div class="winner-lesson">Datos complejos → presentación simple y hermosa. Es lo que debemos hacer con los patrones de gasto. Los widgets y Live Activities son diferenciadores que Apple valora explícitamente.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2024</div>
+    <div class="winner-name">Crouton</div>
+    <div class="winner-cat">Interaction · Nueva Zelanda · iPhone</div>
+    <div class="winner-desc">App de recetas de cocina. Ganador por: "lets users keep their focus on the counter rather than the screen." La interfaz desaparece — el usuario se enfoca en cocinar, no en navegar el app.</div>
+    <div class="winner-lesson">El app ideal no compite por atención — facilita la tarea y desaparece. Registrar un gasto debe ser tan rápido que el usuario casi no sienta que está usando un app.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2024</div>
+    <div class="winner-name">Bears Gratitude</div>
+    <div class="winner-cat">Delight &amp; Fun · Sri Lanka · iPhone</div>
+    <div class="winner-desc">App de journaling con personajes animados. Ganador por su "warm and welcoming" approach a un hábito difícil (gratitud diaria). Prompts de escritura + recordatorios + personajes adorables.</div>
+    <div class="winner-lesson">Convirtió algo que la gente posterga (journaling) en algo que esperan hacer. Nuestro app puede hacer lo mismo con el registro de gastos — que no sea una tarea, sea un momento de conciencia financiera.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2024</div>
+    <div class="winner-name">Gentler Streak</div>
+    <div class="winner-cat">Social Impact · Internacional</div>
+    <div class="winner-desc">App de fitness con filosofía "más suave". No te castiga si faltas un día — celebra el progreso real. Apple lo reconoció por mejorar vidas de forma significativa con un enfoque compasivo.</div>
+    <div class="winner-lesson">El tono sin juicio que definimos para nuestra marca ("no te juzga por lo que gastas") es exactamente lo que Apple valora en Social Impact. La compasión financiera es un diferenciador de categoría.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-winner">Winner 2025</div>
+    <div class="winner-name">Taobao</div>
+    <div class="winner-cat">Interaction · China · Multi-platform</div>
+    <div class="winner-desc">App de e-commerce de Alibaba. Ganador en Interaction — sorprendente para un app de esa escala. Apple reconoció sus controles intuitivos y navegación perfectamente adaptada a la plataforma.</div>
+    <div class="winner-lesson">Apple no favorece solo a los indie developers — favorece al mejor diseño sin importar el tamaño. Pero también demuestra que apps con mucha información pueden ganar si la interacción es impecable.</div>
+  </div>
+
+  <div class="winner-card">
+    <div class="winner-badge badge-finalist">Finalista 2024</div>
+    <div class="winner-name">Things 3</div>
+    <div class="winner-cat">Finalista en DOS categorías · Tasks</div>
+    <div class="winner-desc">App de tareas de Cultured Code. Finalista en dos categorías simultáneamente — un logro rarísimo. Reconocido por su diseño atemporal, tipografía impecable y consistencia después de años en el mercado.</div>
+    <div class="winner-lesson">La coherencia a largo plazo importa. Things 3 no gana por ser nuevo — gana por ser perfectamente consistente. Nuestro sistema nórdico debe mantenerse coherente en cada actualización.</div>
+  </div>
+
+</div>
+
+<!-- PRINCIPIOS UNIVERSALES -->
+<div class="sec-num">03 — Principios</div>
+<h2 class="sec-title">Los 10 principios que comparten todos los ganadores</h2>
+<p class="sec-sub">Extraídos de los criterios oficiales de Apple y el análisis de los ganadores 2023–2025.</p>
+<div class="divider"></div>
+
+<div class="principles-grid">
+
+  <div class="principle-card">
+    <div class="principle-num">01</div>
+    <div class="principle-title">Simplicidad revolucionaria</div>
+    <div class="principle-desc">El mejor diseño toma algo complejo y lo hace parecer obvio. No es minimalismo — es claridad. El usuario nunca debe pensar, solo hacer.</div>
+    <div class="principle-example">CapWords: foto → sticker. 0 pasos intermedios.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">02</div>
+    <div class="principle-title">La interfaz desaparece</div>
+    <div class="principle-desc">El app ideal no compite por atención con la tarea real del usuario. Facilita y desaparece. El usuario se enfoca en su vida, no en la pantalla.</div>
+    <div class="principle-example">Crouton: cocina, no navega.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">03</div>
+    <div class="principle-title">Animación como comunicación</div>
+    <div class="principle-desc">Las animaciones no son decoración — son retroalimentación. Cada transición confirma una acción, celebra un logro o guía la atención. Deben sentirse físicas.</div>
+    <div class="principle-example">CapWords: sonido real + animación = la palabra se graba.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">04</div>
+    <div class="principle-title">Paleta cromática meticulosa</div>
+    <div class="principle-desc">No una paleta "bonita" — una paleta con intención. Cada color comunica algo específico. Los ganadores tienen 2-3 colores máximo, usados con precisión quirúrgica.</div>
+    <div class="principle-example">Lumy: paleta curada que acompaña la hora del día.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">05</div>
+    <div class="principle-title">Ecosistema nativo</div>
+    <div class="principle-desc">Widgets, Live Activities, Apple Watch, Siri Shortcuts, Dynamic Type. Apple recompensa a los apps que abrazan su ecosistema completo — no solo la app principal.</div>
+    <div class="principle-example">Lumy: Watch + widgets + Live Activities = ganador.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">06</div>
+    <div class="principle-title">Tono compasivo</div>
+    <div class="principle-desc">Los ganadores de Social Impact e Inclusivity comparten una cosa: no juzgan al usuario. Celebran el progreso, no castigan el fracaso. El diseño refleja esa compasión.</div>
+    <div class="principle-example">Gentler Streak: te celebra si hiciste algo, nunca te castiga.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">07</div>
+    <div class="principle-title">IA invisible</div>
+    <div class="principle-desc">La IA que gana premios no se anuncia — simplemente funciona. El usuario no sabe que hay machine learning detrás; solo sabe que el app entiende lo que quiere.</div>
+    <div class="principle-example">Copilot: categoriza gastos automáticamente. La IA es invisible.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">08</div>
+    <div class="principle-title">Datos → Historia</div>
+    <div class="principle-desc">Los mejores apps de datos no muestran números — cuentan historias con ellos. Una visualización de gasto debe tener narrativa, no solo barras y gráficos.</div>
+    <div class="principle-example">Outsiders (2026 finalist): Training Readiness Score = un número que cuenta toda la historia.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">09</div>
+    <div class="principle-title">Coherencia total</div>
+    <div class="principle-desc">Desde el ícono del app hasta el mensaje de error — todo habla el mismo lenguaje visual. La coherencia no es opción: es el indicador más visible de excelencia.</div>
+    <div class="principle-example">Things 3: coherente después de 10+ años y múltiples versiones.</div>
+  </div>
+
+  <div class="principle-card">
+    <div class="principle-num">10</div>
+    <div class="principle-title">Privacidad explícita</div>
+    <div class="principle-desc">Apple valora enormemente los apps que hacen de la privacidad una característica de diseño visible, no solo legal. El usuario debe saber que sus datos son suyos.</div>
+    <div class="principle-example">Copilot: "We'll never sell your data" es parte de su propuesta de valor.</div>
+  </div>
+
+</div>
+
+<!-- COPILOT MONEY DEEP DIVE -->
+<div class="focus-box">
+  <h3>Copilot Money — El benchmark directo</h3>
+  <p>El único app de finanzas que Apple ha reconocido como "The future of personal finance". Finalista ADA 2024.</p>
+  <div class="focus-grid">
+    <div class="focus-item">
+      <div class="focus-label">Tagline de Apple</div>
+      <div class="focus-value">"Clear, beautiful, trusted"</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-label">Categoría ADA</div>
+      <div class="focus-value">Interaction — controles intuitivos y perfectamente adaptados</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-label">Diferenciador clave</div>
+      <div class="focus-value">IA de categorización que aprende. Sin anuncios. Sin venta de datos.</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-label">Plataformas</div>
+      <div class="focus-value">iPhone + iPad + Mac (multi-platform = mayor score)</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-label">Modelo de negocio</div>
+      <div class="focus-value">Suscripción pura — alineado con los intereses del usuario</div>
+    </div>
+    <div class="focus-item">
+      <div class="focus-label">Lo que NO tiene</div>
+      <div class="focus-value">Escándo de recibos con IA. Finanzas del hogar compartidas. Mercado LATAM.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GAP ANALYSIS -->
+<div class="sec-num">04 — Gap Analysis</div>
+<h2 class="sec-title">¿Dónde estamos vs. dónde necesitamos estar?</h2>
+<p class="sec-sub">Comparación honesta de nuestro app actual contra los estándares Apple Design Award.</p>
+<div class="divider"></div>
+
+<table class="gap-table">
+  <thead>
+    <tr>
+      <th>Característica ADA</th>
+      <th>Estado actual</th>
+      <th>Brecha</th>
+      <th>Prioridad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Escaneo de recibo con IA</strong></td>
+      <td><span class="status-done">✓ Implementado</span></td>
+      <td>Existe. Pulir la animación de la cámara → resultado</td>
+      <td><span class="priority-med">Media</span></td>
+    </tr>
+    <tr>
+      <td><strong>Claridad visual extrema</strong></td>
+      <td><span class="status-partial">~ Parcial</span></td>
+      <td>Hero card sólido. Necesita mejor jerarquía tipográfica en todas las vistas</td>
+      <td><span class="priority-high">Alta</span></td>
+    </tr>
+    <tr>
+      <td><strong>Animaciones con propósito</strong></td>
+      <td><span class="status-partial">~ Parcial</span></td>
+      <td>El recibo inclinado es un buen inicio. Faltan: transición al guardar, celebración de presupuesto cumplido, barras animadas</td>
+      <td><span class="priority-high">Alta</span></td>
+    </tr>
+    <tr>
+      <td><strong>Widgets</strong></td>
+      <td><span class="status-missing">✗ No existe</span></td>
+      <td>Widget de gasto del día / presupuesto restante. Apple Watch. Apple valora esto explícitamente.</td>
+      <td><span class="priority-high">Alta</span></td>
+    </tr>
+    <tr>
+      <td><strong>Live Activities</strong></td>
+      <td><span class="status-missing">✗ No existe</span></td>
+      <td>Mostrar presupuesto en tiempo real en la Lock Screen cuando se acerca al límite</td>
+      <td><span class="priority-med">Media</span></td>
+    </tr>
+    <tr>
+      <td><strong>Tono sin juicio</strong></td>
+      <td><span class="status-done">✓ En voice guide</span></td>
+      <td>Está definido. Asegurar que todos los mensajes de alerta lo reflejen</td>
+      <td><span class="priority-med">Media</span></td>
+    </tr>
+    <tr>
+      <td><strong>Privacidad explícita</strong></td>
+      <td><span class="status-missing">✗ No visible</span></td>
+      <td>Necesita una declaración visible en onboarding: "Tus datos son tuyos"</td>
+      <td><span class="priority-high">Alta</span></td>
+    </tr>
+    <tr>
+      <td><strong>Datos → Historia</strong></td>
+      <td><span class="status-partial">~ Parcial</span></td>
+      <td>Insights IA tiene el concepto. Falta narrativa más rica: "Este mes superaste tu mejor marca en alimentación"</td>
+      <td><span class="priority-high">Alta</span></td>
+    </tr>
+    <tr>
+      <td><strong>Dynamic Type</strong></td>
+      <td><span class="status-missing">✗ No implementado</span></td>
+      <td>El texto debe escalar con la configuración de accesibilidad del sistema</td>
+      <td><span class="priority-med">Media</span></td>
+    </tr>
+    <tr>
+      <td><strong>Dark Mode</strong></td>
+      <td><span class="status-missing">✗ No existe</span></td>
+      <td>No es bloqueante para ADA pero Apple lo espera en cualquier app serio</td>
+      <td><span class="priority-low">Baja</span></td>
+    </tr>
+    <tr>
+      <td><strong>App nativo iOS (Swift)</strong></td>
+      <td><span class="status-missing">✗ PWA actual</span></td>
+      <td>El paso más importante para ser elegible para ADA. La web no gana Apple Design Awards.</td>
+      <td><span class="priority-high">Alta · Largo plazo</span></td>
+    </tr>
+    <tr>
+      <td><strong>Finanzas compartidas (hogar)</strong></td>
+      <td><span class="status-done">✓ Implementado</span></td>
+      <td>Diferenciador único vs Copilot Money. Nadie más lo tiene tan bien integrado.</td>
+      <td><span class="priority-low">Defender</span></td>
+    </tr>
+    <tr>
+      <td><strong>Mercado LATAM nativo</strong></td>
+      <td><span class="status-done">✓ Implementado</span></td>
+      <td>Soles, categorías locales, español real. Diferenciador geográfico.</td>
+      <td><span class="priority-low">Defender</span></td>
+    </tr>
+    <tr>
+      <td><strong>Siri / App Intents</strong></td>
+      <td><span class="status-missing">✗ No existe</span></td>
+      <td>"Hey Siri, agrega un gasto de restaurantes de S/50" — Apple recompensa esto</td>
+      <td><span class="priority-med">Media</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ROADMAP -->
+<div class="sec-num">05 — Roadmap</div>
+<h2 class="sec-title">El camino hacia el Apple Design Award</h2>
+<p class="sec-sub">Tres fases para llevar el app al nivel de los ganadores. La primera es ejecutable hoy.</p>
+<div class="divider"></div>
+
+<div class="roadmap">
+  <div class="roadmap-col">
+    <div class="roadmap-phase">Fase 1 · Ahora</div>
+    <div class="roadmap-title">Excelencia en lo que existe</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Animación de guardado de gasto (micro-momento de celebración)</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Animación de barra de presupuesto al completarse</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Declaración de privacidad visible en onboarding</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Mensajes de insights más narrativos ("Este mes tu mejor mes")</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Estados vacíos diseñados (sin datos = oportunidad de guiar)</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Consistencia tipográfica en todas las vistas</div>
+  </div>
+  <div class="roadmap-col">
+    <div class="roadmap-phase">Fase 2 · 3-6 meses</div>
+    <div class="roadmap-title">Ecosistema Apple</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Widget de gasto del día (pequeño + mediano)</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Widget de presupuesto restante del mes</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Live Activity cuando el presupuesto supera el 80%</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Siri Shortcuts para agregar gasto por voz</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Dynamic Type en todo el app</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Dark Mode</div>
+  </div>
+  <div class="roadmap-col">
+    <div class="roadmap-phase">Fase 3 · 12+ meses</div>
+    <div class="roadmap-title">App nativo iOS</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Migración de PWA a app nativo SwiftUI</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Apple Watch: agregar gasto desde la muñeca</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Apple Intelligence integración (resumen del mes)</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>iPad: layout optimizado para pantalla grande</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Mac: versión desktop para revisión mensual</div>
+    <div class="roadmap-item"><div class="roadmap-dot"></div>Nominar para Apple Design Awards</div>
+  </div>
+</div>
+
+<!-- INSIGHT FINAL -->
+<div style="background:var(--teal);border-radius:20px;padding:40px;margin-top:40px;">
+  <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,242,232,0.35);font-weight:700;margin-bottom:16px;">Conclusión estratégica</div>
+  <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--cream);line-height:1.4;margin-bottom:16px;">
+    "Copilot Money es nuestro benchmark. Tiene lo que nosotros no — plataformas Apple nativas. Nosotros tenemos lo que ellos no — finanzas del hogar compartidas, escaneo de recibos con IA, y el mercado LATAM. La ventaja competitiva existe. El trabajo es construir el nivel de polish que Apple reconoce."
+  </div>
+  <div style="font-size:0.82rem;color:rgba(247,242,232,0.45);line-height:1.7;">
+    El camino hacia un Apple Design Award no empieza con un app nativo — empieza con obsesión por el detalle en lo que ya existe. CapWords ganó porque cada transición está perfectamente pensada. Crouton ganó porque el usuario nunca tiene que pensar. Lumy ganó porque la paleta es meticulosamente curada. Esas son cosas que podemos hacer hoy, en la PWA actual, en el próximo sprint.
+  </div>
+</div>
+
+</main>
+</body>
+</html>
