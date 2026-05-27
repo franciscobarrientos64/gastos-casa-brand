@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stitch Prompts v2 — HÄUS Redesign Profundo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:#0d3d34;--green:#2e8b6e;--coral:#e8735a;--cream:#f7f2e8;--white:#fefcf8;
+  --gray:#8a9490;--border:rgba(18,34,26,0.08);--gold:#c9a84c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:#12221a;line-height:1.6;-webkit-font-smoothing:antialiased}
+header{background:var(--teal);padding:52px 48px 56px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 30%,rgba(46,139,110,0.25) 0%,transparent 60%);pointer-events:none}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:36px;background:var(--cream);clip-path:ellipse(52% 100% at 50% 100%)}
+header h1{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--cream);margin-bottom:6px;position:relative}
+header h1 span{color:var(--coral)}
+header p{color:rgba(247,242,232,0.45);font-size:0.85rem;max-width:580px;line-height:1.7;position:relative}
+main{max-width:900px;margin:0 auto;padding:48px 48px 100px}
+.screen{background:var(--white);border-radius:18px;border:1px solid var(--border);margin-bottom:24px;overflow:hidden;box-shadow:0 2px 16px rgba(13,61,52,0.05)}
+.screen-header{background:var(--teal);padding:18px 24px;display:flex;align-items:center;gap:14px}
+.screen-num{font-family:'DM Mono',monospace;font-size:0.65rem;color:rgba(247,242,232,0.35);font-weight:500;letter-spacing:0.15em;border:1px solid rgba(247,242,232,0.15);padding:3px 8px;border-radius:4px}
+.screen-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;color:var(--cream)}
+.screen-body{padding:24px}
+.prompt-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:10px}
+.prompt-box{background:#1a1a1a;border-radius:12px;padding:20px 22px;font-family:'DM Mono',monospace;font-size:0.78rem;color:#e8e4dc;line-height:1.8;white-space:pre-wrap;word-break:break-word;position:relative}
+.copy-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5);font-size:0.65rem;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.05em}
+.copy-btn:hover{background:rgba(255,255,255,0.14);color:rgba(255,255,255,0.8)}
+.issues{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.issue{display:flex;gap:10px;font-size:0.82rem;color:var(--gray);padding:8px 12px;background:rgba(232,115,90,0.06);border-radius:8px;border-left:3px solid var(--coral)}
+.issue-icon{flex-shrink:0;color:var(--coral)}
+.sec-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gray);font-weight:700;margin-bottom:8px;margin-top:20px}
+.design-system{background:var(--teal);border-radius:16px;padding:28px;margin-bottom:32px;position:relative;overflow:hidden}
+.design-system::before{content:'';position:absolute;top:-30%;right:-10%;width:50%;height:160%;background:radial-gradient(ellipse,rgba(46,139,110,0.2) 0%,transparent 70%);pointer-events:none}
+.ds-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--cream);margin-bottom:16px;position:relative}
+.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative}
+.ds-item{background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;border:1px solid rgba(255,255,255,0.1)}
+.ds-key{font-size:0.6rem;color:rgba(247,242,232,0.35);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px;font-weight:700}
+.ds-val{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--cream);line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+  <h1>Stitch Prompts <span>v2</span> — HÄUS</h1>
+  <p>Prompts de rediseño profundo por pantalla. Corrigen emojis, tipografía de números, iconografía, spacing y coherencia total del sistema nórdico.</p>
+</header>
+<main>
+
+<div class="design-system">
+  <div class="ds-title">Sistema de diseño fijo — copiar en todos los prompts</div>
+  <div class="ds-grid">
+    <div class="ds-item"><div class="ds-key">Display / Headlines</div><div class="ds-val">Fraunces — serif editorial<br/>Weight 700–900, italic disponible</div></div>
+    <div class="ds-item"><div class="ds-key">Body / UI / Números</div><div class="ds-val">DM Sans — geométrica clean<br/>NO JetBrains Mono para números</div></div>
+    <div class="ds-item"><div class="ds-key">Paleta principal</div><div class="ds-val">#0d3d34 verde selva<br/>#2e8b6e verde acento<br/>#e8735a terracota<br/>#c9a84c oro lima</div></div>
+    <div class="ds-item"><div class="ds-key">Fondo / Superficie</div><div class="ds-val">#fef9ef crema cálida<br/>#fefcf8 blanco cálido<br/>#f2ede3 superficie</div></div>
+    <div class="ds-item"><div class="ds-key">Íconos</div><div class="ds-val">Material Symbols Outlined<br/>wght 300, NO emojis nativos</div></div>
+    <div class="ds-item"><div class="ds-key">Border radius</div><div class="ds-val">Cards: 20px | Pills: 9999px<br/>Inputs: 14px | Items: 16px</div></div>
+  </div>
+</div>
+
+<!-- SCREEN 1: DASHBOARD -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">01</div>
+    <div class="screen-name">Dashboard — Home</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Problemas actuales a corregir</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>Los montos usan tipografía monoespaciada que rompe la armonía visual con el resto del texto</div>
+      <div class="issue"><span class="issue-icon">→</span>Los íconos de categoría en la lista de gastos son emojis — deben ser Material Symbols en círculo con borde</div>
+      <div class="issue"><span class="issue-icon">→</span>Los pill buttons de acciones rápidas necesitan más aire interno y mayor contraste</div>
+      <div class="issue"><span class="issue-icon">→</span>Las bento cards (Consejo de ahorro / Balance) necesitan más jerarquía visual y mejor uso del espacio</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p1">Design the Home screen of HÄUS, a premium household finance app for Latin American couples. Nordic minimalist aesthetic, Apple Design Award level quality.
+
+TYPOGRAPHY SYSTEM (critical — apply everywhere):
+- App name "HÄUS": Fraunces serif, 900 weight
+- All headlines: Fraunces serif, 700 weight  
+- All body text: DM Sans, 400–600 weight
+- ALL monetary amounts and numbers: DM Sans 600 weight — NOT monospace, NOT JetBrains Mono — same font family as body text, just heavier weight
+- Labels and metadata: DM Sans 400, uppercase tracking-widest, 10–11px
+
+COLOR PALETTE:
+- Background: #fef9ef (warm cream)
+- Hero card: gradient 135deg #0d3d34 → #1a4d44
+- Accent green: #2e8b6e
+- Terracotta accent: #e8735a
+- Gold warning: #c9a84c
+- Text: #1d1c16
+- Muted: #8a9490
+
+ICONS: Use Material Symbols Outlined (weight 300) — NEVER emoji characters. Each category gets a circular container (46px, 1px border, background surface-low) with its icon.
+
+LAYOUT:
+Top: Avatar overlap (two 32px circles, forest green + teal, initials F+K) + greeting "Buenos días, Francisco" + notification bell icon
+
+Hero card (gradient dark green, border-radius 20px, padding 24px):
+- Label "GASTO TOTAL DEL MES" in 10px uppercase cream 40% opacity
+- Amount "S/ 3,240" in Fraunces 52px 900 weight cream — NOT monospace
+- Trend indicator with south arrow icon + "12%" in terracotta
+- Budget progress bar (6px, mint green fill, cream 20% background)
+- "Disponible S/ 680" + "83%" labels below bar
+
+Quick actions row (horizontal scroll): Three pill buttons (height 48px, border-radius 9999px, border 1px #c0c8c5, background #f2ede3):
+- "+ Gasto" with add icon (Material Symbol)
+- "Escanear" with qr_code_scanner icon
+- "Ver todo" text only
+
+Section header "Esta semana" in Fraunces 20px dark green + "ver todo" link right
+
+Expense list (card with 0 16px padding, border 1px, border-radius 16px):
+Each row: 46px circle icon container (Material Symbol, category-colored) + merchant name (DM Sans 500 15px) + category label (12px muted) + amount (DM Sans 600 15px dark green, RIGHT) + date (11px muted)
+Rows separated by 1px hairline border
+
+Bottom bento cards (2-column grid, gap 12px):
+Left card "Consejo de ahorro": forest green background, surface-low bg, Fraunces 17px headline, 13px body text, large savings icon watermark (opacity 5%)
+Right card "Balance del mes": green 15% opacity background, amount in DM Sans 600 20px, progress bar 8px
+
+Bottom nav: 5 items, active item gets pill background (green 20% opacity), Material Symbols icons, labels DM Sans 10px uppercase
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p1').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+<!-- SCREEN 2: AÑADIR GASTO -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">02</div>
+    <div class="screen-name">Añadir Gasto</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Problemas actuales a corregir</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>El monto "186.50" usa tipografía monoespaciada — debe ser Fraunces display</div>
+      <div class="issue"><span class="issue-icon">→</span>Los íconos de las filas de detalles son emojis/básicos — deben ser Material Symbols en verde</div>
+      <div class="issue"><span class="issue-icon">→</span>El badge "ESCANEADO POR IA" necesita más refinamiento y mejor iconografía</div>
+      <div class="issue"><span class="issue-icon">→</span>El recibo inclinado necesita más profundidad y sombra dramática</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p2">Design the Add Expense screen of HÄUS after AI receipt scanning. Nordic premium aesthetic.
+
+TYPOGRAPHY: Same system as Home screen. Amount must be Fraunces 900 weight display, NOT monospace.
+
+LAYOUT:
+Header: back arrow (arrow_back_ios Material Symbol) + "Nuevo gasto" Fraunces 18px centered + empty right spacer
+
+AI Badge (centered, dark green pill #0d3d34): check_circle icon filled (white, 14px) + "ESCANEADO POR IA" DM Sans 11px 600 uppercase cream, letter-spacing 0.15em
+
+Receipt preview: 112x144px card, -3deg rotation, white background, border-radius 4px, dramatic shadow (0 8px 32px rgba(13,61,52,0.2)), overflow hidden with actual receipt texture image, black gradient overlay at bottom 30%
+
+Amount display (centered, large):
+- "S/" in DM Sans 24px muted weight 500
+- "186.50" in Fraunces serif 900 weight 56px dark green #0d3d34 — bold, editorial, NOT monospace
+- 1.5px underline bar in green 30% opacity below
+
+Detail card (border-radius 20px, white bg, shadow 0 2px 16px rgba(13,61,52,0.06), padding 20px):
+Rows separated by 1px hairline #ede6d6:
+- storefront icon (green 22px) + "Vivanda" DM Sans 500 16px + edit icon right (muted)  
+- restaurant icon (green) + "Alimentación" + chevron_right icon right
+- calendar_today icon (green) + "Hoy, 21 mayo" + chevron_right right
+- Two overlapping 24px circular avatars + "Francisco y Karina" DM Sans 500 + chevron_right right
+
+Note field: "Añadir nota..." in DM Sans 14px italic muted, left padding 4px
+
+CTA fixed bottom: gradient from cream to transparent (80px), full-width button (54px height, border-radius 9999px, background #0d3d34): "Guardar gasto" DM Sans 600 16px cream
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p2').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+<!-- SCREEN 3: PRESUPUESTOS -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">03</div>
+    <div class="screen-name">Presupuestos</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Problemas actuales a corregir — los más críticos</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>Emojis de categorías (🛒🍽️💊) — reemplazar completamente con Material Symbols Outlined en contenedor circular con color semafórico</div>
+      <div class="issue"><span class="issue-icon">→</span>Montos "S/ 820 gastado" usan tipografía monoespaciada — debe ser DM Sans</div>
+      <div class="issue"><span class="issue-icon">→</span>Las barras de progreso son demasiado finas y sin personalidad — deben ser 8px con bordes redondeados y colores semafóricos</div>
+      <div class="issue"><span class="issue-icon">→</span>El badge "Excedido" existe pero le falta contraste y presencia</div>
+      <div class="issue"><span class="issue-icon">→</span>El anillo circular del mes necesita más presencia visual</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p3">Design the Budgets screen of HÄUS. This is the most detail-critical screen — Nordic precision, no emoji characters anywhere.
+
+CRITICAL RULES:
+- ZERO emojis. All category icons = Material Symbols Outlined (weight 300) in 46px circular containers
+- ALL numbers and amounts = DM Sans 600 weight — never monospace
+- Color-coded progress system: green (#2e8b6e) under 70%, gold (#c9a84c) 70–90%, terracotta (#e8735a) over 90%, solid red when exceeded
+
+HEADER:
+"Presupuestos" in Fraunces 28px 700 dark green + below "Mayo 2026 · 11 días restantes" DM Sans 13px muted
+Right side: SVG circular progress ring (36px, 2.5px stroke, secondary color fill, rotated -90deg) showing % of month elapsed
+
+OVERVIEW CARD (border-radius 20px, surface-low background #f8f3e9, padding 20px):
+- "DISPONIBLE ESTE MES" label DM Sans 11px uppercase muted tracking-wider
+- "S/ 680" in Fraunces 32px 700 dark green + "de S/ 4,000 presupuestado" DM Sans 13px muted
+- Progress bar 6px height, border-radius 9999px, green fill
+
+CATEGORY CARDS (vertical stack, gap 10px, each card: white bg, border-radius 16px, padding 16–18px, nordic shadow):
+
+Each card layout:
+Top row: [Material Symbol icon in 46px circle with 1px border, color-matched] + [category name DM Sans 600 15px dark] + [right: "S/ 380 rest." DM Sans 500 14px green OR "Excedido" badge + "S/ 90 extra" in terracotta]
+Progress bar (8px height, border-radius 9999px, colored by health status)
+Bottom row: "S/ 820 gastado" DM Sans 400 12px muted LEFT + "de S/ 1,200" DM Sans 400 12px muted RIGHT
+
+CATEGORY ICONS (Material Symbols, no emoji):
+- Alimentación: shopping_basket (green)
+- Restaurantes: restaurant (gold when near limit)
+- Transporte: directions_car (green)
+- Salud: medical_services (terracotta when exceeded)
+- Servicios: electric_bolt (green)
+- Digital: subscriptions (green)
+
+EXCEEDED STATE: card gets terracotta left border (3px), "Excedido" pill badge (terracotta bg, white text, 10px uppercase), progress bar fully solid terracotta
+
+FAB button (fixed bottom-right, 54px height, border-radius 9999px, dark green bg, white text): add icon + "Presupuesto" DM Sans 600
+
+Bottom nav: 4 items, "Presupuestos" active with pill highlight
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p3').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+<!-- SCREEN 4: BALANCE / RESUMEN -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">04</div>
+    <div class="screen-name">Balance — Historial 12 meses</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Problemas actuales a corregir</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>Montos de ingresos/gastos en tipografía monoespaciada — debe ser DM Sans</div>
+      <div class="issue"><span class="issue-icon">→</span>El gráfico de barras de 12 meses necesita más altura, labels más legibles y tooltip al tocar</div>
+      <div class="issue"><span class="issue-icon">→</span>Las contribuciones de miembros necesitan avatares más grandes y barras más visibles</div>
+      <div class="issue"><span class="issue-icon">→</span>El grid de categorías con emojis — reemplazar con Material Symbols</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p4">Design the Balance screen of HÄUS showing shared household finances and 12-month history.
+
+TYPOGRAPHY: All amounts in DM Sans 600 weight. Headlines in Fraunces. Zero monospace fonts anywhere.
+
+HEADER:
+"Balance Compartido" Fraunces 28px 700 dark green
+"+2.4% ESTE MES" with trending_up Material Symbol (green) + DM Sans 11px uppercase green
+
+HERO BALANCE CARD (dark green gradient, border-radius 20px, padding 24px):
+- "FONDOS DISPONIBLES" label cream 40% opacity 10px uppercase
+- Balance amount in DM Sans 600 42px cream (bold, not display — financial clarity)
+- Mini grid 2 cols: [Ingresos + amount in mint green] [Gastos + amount in terracotta]
+
+12-MONTH BAR CHART (white card, border-radius 16px, padding 20px):
+- "Últimos 12 meses" label 11px uppercase muted
+- 12 vertical bars, height 100px container, gap 5px between bars
+- Each bar: selected month = dark green, current month = accent green, others = #c0c8c5 light
+- Active bar shows floating tooltip above: amount in DM Sans 600 9px dark
+- Month labels below: 3-letter month abbreviation, 8px, selected = dark 700 weight
+- Stats row below divider: "Promedio mensual" + "Mes seleccionado" + "Total anual" in 3 columns, amounts DM Sans 600 13px
+
+CONTRIBUTIONS (white card, border-radius 16px):
+- "Contribuciones" Fraunces 18px + group icon right
+- Each member: 48px circular avatar + name DM Sans 500 + amount DM Sans 600 + percentage
+- Dual-color progress bar (green for member 1, gold for member 2)
+
+MONTHLY CATEGORIES (white card):
+Each row: Material Symbol icon (NOT emoji) + category name + amount DM Sans 600 + budget comparison
+"VER TODOS" button (full width, border 1px dark green, border-radius 9999px, DM Sans 600 uppercase)
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p4').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+<!-- SCREEN 5: INSIGHTS IA -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">05</div>
+    <div class="screen-name">Insights IA</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Problemas actuales a corregir</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>Los números en las etiquetas ("↑ 40% viernes") usan tipografía monoespaciada — debe ser DM Sans</div>
+      <div class="issue"><span class="issue-icon">→</span>Los íconos de las cards de insight (arrow_downward, schedule) necesitan más presencia visual</div>
+      <div class="issue"><span class="issue-icon">→</span>El campo de consulta libre al final se ve como afterthought — necesita más integración visual</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p5">Design the AI Insights screen of HÄUS. Dark editorial aesthetic mixed with warm Nordic tones.
+
+TYPOGRAPHY: DM Sans everywhere for numbers and body. Fraunces for headlines and the featured insight italic quote.
+
+HEADER:
+"Tu resumen" Fraunces 28px 700 dark green
+"Análisis al 21 mayo" DM Sans 13px muted
+
+FEATURED INSIGHT HERO CARD (dark green #0d3d34, border-radius 20px, padding 24px, radial gradient overlay):
+- "✦ Insight destacado" pill badge (cream bg, dark green text, border-radius 9999px, DM Sans 600 11px)
+- Insight text in Fraunces italic 22px cream leading 1.35 — editorial and impactful
+- Hairline divider cream 10% opacity
+- Stats pills: [dark bg 10% opacity, cream border 8% opacity]: "↑ 40% viernes" + "Últimos 3 meses" — DM Sans 500 13px cream (NOT monospace)
+- "Ver detalle →" cream 50% opacity right aligned
+
+INSIGHT CARDS (3 vertical cards, gap 12px, each: white bg, border-radius 16px, padding 20px, nordic shadow 0 2px 16px rgba(13,61,52,0.06)):
+
+Each card structure:
+- Icon circle (40px, color-matched background 18% opacity): Material Symbol icon
+- Type badge pill (top right): "AHORRO" green | "PATRÓN" gold | "PROYECCIÓN" green
+- Category title DM Sans 700 13px dark uppercase tracking-tight
+- Description DM Sans 400 14px muted leading 1.6
+- Bottom right: chevron_right icon muted 20% opacity
+
+QUERY SECTION (surface-low bg, border-radius 16px, padding 20px):
+- auto_awesome icon + "Consulta libre" DM Sans 600 13px dark green
+- 3 suggestion pills (bg surface, border 1px, border-radius 10px, DM Sans 13px)
+- Textarea (border-radius 14px, surface-low bg, DM Sans 15px)
+- "Consultar" button (9999px border-radius, dark green bg, DM Sans 600 14px)
+
+FOOTER (dashed border 1px #c0c8c5, border-radius 16px, centered):
+auto_awesome icon 28px opacity 30% + body text DM Sans 13px muted centered
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p5').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+<!-- SCREEN 6: LOGIN -->
+<div class="screen">
+  <div class="screen-header">
+    <div class="screen-num">06</div>
+    <div class="screen-name">Login — HÄUS</div>
+  </div>
+  <div class="screen-body">
+    <div class="sec-label">Refinamiento del login screen</div>
+    <div class="issues">
+      <div class="issue"><span class="issue-icon">→</span>El nombre HÄUS debe ser el protagonista absoluto — Fraunces 900, enorme, con el diacrítico como elemento de marca</div>
+      <div class="issue"><span class="issue-icon">→</span>El botón de Google necesita más refinamiento y peso visual</div>
+    </div>
+    <div class="prompt-label">Prompt para Google Stitch</div>
+    <div class="prompt-box" id="p6">Design the login screen of HÄUS. Dark, editorial, Nordic luxury. This is the first impression.
+
+BACKGROUND: Full screen dark forest green #0d3d34 with subtle radial gradient (teal 30% opacity) at top right corner.
+
+LAYOUT (centered, full height, padding 40px 32px):
+
+Top third — empty breathing space
+
+Middle — hero section:
+- "Bienvenido a" DM Sans 11px uppercase tracking-widest cream 35% opacity, margin-bottom 16px
+- "HÄUS" in Fraunces serif 900 weight, 72px, cream #f7f2e8, letter-spacing -0.04em, line-height 0.85 — the Ä umlaut must be prominent and beautiful
+- "Todo cuadra en casa" DM Sans 300 weight 17px, italic style, cream 45% opacity, margin-top 12px
+
+Bottom third:
+- 56px margin before button
+- Google sign-in button (full width max 320px, height 56px, border-radius 9999px, background #f7f2e8):
+  - Google G SVG logo (18px) + "Continuar con Google" DM Sans 600 15px dark green #0d3d34
+  - Subtle shadow 0 4px 24px rgba(0,0,0,0.3)
+
+Privacy note below button: DM Sans 12px cream 25% opacity centered: "Tus datos son tuyos. Siempre."
+
+<button onclick="navigator.clipboard.writeText(document.getElementById('p6').innerText)">Copiar</button></div>
+  </div>
+</div>
+
+</main>
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const box = btn.closest('.prompt-box');
+    const text = box.innerText.replace('Copiar','').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copiado';
+      setTimeout(() => btn.textContent = 'Copiar', 2000);
+    });
+  });
+});
+</script>
+</body>
+</html>
