@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Estratégico: Apple Awards — App de Gastos del Hogar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #12221a;
+  --teal: #0d3d34;
+  --teal-mid: #1a4d44;
+  --green: #2e8b6e;
+  --coral: #e8735a;
+  --cream: #f7f2e8;
+  --cream-dark: #ede6d6;
+  --gold: #c9a84c;
+  --white: #fefcf8;
+  --gray: #8a9490;
+  --gray-light: #c4cac8;
+  --border: rgba(18,34,26,0.08);
+  --border-strong: rgba(18,34,26,0.15);
+  --apple: #0071e3;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ─── COVER ─── */
+.cover{min-height:100vh;background:var(--teal);display:flex;flex-direction:column;justify-content:space-between;padding:60px;position:relative;overflow:hidden;page-break-after:always}
+.cover::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 80% 30%,rgba(46,139,110,0.3) 0%,transparent 100%),
+              radial-gradient(ellipse 50% 50% at 10% 80%,rgba(232,115,90,0.15) 0%,transparent 100%);
+  pointer-events:none}
+.cover-meta{font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(247,242,232,0.3);font-weight:700;position:relative}
+.cover-body{position:relative;max-width:760px}
+.cover-label{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.cover-label::before{content:'';width:32px;height:2px;background:var(--coral)}
+.cover-title{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:900;color:var(--cream);line-height:0.95;letter-spacing:-0.02em;margin-bottom:24px}
+.cover-title em{color:var(--coral);font-style:italic}
+.cover-sub{font-size:1rem;color:rgba(247,242,232,0.45);max-width:500px;line-height:1.7}
+.cover-footer{display:flex;justify-content:space-between;align-items:flex-end;position:relative}
+.cover-stats{display:flex;gap:40px}
+.cover-stat-num{font-family:'DM Mono',monospace;font-size:2rem;font-weight:500;color:var(--cream);display:block;letter-spacing:-0.02em}
+.cover-stat-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(247,242,232,0.3)}
+.cover-date{font-size:0.72rem;color:rgba(247,242,232,0.2);text-align:right}
+
+/* ─── LAYOUT ─── */
+main{max-width:1000px;margin:0 auto;padding:72px 60px 120px}
+section{margin-bottom:80px}
+
+/* ─── SECTION HEADERS ─── */
+.section-index{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.si-num{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--coral);font-weight:500;letter-spacing:0.1em;border:1px solid rgba(232,115,90,0.3);padding:3px 8px;border-radius:4px}
+.si-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gray);font-weight:700}
+h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--teal);line-height:1.1;margin-bottom:10px}
+.section-desc{font-size:0.95rem;color:var(--gray);max-width:620px;line-height:1.7}
+.rule{width:40px;height:3px;background:var(--coral);border-radius:2px;margin:18px 0 40px}
+
+/* ─── CALLOUT ─── */
+.callout{background:var(--teal);border-radius:16px;padding:28px 32px;margin:32px 0;position:relative;overflow:hidden}
+.callout::before{content:'';position:absolute;top:-40%;right:-10%;width:50%;height:200%;background:radial-gradient(ellipse,rgba(46,139,110,0.2) 0%,transparent 70%);pointer-events:none}
+.callout p{font-family:'Fraunces',serif;font-size:clamp(1rem,2vw,1.35rem);font-weight:700;color:var(--cream);line-height:1.4;position:relative;font-style:italic}
+.callout-src{font-size:0.72rem;color:rgba(247,242,232,0.3);margin-top:10px;position:relative;font-style:normal;font-family:'DM Sans',sans-serif}
+
+/* ─── TWO AWARDS EXPLAINER ─── */
+.awards-compare{display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:stretch;margin:32px 0}
+.award-col{background:var(--white);border-radius:16px;padding:28px;border:1px solid var(--border)}
+.award-col h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--teal);margin-bottom:4px}
+.award-col .subtitle{font-size:0.7rem;color:var(--coral);letter-spacing:0.12em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.award-fact{font-size:0.82rem;color:var(--gray);padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;line-height:1.5}
+.award-fact:last-child{border-bottom:none}
+.af-key{font-size:0.62rem;color:var(--gray-light);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;min-width:72px;flex-shrink:0;padding-top:2px}
+.award-vs{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--coral);font-weight:700;letter-spacing:0.1em}
+
+/* ─── WINNER TABLES ─── */
+.year-section{margin-bottom:48px}
+.year-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--cream);padding:8px 18px;border-radius:8px;margin-bottom:20px}
+.year-badge span{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900}
+.year-badge small{font-size:0.65rem;color:rgba(247,242,232,0.4);letter-spacing:0.12em;text-transform:uppercase}
+.winners-table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.winners-table th{text-align:left;padding:11px 18px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);font-weight:700;background:rgba(13,61,52,0.03);border-bottom:1px solid var(--border)}
+.winners-table td{padding:14px 18px;font-size:0.83rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.winners-table tr:last-child td{border-bottom:none}
+.winners-table tr:hover td{background:rgba(13,61,52,0.02)}
+.wt-app{font-weight:700;color:var(--teal);margin-bottom:2px}
+.wt-dev{font-size:0.72rem;color:var(--gray)}
+.platform-tag{display:inline-block;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(13,61,52,0.07);color:var(--teal)}
+.rel-high{background:rgba(232,115,90,0.1);color:var(--coral)}
+.lesson-cell{font-size:0.79rem;color:var(--gray)}
+.lesson-cell strong{color:var(--ink)}
+
+/* ─── DEEP DIVE ─── */
+.deep-dive{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+.dd-card{border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.dd-header{background:var(--ink);padding:22px 24px}
+.dd-award{font-size:0.6rem;color:var(--coral);letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.dd-name{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;color:var(--white)}
+.dd-tagline{font-size:0.78rem;color:rgba(254,252,248,0.35);margin-top:3px;font-style:italic}
+.dd-body{background:var(--white);padding:0}
+.dd-row{display:flex;gap:0;border-bottom:1px solid var(--border)}
+.dd-row:last-child{border-bottom:none}
+.dd-key{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-light);font-weight:700;min-width:90px;padding:12px 14px;background:rgba(13,61,52,0.02);border-right:1px solid var(--border);flex-shrink:0}
+.dd-val{font-size:0.8rem;color:var(--ink);padding:12px 14px;line-height:1.5}
+.dd-lesson{background:rgba(232,115,90,0.06);padding:14px 24px;font-size:0.8rem;color:var(--teal);line-height:1.6;border-top:1px solid var(--border)}
+.dd-lesson::before{content:'→ Lección: ';color:var(--coral);font-weight:700}
+
+/* ─── PRINCIPLES ─── */
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:32px 0}
+.princ{background:var(--white);border-radius:12px;padding:20px;border:1px solid var(--border)}
+.princ-num{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--coral);font-weight:500;letter-spacing:0.1em;margin-bottom:8px}
+.princ-title{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;color:var(--teal);margin-bottom:6px;line-height:1.2}
+.princ-desc{font-size:0.78rem;color:var(--gray);line-height:1.6}
+.princ-ex{font-size:0.72rem;color:var(--green);margin-top:7px;font-style:italic}
+
+/* ─── BENCHMARKS ─── */
+.benchmarks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:32px 0}
+.bench{background:var(--white);border-radius:14px;padding:22px;border:1px solid var(--border)}
+.bench.us{border-color:var(--green);background:rgba(46,139,110,0.03)}
+.bench-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--teal);margin-bottom:6px}
+.bench-sub{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:14px;font-weight:700}
+.bench-items{list-style:none}
+.bench-items li{font-size:0.8rem;color:var(--gray);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+.bench-items li:last-child{border-bottom:none}
+.bench-items li::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0;margin-top:5px}
+.bench-items.missing li::before{background:var(--coral)}
+.bench-items.partial li::before{background:var(--gold)}
+
+/* ─── GAP MATRIX ─── */
+.gap-matrix{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin:32px 0}
+.gap-header{display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;background:rgba(13,61,52,0.04);border-bottom:1px solid var(--border)}
+.gap-header div{padding:11px 16px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);font-weight:700}
+.gap-row{display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;border-bottom:1px solid var(--border);background:var(--white)}
+.gap-row:last-child{border-bottom:none}
+.gap-row:nth-child(even){background:rgba(13,61,52,0.01)}
+.gap-cell{padding:13px 16px;font-size:0.82rem;line-height:1.5;display:flex;align-items:center}
+.gap-cell.feature{font-weight:500;color:var(--ink)}
+.gap-cell.feature span{font-size:0.72rem;color:var(--gray);display:block;font-weight:400;margin-top:1px}
+.s-done{color:var(--green);font-weight:700}
+.s-part{color:var(--gold);font-weight:700}
+.s-miss{color:var(--coral);font-weight:700}
+.s-todo{color:var(--apple);font-weight:700}
+.tag{display:inline-block;font-size:0.58rem;padding:3px 8px;border-radius:100px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.tg-h{background:rgba(232,115,90,0.1);color:var(--coral)}
+.tg-m{background:rgba(201,168,76,0.1);color:#7a5f0e}
+.tg-l{background:rgba(46,139,110,0.1);color:var(--green)}
+.tg-s{background:rgba(0,113,227,0.1);color:var(--apple)}
+
+/* ─── ROADMAP ─── */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:32px 0}
+.rm-col{padding:28px}
+.rm-col:not(:last-child){border-right:1px solid var(--border)}
+.rm-col:nth-child(1){background:var(--white)}
+.rm-col:nth-child(2){background:rgba(13,61,52,0.03)}
+.rm-col:nth-child(3){background:var(--teal)}
+.rm-phase{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.rm-col:nth-child(1) .rm-phase{color:var(--coral)}
+.rm-col:nth-child(2) .rm-phase{color:var(--gold)}
+.rm-col:nth-child(3) .rm-phase{color:rgba(232,115,90,0.7)}
+.rm-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:20px}
+.rm-col:nth-child(3) .rm-title{color:var(--cream)}
+.rm-item{font-size:0.8rem;padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.rm-col:nth-child(3) .rm-item{border-color:rgba(255,255,255,0.08)}
+.rm-item:last-child{border-bottom:none}
+.rm-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.rm-col:nth-child(1) .rm-dot{background:var(--coral)}
+.rm-col:nth-child(2) .rm-dot{background:var(--gold)}
+.rm-col:nth-child(3) .rm-dot{background:rgba(247,242,232,0.4)}
+.rm-col:nth-child(3) .rm-item{color:rgba(247,242,232,0.6)}
+
+/* ─── FORMULA ─── */
+.formula{background:var(--teal);border-radius:16px;padding:36px;margin:32px 0;position:relative;overflow:hidden}
+.formula::before{content:'';position:absolute;top:-20%;right:-5%;width:50%;height:140%;background:radial-gradient(ellipse,rgba(46,139,110,0.25) 0%,transparent 70%);pointer-events:none}
+.formula h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--cream);margin-bottom:20px;position:relative}
+.formula-eq{display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:relative}
+.feq-item{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 18px;font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;color:var(--cream);text-align:center}
+.feq-op{font-family:'DM Mono',monospace;font-size:1.1rem;color:var(--coral);font-weight:700}
+.feq-result{background:var(--coral);border-color:var(--coral)}
+
+/* ─── IMPACT BOX ─── */
+.impact{background:var(--ink);border-radius:16px;padding:36px;margin:40px 0;position:relative;overflow:hidden}
+.impact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 90% 20%,rgba(0,113,227,0.08) 0%,transparent 100%);pointer-events:none}
+.impact h3{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:var(--white);margin-bottom:16px;position:relative}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+.ig-box{background:rgba(255,255,255,0.05);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.08)}
+.ig-label{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(254,252,248,0.25);font-weight:700;margin-bottom:8px}
+.ig-content{font-size:0.82rem;color:var(--white);line-height:1.55}
+
+@media(max-width:800px){
+  .cover{padding:32px;min-height:auto}
+  main{padding:40px 20px 80px}
+  .awards-compare,.deep-dive,.principles-grid,.benchmarks,.roadmap,.impact-grid{grid-template-columns:1fr}
+  .award-vs{display:none}
+  .gap-matrix,.winners-table{font-size:0.75rem}
+  .gap-header,.gap-row{grid-template-columns:1.5fr 1fr 1.5fr 0.8fr}
+  .formula-eq{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── COVER ─── -->
+<div class="cover">
+  <div class="cover-meta">Informe estratégico · Confidencial · Mayo 2026</div>
+
+  <div class="cover-body">
+    <div class="cover-label">App de Gastos del Hogar · Research</div>
+    <h1 class="cover-title">Apple Awards<br><em>Benchmark</em><br>Report</h1>
+    <p class="cover-sub">Análisis exhaustivo de los App Store Awards (2022–2024) y Apple Design Awards (2023–2025). Patrones de diseño, usabilidad e innovación extraídos de 31 apps ganadoras. Aplicación directa al roadmap del producto.</p>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-stats">
+      <div>
+        <span class="cover-stat-num">31</span>
+        <span class="cover-stat-label">apps analizadas</span>
+      </div>
+      <div>
+        <span class="cover-stat-num">12</span>
+        <span class="cover-stat-label">principios extraídos</span>
+      </div>
+      <div>
+        <span class="cover-stat-num">01</span>
+        <span class="cover-stat-label">benchmark directo</span>
+      </div>
+    </div>
+    <div class="cover-date">Preparado por Claude<br>Mayo 2026</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ─── 01 CONTEXTO ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">01</div>
+    <div class="si-label">Marco conceptual</div>
+  </div>
+  <h2>Dos premios,<br>dos criterios</h2>
+  <p class="section-desc">Apple otorga dos reconocimientos completamente distintos que a menudo se confunden. Entender la diferencia es fundamental para estrategizar correctamente.</p>
+  <div class="rule"></div>
+
+  <div class="awards-compare">
+    <div class="award-col">
+      <div class="subtitle">Diciembre · Editorial Team</div>
+      <h3>App Store Awards</h3>
+      <div class="award-fact">
+        <div class="af-key">¿Quién elige?</div>
+        El equipo editorial global de Apple — los mismos que escriben las recomendaciones del App Store.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Criterios</div>
+        Impacto cultural real, experiencia de usuario, diseño, innovación aplicada.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Estructura</div>
+        Un ganador por plataforma (iPhone, iPad, Mac, Watch, TV) y por juegos.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Peso mayor</div>
+        Impacto en la vida real de las personas. Apps que mueven cultura.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Analogía</div>
+        El Oscar popular — lo que ve y siente el usuario final.
+      </div>
+    </div>
+    <div class="award-vs">VS</div>
+    <div class="award-col">
+      <div class="subtitle">Junio · WWDC · Design Team</div>
+      <h3>Apple Design Awards</h3>
+      <div class="award-fact">
+        <div class="af-key">¿Quién elige?</div>
+        El equipo de diseño de Apple — los creadores de las Human Interface Guidelines.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Criterios</div>
+        Excelencia técnica en diseño, innovación en HIG, logro de ingeniería.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Estructura</div>
+        Categorías: Delight, Inclusivity, Innovation, Interaction, Social Impact, Visuals.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Peso mayor</div>
+        El craft del diseño en sí. La maestría técnica del desarrollador.
+      </div>
+      <div class="award-fact">
+        <div class="af-key">Analogía</div>
+        El Oscar de los cineastas — lo que aprecian los expertos del oficio.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>"Los App Store Awards son el Oscar popular. Los Apple Design Awards son el Oscar de los cineastas. Los mejores apps del mundo aspiran a ganar los dos. Kino (2024) y Lumy (2024) aparecen en ambas listas."</p>
+  </div>
+</section>
+
+<!-- ─── 02 APP STORE AWARDS ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">02</div>
+    <div class="si-label">App Store Awards 2022–2024</div>
+  </div>
+  <h2>Los ganadores<br>y por qué ganaron</h2>
+  <p class="section-desc">Análisis de tres años de App Store Awards con foco en las categorías y los apps más relevantes para un producto de finanzas domésticas.</p>
+  <div class="rule"></div>
+
+  <!-- 2024 -->
+  <div class="year-section">
+    <div class="year-badge"><span>2024</span> <small>17 ganadores · 45 finalistas</small></div>
+    <table class="winners-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>App ganador</th>
+          <th>Por qué ganó · Lo que Apple dijo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="platform-tag rel-high">★ iPhone</span></td>
+          <td>
+            <div class="wt-app">Kino</div>
+            <div class="wt-dev">Lux Optics Inc. · $9.99 one-time</div>
+          </td>
+          <td class="lesson-cell"><strong>"Turning everyday moments into cinematic masterpieces."</strong> Pro features + interfaz completamente repensada. Controles que se arrastran desde el visor. Instant Grade: presets profesionales en un toque. Lecciones integradas. Sin suscripción.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">iPad</span></td>
+          <td>
+            <div class="wt-app">Moises</div>
+            <div class="wt-dev">Moises Systems Inc.</div>
+          </td>
+          <td class="lesson-cell"><strong>IA que separa pistas de audio</strong> (voz, batería, guitarra) para que músicos practiquen acompañados. Democratizó herramientas de estudio profesional. La IA hace algo antes imposible, en segundos.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">Mac</span></td>
+          <td>
+            <div class="wt-app">Adobe Lightroom</div>
+            <div class="wt-dev">Adobe Inc. · App de 17 años</div>
+          </td>
+          <td class="lesson-cell"><strong>Innovación continua en un app maduro.</strong> Demostró que consistencia + evolución constante puede ganar. Nuevas capacidades de IA en edición. Mayor paridad entre versiones. 17 años de historia.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag rel-high">★ Watch</span></td>
+          <td>
+            <div class="wt-app">Lumy</div>
+            <div class="wt-dev">Raja V · Solo developer · India</div>
+          </td>
+          <td class="lesson-cell"><strong>Diseño, paleta y ecosistema impecables.</strong> Paleta cromática meticulosamente curada. Widgets + Live Activities + Watch. Datos complejos → presentación máximamente simple. Un solo developer ganó contra corporaciones.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">Apple TV</span></td>
+          <td>
+            <div class="wt-app">F1 TV</div>
+            <div class="wt-dev">Formula One Digital Media</div>
+          </td>
+          <td class="lesson-cell">Experiencia inmersiva de ver carreras. Telemetría en tiempo real, múltiples cámaras, pantalla grande maximizada para el contenido. Nativo para Apple TV.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2023 -->
+  <div class="year-section">
+    <div class="year-badge"><span>2023</span> <small>14 ganadores · ~40 finalistas</small></div>
+    <table class="winners-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>App ganador</th>
+          <th>Por qué ganó · Lo que Apple dijo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="platform-tag rel-high">★ iPhone</span></td>
+          <td>
+            <div class="wt-app">AllTrails</div>
+            <div class="wt-dev">AllTrails Inc. · Outdoor community</div>
+          </td>
+          <td class="lesson-cell"><strong>"Nurtures community through comprehensive trail guides."</strong> Fomentó comunidad real: más personas al aire libre. Inclusivo por naturaleza. Impacto cultural tangible y medible. Guías generadas por usuarios + curation editorial.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">iPad</span></td>
+          <td>
+            <div class="wt-app">Prêt-à-Makeup</div>
+            <div class="wt-dev">Prêt-à-Template · Francia</div>
+          </td>
+          <td class="lesson-cell">Sketchpad de maquillaje realístico en iPad. <strong>Inclusividad y autoexpresión.</strong> Profesionales y casuales en el mismo app. iPad como lienzo creativo profesional.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">Mac</span></td>
+          <td>
+            <div class="wt-app">Photomator</div>
+            <div class="wt-dev">UAB Pixelmator · Lituania · Indie</div>
+          </td>
+          <td class="lesson-cell"><strong>ML que hace avanzado = simple.</strong> Machine learning para tareas de edición profesional de forma "streamlined and seamless". Indie team que compitió con Adobe y ganó.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">Watch</span></td>
+          <td>
+            <div class="wt-app">SmartGym</div>
+            <div class="wt-dev">Mateus Abras · Indie</div>
+          </td>
+          <td class="lesson-cell"><strong>Watch-first, no Watch-secondary.</strong> Librería exhaustiva y reportes robustos pensados desde el Watch, no portados desde el iPhone. Hizo de Watch la plataforma primaria.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">Apple TV</span></td>
+          <td>
+            <div class="wt-app">MUBI</div>
+            <div class="wt-dev">MUBI Inc. · Cine independiente</div>
+          </td>
+          <td class="lesson-cell"><strong>Curaduría humana en era de algoritmos.</strong> Una selección pequeña y perfecta de cine indie, elegida con criterio. Calidad sobre cantidad. Toque humano como diferenciador.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2022 -->
+  <div class="year-section">
+    <div class="year-badge"><span>2022</span> <small>Referencia histórica</small></div>
+    <table class="winners-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>App ganador</th>
+          <th>Por qué ganó · Lo que Apple dijo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="platform-tag rel-high">★ iPhone</span></td>
+          <td>
+            <div class="wt-app">BeReal</div>
+            <div class="wt-dev">BeReal SAS · Francia</div>
+          </td>
+          <td class="lesson-cell"><strong>Contracultural con impacto masivo.</strong> La antítesis de Instagram: foto auténtica, sin filtros, sin edición, en tiempo real. Ganó no por tecnología sino por propuesta de valor que iba contra la corriente. El App Store premia apps que mueven cultura.</td>
+        </tr>
+        <tr>
+          <td><span class="platform-tag">iPhone</span></td>
+          <td>
+            <div class="wt-app">Duolingo</div>
+            <div class="wt-dev">Duolingo Inc.</div>
+          </td>
+          <td class="lesson-cell"><strong>Educación masiva + gamificación con propósito.</strong> Llevó el aprendizaje de idiomas a las masas. Streak system, misión de impacto global medible. Impacto cultural cuantificable.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── 03 APPLE DESIGN AWARDS ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">03</div>
+    <div class="si-label">Apple Design Awards 2023–2025</div>
+  </div>
+  <h2>El craft de<br>los ganadores</h2>
+  <p class="section-desc">Los Apple Design Awards premian el proceso de diseño. Los ganadores relevantes para finanzas y productividad analizados en detalle.</p>
+  <div class="rule"></div>
+
+  <div class="deep-dive">
+    <div class="dd-card">
+      <div class="dd-header">
+        <div class="dd-award">ADA Finalist · Interaction 2024</div>
+        <div class="dd-name">Copilot Money</div>
+        <div class="dd-tagline">"The future of personal finance" — Apple App Store</div>
+      </div>
+      <div class="dd-body">
+        <div class="dd-row"><div class="dd-key">Por qué</div><div class="dd-val">Finalista en Interaction — controles intuitivos y perfectamente adaptados al iPhone. El único app de finanzas reconocido por Apple en años.</div></div>
+        <div class="dd-row"><div class="dd-key">Tagline Apple</div><div class="dd-val"><strong>"Clear, beautiful, trusted."</strong> Tres palabras que resumen su propuesta de valor total.</div></div>
+        <div class="dd-row"><div class="dd-key">IA</div><div class="dd-val">Categorización automática de gastos que aprende del usuario. La IA es invisible — el usuario solo ve que el app entiende su vida.</div></div>
+        <div class="dd-row"><div class="dd-key">Modelo</div><div class="dd-val">Suscripción pura. Sin anuncios. Sin venta de datos. El modelo alineado con el usuario.</div></div>
+        <div class="dd-row"><div class="dd-key">Plataformas</div><div class="dd-val">iPhone + iPad + Mac. Multi-platform = mayor score en los criterios de Apple.</div></div>
+        <div class="dd-row"><div class="dd-key">No tiene</div><div class="dd-val">Escaneo de recibos con IA. Finanzas del hogar compartidas. Mercado LATAM.</div></div>
+      </div>
+      <div class="dd-lesson">Es nuestro benchmark directo. Tiene lo que nosotros no — plataformas nativas Apple. Nosotros tenemos lo que ellos no — colaboración, escaneo IA, LATAM. La ventaja competitiva existe.</div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-header">
+        <div class="dd-award">ADA Winner · Interaction 2024</div>
+        <div class="dd-name">Crouton</div>
+        <div class="dd-tagline">Recipes — "The interface disappears"</div>
+      </div>
+      <div class="dd-body">
+        <div class="dd-row"><div class="dd-key">Por qué</div><div class="dd-val">Apple: <em>"Lets users keep their focus on the counter rather than the screen."</em> El app facilita la tarea y desaparece.</div></div>
+        <div class="dd-row"><div class="dd-key">Principio</div><div class="dd-val">La interfaz ideal no compite por atención con la tarea real. El usuario cocina, no navega. Mínima fricción en el momento de uso.</div></div>
+        <div class="dd-row"><div class="dd-key">Developer</div><div class="dd-val">Devin Davies, Nueva Zelanda — solo developer. Ganó la categoría de Interaction contra apps enterprise.</div></div>
+        <div class="dd-row"><div class="dd-key">Lección clave</div><div class="dd-val">No es sobre cuántas features tiene — es sobre qué tan invisible es la experiencia de usarlas.</div></div>
+      </div>
+      <div class="dd-lesson">Agregar un gasto debe ser tan rápido que el usuario casi no sienta que está usando un app. El flujo escanear → confirmar → guardar debe durar menos de 10 segundos.</div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-header">
+        <div class="dd-award">ADA Winner · Delight &amp; Fun 2025</div>
+        <div class="dd-name">CapWords</div>
+        <div class="dd-tagline">"As simple as it is revolutionary"</div>
+      </div>
+      <div class="dd-body">
+        <div class="dd-row"><div class="dd-key">Por qué</div><div class="dd-val">Tomas una foto → aparece el nombre del objeto como sticker animado con sonido real. Idea revolucionaria en 1 gesto.</div></div>
+        <div class="dd-row"><div class="dd-key">Apple dijo</div><div class="dd-val"><em>"An idea as simple as it is revolutionary: learn the name of a thing by taking a picture of it."</em></div></div>
+        <div class="dd-row"><div class="dd-key">Sensorial</div><div class="dd-val">Cada transición va acompañada de un sonido del mundo real. El diseño sensorial como diferenciador de memorabilidad.</div></div>
+        <div class="dd-row"><div class="dd-key">Relevancia</div><div class="dd-val">La cámara como punto de entrada cambia todo. Nuestro escaneo de recibos tiene el mismo potencial.</div></div>
+      </div>
+      <div class="dd-lesson">El flujo foto → datos del recibo es nuestra CapWords. Debe sentirse igual: transformación instantánea, casi mágica. Una foto que se convierte en un gasto registrado, sin formularios.</div>
+    </div>
+
+    <div class="dd-card">
+      <div class="dd-header">
+        <div class="dd-award">ADA Winner · Social Impact 2024</div>
+        <div class="dd-name">Gentler Streak</div>
+        <div class="dd-tagline">"The compassionate approach"</div>
+      </div>
+      <div class="dd-body">
+        <div class="dd-row"><div class="dd-key">Por qué</div><div class="dd-val">App de fitness que no te castiga si faltas un día. Celebra el progreso real, no la perfección. Apple lo reconoció por <em>"mejorar vidas con un enfoque compasivo."</em></div></div>
+        <div class="dd-row"><div class="dd-key">Tono</div><div class="dd-val">Sin juicio. Sin culpa. Sin gamificación agresiva. El diseño refleja la compasión hacia el usuario.</div></div>
+        <div class="dd-row"><div class="dd-key">Relevancia</div><div class="dd-val">Las finanzas tienen la misma carga emocional que el fitness. La gente las evita por vergüenza o ansiedad.</div></div>
+        <div class="dd-row"><div class="dd-key">Lección</div><div class="dd-val">El tono sin juicio que definimos en nuestra brand voice es exactamente lo que Apple valora en Social Impact.</div></div>
+      </div>
+      <div class="dd-lesson">Nuestra app no debe hacerte sentir mal por haber gastado de más. Debe celebrar cuando cuadras, y acompañarte con calma cuando no. El tono compasivo es una decisión de diseño.</div>
+    </div>
+  </div>
+
+  <table class="winners-table" style="margin-top:24px">
+    <thead>
+      <tr>
+        <th>App</th>
+        <th>ADA categoría</th>
+        <th>Año</th>
+        <th>Principio clave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="wt-app">Bears Gratitude</div><div class="wt-dev">Sri Lanka · Indie couple</div></td>
+        <td><span class="platform-tag">Delight &amp; Fun</span></td>
+        <td>2024 Winner</td>
+        <td class="lesson-cell">Convirtió un hábito difícil (journaling) en algo que la gente espera hacer. <strong>Calidez + personajes + recordatorios que celebran.</strong></td>
+      </tr>
+      <tr>
+        <td><div class="wt-app">Lumy</div><div class="wt-dev">Raja V · India · Solo dev</div></td>
+        <td><span class="platform-tag">Delight &amp; Fun</span></td>
+        <td>2025 Finalist</td>
+        <td class="lesson-cell">Datos complejos → presentación simple. <strong>Paleta curada + widgets + Live Activities + Watch.</strong> Ganó App Store Y Apple Design Awards.</td>
+      </tr>
+      <tr>
+        <td><div class="wt-app">Things 3</div><div class="wt-dev">Cultured Code</div></td>
+        <td><span class="platform-tag">Dos categorías</span></td>
+        <td>2024 Finalist x2</td>
+        <td class="lesson-cell">Finalista en DOS categorías simultáneamente. <strong>Coherencia total a lo largo de los años.</strong> Diseño atemporal.</td>
+      </tr>
+      <tr>
+        <td><div class="wt-app">Procreate Dreams</div><div class="wt-dev">Savage Interactive</div></td>
+        <td><span class="platform-tag">Innovation</span></td>
+        <td>2024 Winner</td>
+        <td class="lesson-cell">Animación 2D profesional con gestos familiares. <strong>Controles effortlessly integrated.</strong> No requiere aprender, el usuario ya sabe.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─── 04 PRINCIPIOS ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">04</div>
+    <div class="si-label">Patrones universales</div>
+  </div>
+  <h2>Los 12 principios<br>que comparten todos</h2>
+  <p class="section-desc">Extraídos del análisis de 31 apps ganadoras en ambos premios (2022–2025). Sin excepción.</p>
+  <div class="rule"></div>
+
+  <div class="principles-grid">
+    <div class="princ">
+      <div class="princ-num">01</div>
+      <div class="princ-title">Simplicidad revolucionaria</div>
+      <div class="princ-desc">El mejor diseño toma algo complejo y lo hace parecer obvio. No es minimalismo — es claridad radical.</div>
+      <div class="princ-ex">CapWords: foto → aprende. 0 pasos intermedios.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">02</div>
+      <div class="princ-title">La interfaz desaparece</div>
+      <div class="princ-desc">El app ideal no compite por atención con la tarea real. Facilita y se hace invisible.</div>
+      <div class="princ-ex">Crouton: cocina, no navega el app.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">03</div>
+      <div class="princ-title">IA invisible</div>
+      <div class="princ-desc">La IA que gana premios no se anuncia — simplemente funciona. El usuario no piensa en ML, solo siente que el app lo entiende.</div>
+      <div class="princ-ex">Copilot: categoriza solo. Moises: separa pistas solo.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">04</div>
+      <div class="princ-title">Lo pro democratizado</div>
+      <div class="princ-desc">Capacidad profesional en manos de cualquiera. Sin sacrificar el poder — simplificando el acceso.</div>
+      <div class="princ-ex">Kino: video pro. Moises: estudio musical.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">05</div>
+      <div class="princ-title">Animación como comunicación</div>
+      <div class="princ-desc">Las transiciones no son decoración — son retroalimentación. Cada animación confirma, celebra o guía.</div>
+      <div class="princ-ex">CapWords: sticker animado + sonido real.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">06</div>
+      <div class="princ-title">Paleta cromática meticulosa</div>
+      <div class="princ-desc">No una paleta bonita — una paleta con intención. 2-3 colores usados con precisión quirúrgica, cada uno con significado.</div>
+      <div class="princ-ex">Lumy: paleta curada según hora del día.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">07</div>
+      <div class="princ-title">Ecosistema nativo Apple</div>
+      <div class="princ-desc">Widgets, Live Activities, Watch, Shortcuts, Dynamic Type. Apple recompensa a quienes creen en su plataforma completa.</div>
+      <div class="princ-ex">Lumy: Watch + widgets + Live Activities = ganó.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">08</div>
+      <div class="princ-title">Tono compasivo</div>
+      <div class="princ-desc">Los ganadores no juzgan al usuario. Celebran el progreso, no castigan el fracaso. La compasión está en el diseño.</div>
+      <div class="princ-ex">Gentler Streak: celebra si hiciste algo.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">09</div>
+      <div class="princ-title">Comunidad real</div>
+      <div class="princ-desc">Los apps que ganan crean conexión entre personas. La dimensión social multiplica el impacto que Apple valora.</div>
+      <div class="princ-ex">AllTrails: trails compartidos. BeReal: fotos reales.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">10</div>
+      <div class="princ-title">Datos → Historia</div>
+      <div class="princ-desc">Los mejores apps de datos no muestran números — cuentan historias con ellos. Una visualización debe tener narrativa.</div>
+      <div class="princ-ex">Outsiders: Training Readiness Score = un número, toda la historia.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">11</div>
+      <div class="princ-title">Privacidad explícita</div>
+      <div class="princ-desc">Apple valora que la privacidad sea visible, no solo legal. El usuario debe saber que sus datos son suyos.</div>
+      <div class="princ-ex">Copilot: "We'll never sell your data" como propuesta de valor.</div>
+    </div>
+    <div class="princ">
+      <div class="princ-num">12</div>
+      <div class="princ-title">Propósito que trasciende</div>
+      <div class="princ-desc">Los ganadores tienen un "por qué" que va más allá de la funcionalidad. El propósito hace al app especial.</div>
+      <div class="princ-ex">AllTrails: conectar personas con naturaleza. Duolingo: educación masiva.</div>
+    </div>
+  </div>
+
+  <div class="formula">
+    <h3>La fórmula del ganador</h3>
+    <div class="formula-eq">
+      <div class="feq-item">Pro democratizado</div>
+      <div class="feq-op">+</div>
+      <div class="feq-item">IA invisible</div>
+      <div class="feq-op">+</div>
+      <div class="feq-item">Comunidad real</div>
+      <div class="feq-op">+</div>
+      <div class="feq-item">Ecosistema Apple</div>
+      <div class="feq-op">+</div>
+      <div class="feq-item">Propósito claro</div>
+      <div class="feq-op">=</div>
+      <div class="feq-item feq-result">Apple Award</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 05 BENCHMARK ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">05</div>
+    <div class="si-label">Análisis competitivo</div>
+  </div>
+  <h2>Nosotros vs<br>los benchmarks</h2>
+  <p class="section-desc">Comparación honesta de nuestras capacidades actuales contra los tres referentes más directos.</p>
+  <div class="rule"></div>
+
+  <div class="benchmarks">
+    <div class="bench">
+      <div class="bench-title">Copilot Money</div>
+      <div class="bench-sub">Lo que tiene y nosotros no</div>
+      <ul class="bench-items missing">
+        <li>App nativo iOS (SwiftUI)</li>
+        <li>Disponible en iPhone + iPad + Mac</li>
+        <li>Widget de gasto del día</li>
+        <li>Privacidad explícita en onboarding</li>
+        <li>Historial de años de uso</li>
+        <li>Reseñas masivas en App Store</li>
+      </ul>
+    </div>
+    <div class="bench">
+      <div class="bench-title">Copilot Money</div>
+      <div class="bench-sub">Lo que tenemos y ellos no</div>
+      <ul class="bench-items">
+        <li>Finanzas del hogar compartidas en tiempo real</li>
+        <li>Escaneo de recibos con IA</li>
+        <li>Mercado LATAM nativo (soles, categorías locales)</li>
+        <li>Consultas en lenguaje natural en español</li>
+        <li>Gastos personales vs hogar separados</li>
+        <li>Precio menor (o gratuito con suscripción)</li>
+      </ul>
+    </div>
+    <div class="bench us">
+      <div class="bench-title">Nuestro app</div>
+      <div class="bench-sub">Ventajas competitivas reales</div>
+      <ul class="bench-items">
+        <li><strong>Único</strong> en finanzas compartidas del hogar</li>
+        <li><strong>Único</strong> con escaneo IA en LATAM</li>
+        <li>Diseño nórdico diferenciado</li>
+        <li>Insights IA en español natural</li>
+        <li>Presupuestos por categoría + alertas</li>
+        <li>Sync en tiempo real entre miembros</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>"Copilot Money es nuestro benchmark más cercano. Ellos tienen las plataformas. Nosotros tenemos las funcionalidades que ellos no pueden copiar fácilmente: la colaboración del hogar y el mercado LATAM. La ventaja competitiva existe — el trabajo es construir el nivel de polish que Apple reconoce."</p>
+  </div>
+</section>
+
+<!-- ─── 06 GAP ANALYSIS ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">06</div>
+    <div class="si-label">Gap Analysis</div>
+  </div>
+  <h2>¿Dónde estamos<br>vs. donde necesitamos estar?</h2>
+  <p class="section-desc">Estado actual de cada característica que los ganadores tienen, con prioridad de implementación.</p>
+  <div class="rule"></div>
+
+  <div class="gap-matrix">
+    <div class="gap-header">
+      <div>Característica</div>
+      <div>Estado</div>
+      <div>Qué falta</div>
+      <div>Prioridad</div>
+    </div>
+
+    <!-- TENEMOS -->
+    <div class="gap-row">
+      <div class="gap-cell feature">Finanzas compartidas del hogar <span>Colaboración en tiempo real entre miembros</span></div>
+      <div class="gap-cell"><span class="s-done">✓ Sí</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Defender. Diferenciador único vs. toda la competencia.</div>
+      <div class="gap-cell"><span class="tag tg-l">Defender</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Escaneo de recibos con IA <span>Foto → datos automáticos</span></div>
+      <div class="gap-cell"><span class="s-part">~ Parcial</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Funciona. Falta la animación tipo CapWords — transformación visible y mágica.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Insights IA en lenguaje natural <span>Consultas y análisis automáticos</span></div>
+      <div class="gap-cell"><span class="s-part">~ Parcial</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Existe. Falta narrativa más rica — "Este mes superaste tu mejor marca en alimentación".</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">LATAM nativo <span>Soles, categorías locales, español real</span></div>
+      <div class="gap-cell"><span class="s-done">✓ Sí</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Diferenciador geográfico único. Mantener y profundizar.</div>
+      <div class="gap-cell"><span class="tag tg-l">Defender</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Sistema de diseño nórdico <span>Fraunces + DM Sans + paleta curada</span></div>
+      <div class="gap-cell"><span class="s-part">~ Parcial</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Implementado. Falta consistencia total en estados vacíos, mensajes de error, onboarding.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+
+    <!-- GAPS -->
+    <div class="gap-row">
+      <div class="gap-cell feature">Animaciones con propósito <span>Celebración de logros, transiciones significativas</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Animación al guardar gasto, barra llenándose, presupuesto cumplido. Máximo impacto del sprint.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Privacidad explícita <span>Declaración visible, sin anuncios, sin venta de datos</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">"Tus datos son tuyos. Siempre." Necesita aparecer en onboarding y en la app. Es parte del diseño.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Estados vacíos diseñados <span>Cuando no hay datos: guiar al usuario</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Sin gastos, sin presupuesto, primer uso. Cada estado vacío es una oportunidad de guiar y deleitar.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Widget de presupuesto <span>Gasto del día y balance restante en pantalla de inicio</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Apple recompensa esto explícitamente. Lumy ganó Watch App of Year parcialmente por sus widgets.</div>
+      <div class="gap-cell"><span class="tag tg-h">Alta</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Tono sin juicio en todas las pantallas <span>Mensajes de alerta, errores, límites superados</span></div>
+      <div class="gap-cell"><span class="s-part">~ Parcial</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Definido en brand guide. Asegurar que todos los mensajes de alerta, errores y límites lo reflejen.</div>
+      <div class="gap-cell"><span class="tag tg-m">Media</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Live Activities <span>Presupuesto en Lock Screen en tiempo real</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Mostrar gasto acumulado del día en Lock Screen cuando supera 80% del presupuesto diario.</div>
+      <div class="gap-cell"><span class="tag tg-m">Media</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Dynamic Type / Accessibility <span>Texto que escala con configuración del sistema</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">Apple valora la accesibilidad en ambos premios. Guitar Wiz (ADA 2026 finalist) ganó por esto.</div>
+      <div class="gap-cell"><span class="tag tg-m">Media</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">Dark Mode <span>Modo oscuro nativo</span></div>
+      <div class="gap-cell"><span class="s-miss">✗ No</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">No es bloqueante pero Apple lo espera en apps serios. El hero card ya está oscuro — buen punto de partida.</div>
+      <div class="gap-cell"><span class="tag tg-l">Baja</span></div>
+    </div>
+    <div class="gap-row">
+      <div class="gap-cell feature">App nativo iOS (SwiftUI) <span>Requerido para ser elegible para cualquier premio Apple</span></div>
+      <div class="gap-cell"><span class="s-todo">→ Largo plazo</span></div>
+      <div class="gap-cell" style="font-size:0.78rem;color:var(--gray)">La PWA actual no puede ganar ningún Apple award. La migración a SwiftUI es la condición de largo plazo.</div>
+      <div class="gap-cell"><span class="tag tg-s">Estratégico</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 07 ROADMAP ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">07</div>
+    <div class="si-label">Roadmap estratégico</div>
+  </div>
+  <h2>El camino en<br>tres fases</h2>
+  <p class="section-desc">Cada fase construye sobre la anterior. La Fase 1 es completamente ejecutable hoy, en la PWA actual, sin necesitar app nativo.</p>
+  <div class="rule"></div>
+
+  <div class="roadmap">
+    <div class="rm-col">
+      <div class="rm-phase">Fase 1 · Sprint inmediato</div>
+      <div class="rm-title">Polish de lo que existe</div>
+      <div class="rm-item"><div class="rm-dot"></div>Animación al guardar gasto (micro-celebración)</div>
+      <div class="rm-item"><div class="rm-dot"></div>Barras de presupuesto con animación de llenado</div>
+      <div class="rm-item"><div class="rm-dot"></div>Declaración de privacidad en onboarding</div>
+      <div class="rm-item"><div class="rm-dot"></div>Estados vacíos diseñados (primer uso, sin datos)</div>
+      <div class="rm-item"><div class="rm-dot"></div>Tono sin juicio en todos los mensajes del sistema</div>
+      <div class="rm-item"><div class="rm-dot"></div>Narrativa más rica en Insights IA</div>
+      <div class="rm-item"><div class="rm-dot"></div>Consistencia tipográfica total en todas las vistas</div>
+    </div>
+    <div class="rm-col">
+      <div class="rm-phase">Fase 2 · 3-6 meses</div>
+      <div class="rm-title">Ecosistema Apple</div>
+      <div class="rm-item"><div class="rm-dot"></div>Widget pequeño: gasto del día</div>
+      <div class="rm-item"><div class="rm-dot"></div>Widget mediano: presupuesto restante del mes</div>
+      <div class="rm-item"><div class="rm-dot"></div>Live Activity cuando presupuesto supera 80%</div>
+      <div class="rm-item"><div class="rm-dot"></div>Siri Shortcuts: "Hey Siri, agrega S/50 en restaurantes"</div>
+      <div class="rm-item"><div class="rm-dot"></div>Dynamic Type en todo el app</div>
+      <div class="rm-item"><div class="rm-dot"></div>Dark Mode</div>
+      <div class="rm-item"><div class="rm-dot"></div>Share Sheet: compartir resumen mensual</div>
+    </div>
+    <div class="rm-col">
+      <div class="rm-phase">Fase 3 · 12+ meses</div>
+      <div class="rm-title">App nativo iOS</div>
+      <div class="rm-item"><div class="rm-dot"></div>Migración de PWA a SwiftUI nativo</div>
+      <div class="rm-item"><div class="rm-dot"></div>Apple Watch: agregar gasto desde la muñeca</div>
+      <div class="rm-item"><div class="rm-dot"></div>Apple Intelligence: resumen mensual inteligente</div>
+      <div class="rm-item"><div class="rm-dot"></div>iPad: layout optimizado para pantalla grande</div>
+      <div class="rm-item"><div class="rm-dot"></div>Mac: versión desktop para revisión mensual</div>
+      <div class="rm-item"><div class="rm-dot"></div>Publicar en App Store</div>
+      <div class="rm-item"><div class="rm-dot"></div>Nominar para Apple Design Awards + App Store Awards</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 08 CONCLUSIÓN ─── -->
+<section>
+  <div class="section-index">
+    <div class="si-num">08</div>
+    <div class="si-label">Conclusión ejecutiva</div>
+  </div>
+  <h2>Dónde estamos<br>y a dónde vamos</h2>
+  <div class="rule"></div>
+
+  <div class="impact">
+    <h3>El diagnóstico honesto</h3>
+    <div class="impact-grid">
+      <div class="ig-box">
+        <div class="ig-label">Lo que ya tenemos</div>
+        <div class="ig-content">El propósito correcto — finanzas del hogar compartidas es impacto cultural real en familias latinoamericanas.<br><br>La IA correcta — escaneo de recibos es nuestra CapWords.<br><br>La comunidad correcta — pareja/familia en tiempo real es nuestro AllTrails.</div>
+      </div>
+      <div class="ig-box">
+        <div class="ig-label">Lo que nos falta · Sprint</div>
+        <div class="ig-content">El nivel de polish de Kino — la animación al escanear debe sentirse como magia instantánea.<br><br>La integración de Lumy — widgets y Live Activities que hacen al app parte del sistema operativo.<br><br>La narrativa de MUBI — curaduría con voz, no solo datos.</div>
+      </div>
+      <div class="ig-box">
+        <div class="ig-label">Lo que nos falta · Largo plazo</div>
+        <div class="ig-content">App nativo SwiftUI — la condición inevitable para ser elegible para cualquier Apple award.<br><br>Historial en el App Store — reseñas, tiempo, track record.<br><br>Multi-platform — iPhone + iPad + Mac + Watch = score máximo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:24px">
+    <p>"La diferencia entre un app que gana un Apple Award y uno que no, no es la idea — es la obsesión por el detalle. CapWords ganó porque cada transición está perfectamente pensada. Crouton ganó porque el usuario nunca tiene que pensar. Lumy ganó porque la paleta es meticulosamente curada. Esas son cosas que podemos hacer hoy."</p>
+    <div class="callout-src">Conclusión extraída del análisis de 31 apps ganadoras · Apple Awards 2022–2025</div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
