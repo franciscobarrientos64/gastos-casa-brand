@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HÄUS — Stitch Master Prompt</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0d3d34;--green:#2e8b6e;--coral:#e8735a;--cream:#f7f2e8;--white:#fefcf8;--gray:#8a9490;--border:rgba(18,34,26,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:#12221a;-webkit-font-smoothing:antialiased}
+
+header{background:var(--teal);padding:56px 48px 60px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 25%,rgba(46,139,110,0.25) 0%,transparent 60%),radial-gradient(ellipse at 10% 80%,rgba(232,115,90,0.1) 0%,transparent 50%);pointer-events:none}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:36px;background:var(--cream);clip-path:ellipse(52% 100% at 50% 100%)}
+.h-label{font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(247,242,232,0.3);font-weight:700;margin-bottom:14px;position:relative}
+header h1{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;color:var(--cream);line-height:1;margin-bottom:10px;position:relative}
+header h1 span{color:var(--coral)}
+header p{font-size:0.88rem;color:rgba(247,242,232,0.4);max-width:600px;line-height:1.7;position:relative}
+
+main{max-width:900px;margin:0 auto;padding:48px 48px 100px}
+
+/* PROMPT BLOCK */
+.prompt-wrap{background:var(--white);border-radius:20px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px;box-shadow:0 2px 20px rgba(13,61,52,0.06)}
+.prompt-header{background:var(--teal);padding:18px 26px;display:flex;justify-content:space-between;align-items:center}
+.ph-info{display:flex;align-items:center;gap:14px}
+.ph-num{font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(247,242,232,0.3);border:1px solid rgba(247,242,232,0.15);padding:3px 8px;border-radius:4px;letter-spacing:0.12em}
+.ph-title{font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:var(--cream)}
+.copy-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-size:0.7rem;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.05em;transition:all 0.2s}
+.copy-btn:hover{background:rgba(255,255,255,0.16);color:rgba(255,255,255,0.9)}
+.copy-btn.copied{background:var(--green);border-color:var(--green);color:white}
+
+.prompt-context{padding:18px 24px;background:rgba(232,115,90,0.04);border-bottom:1px solid var(--border)}
+.ctx-label{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:6px}
+.ctx-text{font-size:0.82rem;color:var(--gray);line-height:1.6}
+
+.prompt-box{padding:24px;background:#131a17;font-family:'DM Mono',monospace;font-size:0.77rem;color:#d4cfc7;line-height:1.85;white-space:pre-wrap;word-break:break-word;max-height:600px;overflow-y:auto}
+.prompt-box::-webkit-scrollbar{width:6px}
+.prompt-box::-webkit-scrollbar-track{background:rgba(255,255,255,0.04)}
+.prompt-box::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:3px}
+
+/* COLORS */
+.c-head{color:#7ec8a4}
+.c-key{color:#f0c070}
+.c-val{color:#d4cfc7}
+.c-em{color:#e8735a}
+.c-comment{color:#6b7b74;font-style:italic}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-label">HÄUS · Google Stitch · Master Prompts</div>
+  <h1>Revisión total del app<br/>+ <span>Logo & Branding</span></h1>
+  <p>Dos prompts maestros para Stitch: uno para revisión completa del sistema de diseño y pantallas, otro para crear el logo definitivo de HÄUS.</p>
+</header>
+
+<main>
+
+<!-- PROMPT 1: LOGO -->
+<div class="prompt-wrap">
+  <div class="prompt-header">
+    <div class="ph-info">
+      <span class="ph-num">PROMPT 01</span>
+      <span class="ph-title">Logo & Identidad de Marca</span>
+    </div>
+    <button class="copy-btn" onclick="copyPrompt(this, 'p1')">Copiar</button>
+  </div>
+  <div class="prompt-context">
+    <div class="ctx-label">Cuándo usar</div>
+    <div class="ctx-text">Usar en Stitch para generar el logo definitivo de HÄUS. Pide 5 variantes del logotipo con distintos enfoques visuales.</div>
+  </div>
+  <div class="prompt-box" id="p1">Design the definitive logo for HÄUS — a premium household finance app for Latin American couples and families.
+
+━━━ BRAND BRIEF ━━━
+
+BRAND NAME: HÄUS
+Pronunciation: "hows" (like "house" in English)
+Etymology: Derived from German "Haushalt" = household + budget management in a single concept
+Tagline: "Todo cuadra en casa"
+Target: Modern Latin American couples (25–40) managing shared household finances
+
+BRAND PERSONALITY:
+- Nordic precision meets Latin warmth
+- Trustworthy like a Swiss bank, approachable like a family home
+- Premium but not elitist — accessible luxury
+- Calm, not anxious about money
+- Smart AI that feels like a wise friend, not a cold machine
+
+BRAND VALUES: Clarity, Trust, Togetherness, Calm, Precision
+
+━━━ VISUAL IDENTITY ━━━
+
+PRIMARY PALETTE:
+- Forest green #0d3d34 — authority, trust, money, nature
+- Accent green #2e8b6e — growth, freshness, modernity
+- Terracotta #e8735a — warmth, Latin energy, accent
+- Gold #c9a84c — premium, prosperity
+- Warm cream #f7f2e8 — softness, home, comfort
+
+TYPOGRAPHY SYSTEM:
+- Display: Fraunces (optical serif, 900 weight) — editorial, premium, timeless
+- Body: DM Sans (geometric, clean) — modern, accessible
+- The Ä umlaut in HÄUS is intentional and iconic — it signals Nordic design DNA
+
+AESTHETIC DIRECTION: Nordic minimalism with warmth. Think Scandinavian design applied to Latin American family finance. Clean geometry with organic touches.
+
+━━━ LOGO DESIGN BRIEF ━━━
+
+Create 5 logo variants for HÄUS. Each variant must:
+1. Work at 16px (favicon) and 512px (App Store icon) — extreme legibility at all sizes
+2. Feel premium enough for an Apple App Store Featured App
+3. Communicate: home + finance + precision + warmth
+4. The Ä with umlaut must be featured — it's the brand's visual signature
+
+VARIANT DIRECTIONS TO EXPLORE:
+
+Variant 1 — WORDMARK MINIMAL
+Pure typographic logo. "HÄUS" in Fraunces 900 weight. Forest green on cream or reverse. The Ä umlaut dots become tiny design elements — perhaps gold #c9a84c. Explore letter-spacing from -0.04em to 0. Optionally: a thin geometric underline or overline that evokes architecture and structure.
+
+Variant 2 — MONOGRAM ICON + WORDMARK
+A standalone "H" mark designed for app icons, combined with "HÄUS" wordmark for full logo use. The H mark: geometric, architectural — two vertical columns connected by a horizontal bridge that evokes a house roofline or a balance bar. Explore: the H columns as two people side by side (couple), or the H bridge as a roof silhouette.
+
+Variant 3 — HOUSE ABSTRACTION
+Abstract mark that is simultaneously: the letter H, a simplified house (roof + walls), and a balance scale or chart suggesting financial wellness. Must NOT look like a generic real estate logo. Must feel architectural and systematic — like a blueprint, not a clipart house.
+
+Variant 4 — CIRCLE MARK
+H�US enclosed in a circle or oval. Nordic/Swiss precision aesthetic. The circle can reference: a coin (finance), a home (domestic), a seal of trust (premium). Inside: the monogram H or full HÄUS wordmark. Works perfectly as app icon on dark and light backgrounds.
+
+Variant 5 — EDITORIAL LOGO
+H�US set in Fraunces italic with the Ä and a small geometric accent mark — perhaps a tiny house silhouette replacing one of the umlaut dots, or a small roof angle above the wordmark. This variant emphasizes the editorial, premium nature of the brand.
+
+━━━ TECHNICAL REQUIREMENTS ━━━
+
+For each variant, show:
+□ Primary version: dark green on cream background
+□ Reverse version: cream on dark green background  
+□ App icon version: square with rounded corners (iOS format)
+□ Minimum size test: shown at 32x32px equivalent
+
+Logo must NOT:
+✗ Look like a real estate company
+✗ Look like a generic fintech startup
+✗ Use emoji or clip-art house icons
+✗ Use gradients that look cheap or dated
+✗ Use more than 2-3 colors
+
+Logo MUST:
+✓ Feel at home on the App Store next to Kino, Things 3, Lumy
+✓ Scale from favicon to billboard
+✓ Work in single color (black and white)
+✓ Communicate "home finances" without being literal
+✓ Have a unique, protectable silhouette
+
+━━━ CONTEXT: APP SCREENS ━━━
+
+The logo will appear in these contexts:
+- Login screen: large, centered, 72px on forest green background
+- App header: small, 28px, on light cream background
+- App icon: 512x512px, iOS rounded corners
+- Marketing materials: white backgrounds, dark backgrounds
+
+Present all 5 variants side by side with annotations explaining the design thinking behind each. Label each variant clearly. Include the reasoning: what does this mark communicate, why does it work for HÄUS.</div>
+</div>
+
+<!-- PROMPT 2: FULL APP REVIEW -->
+<div class="prompt-wrap">
+  <div class="prompt-header">
+    <div class="ph-info">
+      <span class="ph-num">PROMPT 02</span>
+      <span class="ph-title">Revisión Total del App — Sistema Completo</span>
+    </div>
+    <button class="copy-btn" onclick="copyPrompt(this, 'p2')">Copiar</button>
+  </div>
+  <div class="prompt-context">
+    <div class="ctx-label">Cuándo usar</div>
+    <div class="ctx-text">Usar en Stitch para hacer una revisión profunda de todo el sistema de diseño. Este prompt pide a Stitch que proponga correcciones y mejoras transversales a todas las pantallas.</div>
+  </div>
+  <div class="prompt-box" id="p2">Perform a complete design system review and redefinition for HÄUS — a premium household finance app. Identify inconsistencies, apply corrections, and propose the definitive design language across all screens.
+
+━━━ ABOUT HÄUS ━━━
+
+H�US is a Nordic-inspired household finance app for Latin American couples. It tracks shared expenses, manages budgets, scans receipts with AI, and provides financial insights. Think: the sophistication of Kino (Apple App Store Award winner 2024) applied to personal finance for LATAM families.
+
+Business goal: Win Apple App Store Awards and Apple Design Awards within 3 years.
+Platform: iOS PWA (moving to native SwiftUI in 12 months).
+Target: Modern couples 25–40, Lima / LATAM, dual-income households.
+
+━━━ CURRENT DESIGN PROBLEMS (fix all of these) ━━━
+
+CRITICAL ISSUES:
+1. NUMBER TYPOGRAPHY INCONSISTENCY — Some monetary amounts use monospace fonts (JetBrains Mono). This is wrong. ALL numbers, amounts, percentages must use DM Sans 600 weight. Monospace fonts break the visual harmony with body text.
+
+2. EMOJI ICONS — Category icons (🛒🍽️💊🚗) are emoji characters. These must be replaced with Material Symbols Outlined (weight 300) in circular containers with semantic color. Emoji feel unprofessional and render inconsistently across devices.
+
+3. MISSING EMPTY STATES — When there are no expenses, no budgets, no data — the app shows blank space. Every empty state needs a designed state: an icon, a message, an action.
+
+4. MISSING MICRO-ANIMATIONS — No feedback animations when saving a expense, no celebration when staying under budget, no transition when switching views. The app feels static and unresponsive.
+
+5. TYPOGRAPHY SCALE INCONSISTENCY — Headlines mix Fraunces and DM Sans arbitrarily. Body text sizes jump from 11px to 16px without a clear scale.
+
+MODERATE ISSUES:
+6. Progress bars are 4px — too thin. Must be 8px minimum.
+7. Card shadows are either too heavy or missing entirely — needs a unified shadow system.
+8. Color semantic inconsistency — green means different things in different screens.
+9. No visual hierarchy in lists — all expense rows feel the same weight.
+10. The navigation bar lacks visual distinction between active and inactive states.
+
+━━━ DESIGN SYSTEM DEFINITION ━━━
+
+Define and apply consistently across ALL screens:
+
+TYPOGRAPHY SCALE (apply everywhere):
+- Display XL: Fraunces 900, 52–64px — hero amounts, app name
+- Display L: Fraunces 700, 28–32px — screen titles, feature amounts  
+- Display M: Fraunces 700, 20–24px — card headlines, section amounts
+- Body L: DM Sans 500, 16px — primary content, merchant names
+- Body M: DM Sans 400, 14px — descriptions, secondary content
+- Body S: DM Sans 400, 13px — captions, helper text
+- Label: DM Sans 700, 10–11px, UPPERCASE, letter-spacing 0.15em — section headers, badges
+- Mono: DM Mono 500 — ONLY for code, never for financial amounts
+
+COLOR SEMANTIC SYSTEM (apply everywhere, no exceptions):
+- #0d3d34 Forest Green — primary brand, CTAs, headers
+- #2e8b6e Accent Green — success, positive trends, income, under-budget
+- #e8735a Terracotta — warning moderate, budget near limit (80–100%)
+- #c9a84c Gold — partial, in-progress, medium alerts (60–80%)
+- #e53935 Red (Material) — danger, over-budget, deficit
+- #f7f2e8 Cream — primary background
+- #fefcf8 White-Warm — card surfaces
+- #f2ede3 Surface-Low — input backgrounds, subtle containers
+- #c0c8c5 Border-Light — subtle dividers, inactive elements
+- #8a9490 Muted — secondary text, labels, metadata
+
+SPACING SYSTEM:
+4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64px
+— Never use arbitrary values. Snap to this scale.
+
+ELEVATION / SHADOW SYSTEM:
+- Level 0: no shadow — flat surfaces, inputs
+- Level 1: 0 1px 4px rgba(13,61,52,0.06) — default cards
+- Level 2: 0 2px 12px rgba(13,61,52,0.08) — elevated cards, modals
+- Level 3: 0 4px 24px rgba(13,61,52,0.12) — FAB, bottom sheet, overlays
+
+BORDER RADIUS SYSTEM:
+- 4px — badges, chips, tags
+- 8px — inputs, small buttons
+- 12px — medium cards, list items
+- 16px — primary cards
+- 20px — hero cards, modals
+- 9999px — pills, FABs, full-radius buttons
+
+ICON SYSTEM (Material Symbols Outlined, wght=300):
+Category icons in 46px circular containers (1px border, background at 15% opacity of category color):
+- shopping_basket → Alimentación (green #2e8b6e)
+- restaurant → Restaurantes (gold #c9a84c)
+- directions_car → Transporte (blue-slate)
+- medical_services → Salud (red-soft)
+- electric_bolt → Servicios (yellow-amber)
+- subscriptions → Digital/Streaming (purple-soft)
+- fitness_center → Deporte (teal)
+- school → Educación (blue)
+- home → Hogar (forest green)
+- more_horiz → Otros (muted)
+
+━━━ SCREEN-BY-SCREEN REVIEW ━━━
+
+Review and redesign each screen applying the design system above:
+
+SCREEN 1 — LOGIN
+Current problem: App name "HÄUS" could have more visual impact.
+Fix: HÄUS in Fraunces 900, 72px, cream on forest green. The Ä must be beautiful and prominent. Tagline "Todo cuadra en casa" in DM Sans 300 italic, 17px, cream 45% opacity. Privacy note at bottom: "Tus datos son tuyos. Siempre." Google button: pill shape, cream background, 56px height.
+
+SCREEN 2 — DASHBOARD / HOME
+Current problem: Expense list uses emoji icons. Numbers may use monospace.
+Fix: Replace all emoji with Material Symbol icons in colored circles. All amounts in DM Sans 600. Hero card: gradient forest green, Fraunces 52px for total amount. Quick action pills: 48px height, rounded, with icons.
+Add: A "good morning" state when no expenses yet today — illustrated empty state with encouraging message.
+
+SCREEN 3 — ADD EXPENSE
+Current problem: Amount display after AI scan may use monospace. 
+Fix: Scanned amount in Fraunces 900, 56px, NOT monospace. "ESCANEADO POR IA" badge in forest green pill. Detail rows use Material Symbol icons, not emoji. Receipt preview card: white, slightly rotated, dramatic shadow.
+
+SCREEN 4 — BUDGETS
+Current problem: Emoji icons, thin progress bars, monospace amounts.
+Fix: ALL emoji → Material Symbols in colored circles. Progress bars 8px, rounded, color-coded semantically. Amounts in DM Sans 600.
+Color-code each budget card by health:
+- Under 60%: green accent border left
+- 60-80%: gold border, yellow warning
+- 80-100%: terracotta border, orange warning  
+- Over 100%: red border, "Excedido" badge, solid red bar
+Header: circular SVG progress ring showing % of month elapsed.
+
+SCREEN 5 — BALANCE / CHARTS
+Current problem: Amounts use monospace fonts. Chart could be taller and more readable.
+Fix: ALL amounts DM Sans 600. 12-month bar chart: 120px height, bars with rounded tops, selected bar = forest green, current = accent green, others = border-light. Tap any bar to filter. Below chart: 3 stats (Promedio / Seleccionado / Total) in DM Sans 600 13px.
+Contributions section: larger avatars (48px), dual-color progress bar.
+
+SCREEN 6 — INSIGHTS / AI
+Current problem: Featured insight lacks editorial punch.
+Fix: Hero insight card: forest green gradient, radial glow, Fraunces italic 22px cream — editorial tone. Stats pills below in dark-on-cream. 3 insight cards below with Material Symbol icons in colored circles. Free query section integrated seamlessly at bottom.
+
+━━━ ANIMATION SPECIFICATIONS ━━━
+
+Define micro-animations for these key moments:
+1. SAVE EXPENSE — When user taps "Guardar": checkmark animates in (scale 0→1, 200ms spring), card slides up and out, brief green flash on hero card amount updating (300ms)
+2. BUDGET THRESHOLD — When budget reaches 80%: progress bar color transitions from green→gold (500ms ease), subtle pulse animation on the bar (2x, then stops)
+3. BUDGET EXCEEDED — When budget goes over: progress bar color snaps to red, "Excedido" badge slides in from right (150ms), card gets red left border (immediate)
+4. SCAN RECEIPT — While scanning: shimmer animation on amount field (skeleton loading), then amount appears with a typewriter reveal (each digit, 50ms apart)
+5. VIEW TRANSITIONS — Screen changes: fade + subtle Y-axis slide (8px, 200ms ease-out)
+6. EMPTY STATE ENTRY — When no data: illustrated icon fades in with scale (0.8→1.0, 300ms spring) then message fades up (100ms delay)
+
+━━━ DELIVERABLE FORMAT ━━━
+
+Show the complete redesigned system as:
+1. A design system overview page (colors, typography, icons, spacing, shadows)
+2. Each screen redesigned with corrections applied
+3. Before/after comparison highlighting the 3 most impactful fixes per screen
+4. An icon set showing all 10 category icons in their circular containers
+5. Animation storyboard for the 3 most important micro-animations
+
+QUALITY BAR: Every element should be at the level of Kino, Lumy, or Crouton — Apple Design Award winners. If it doesn't look like it belongs on the App Store Featured section, redesign it.</div>
+</div>
+
+<!-- PROMPT 3: LOGO REFINEMENT -->
+<div class="prompt-wrap">
+  <div class="prompt-header">
+    <div class="ph-info">
+      <span class="ph-num">PROMPT 03</span>
+      <span class="ph-title">Logo — Variante App Icon (Bonus)</span>
+    </div>
+    <button class="copy-btn" onclick="copyPrompt(this, 'p3')">Copiar</button>
+  </div>
+  <div class="prompt-context">
+    <div class="ctx-label">Cuándo usar</div>
+    <div class="ctx-text">Usar después del Prompt 01 para refinar el ícono del app. Se enfoca específicamente en el formato de ícono iOS para la pantalla de inicio.</div>
+  </div>
+  <div class="prompt-box" id="p3">Design the iOS app icon for HÄUS — a premium household finance app. This icon will appear on iPhone home screens alongside apps like Kino, Things 3, and Copilot Money.
+
+━━━ ICON SPECIFICATIONS ━━━
+
+SIZE: 512x512px canvas (iOS uses this + scales down)
+SHAPE: Square with rounded corners — Apple handles the mask, design full-bleed square
+SAFE ZONE: Keep key visual element within central 60% of canvas
+
+━━━ BRAND CONTEXT ━━━
+
+App name: HÄUS (German-inspired household finance)
+Target: Latin American couples managing shared home finances
+Aesthetic: Nordic minimalism — Scandinavian precision with warmth
+Color palette: Forest green #0d3d34 (primary), Cream #f7f2e8, Terracotta #e8735a, Gold #c9a84c
+
+━━━ ICON DESIGN DIRECTIONS ━━━
+
+Create 4 icon concepts, each optimized for iOS home screen at actual sizes (show at 60x60px, 120x120px, 512x512px):
+
+CONCEPT A — THE WORDMARK ICON
+Background: Forest green #0d3d34 with subtle radial gradient (add 15% lighter green at center for depth)
+Foreground: "HÄUS" in Fraunces 900 serif, cream #f7f2e8
+Size: Letters fill approximately 65% of the icon width
+The Ä umlaut: the two dots above can be rendered in terracotta #e8735a or gold #c9a84c — making them a visual focal point
+Letter-spacing: -0.04em (tight, editorial)
+NO decorative elements — pure typographic strength
+
+CONCEPT B — THE H MONOGRAM
+Background: Forest green gradient (dark at edges, slightly lighter center)
+Foreground: A custom-designed "H" letterform in cream
+The H has architectural detailing: the crossbar is slightly thicker at center, the legs have subtle serifs that evoke house pillars, the overall form suggests both a letter and a building facade
+Optionally: the crossbar of H forms a roofline silhouette — the ends turn up slightly like eaves
+Size: H fills 55% of the icon, well within safe zone
+
+CONCEPT C — THE SPLIT MARK
+Background: Bisected diagonally or horizontally — forest green (top) meets cream (bottom), or forest green (left) meets terracotta (right)
+Foreground: "H" or "HÄUS" spans the split, rendered in the opposite color on each section (cream on green half, forest green on cream half)
+This creates a bold, memorable two-tone identity that's unique in the App Store finance category
+
+CONCEPT D — THE ARCHITECTURAL MARK
+Background: Warm cream #f7f2e8 (light version for variety)
+Foreground: An abstract geometric mark in forest green — simultaneously reads as:
+  - The letter H (structural columns + bridge)
+  - A simplified house elevation (gabled roof)
+  - A balance/scale (symmetrical structure)
+Below the mark: "HÄUS" in Fraunces 900, forest green, small
+This is the most versatile — works across all marketing materials
+
+━━━ QUALITY REQUIREMENTS ━━━
+
+Each concept must:
+✓ Be instantly recognizable at 60x60px (iPhone home screen size)
+✓ Have a unique silhouette — no generic house or piggy bank
+✓ Feel more premium than Mint, YNAB, or Copilot Money's icon
+✓ Work in both light and dark iOS home screen themes
+✓ Have no fine details that disappear at small sizes
+✓ Feel like it belongs in a curated collection with Kino, Lumy, Things 3
+
+The winner will become the app's permanent icon on the App Store.
+
+Show all 4 concepts at actual display sizes. Include a "home screen mock" showing the icon surrounded by other premium apps to evaluate how it holds its own in context.</div>
+</div>
+
+</main>
+
+<script>
+function copyPrompt(btn, id) {
+  const box = document.getElementById(id);
+  const text = box.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+</script>
+</body>
+</html>
